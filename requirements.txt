@@ -1,0 +1,19 @@
+# Grafo multi-agente
+langgraph==1.2.18
+# LLM: Claude vía LangChain
+langchain-core==1.7.3
+langchain-anthropic==1.7.7
+anthropic==2.3.0
+# Búsqueda web (reemplaza a TavilySearchResults, deprecado)
+langchain-tavily==0.2.18
+# Memoria local de búsquedas (embeddings ONNX por defecto, sin torch)
+chromadb==1.5.9
+# Validación y configuración
+pydantic==2.14.2
+python-dotenv==1.2.4
+# Tests (sin API key)
+pytest==9.2.0
+pytest-asyncio==1.4.1.post1
+# Notebook de demo (ejecutarlo y guardar sus salidas)
+ipykernel==7.4.0
+nbconvert==7.17.2

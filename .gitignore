@@ -1,0 +1,10 @@
+# Entorno virtual (se recrea con: pip install -r requirements.txt)
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+# Secretos: las claves NUNCA se suben a GitHub
+.env
+.DS_Store
+# Cache de embeddings / memoria de búsquedas (se genera sola)
+data/memoria_chroma/

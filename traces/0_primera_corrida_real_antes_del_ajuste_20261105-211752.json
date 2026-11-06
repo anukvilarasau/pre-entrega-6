@@ -1,0 +1,1313 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "1_flujo_completo",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-05T21:17:52.641-03:00",
+  "fin": "2026-11-05T21:19:31.147-03:00",
+  "duracion_s": 98.51,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "Enero sin día exacto: ida el 10/01/2027 (próximo enero, ya que enero 2026 ya pasó), vuelta el 16/01/2027 por 7 días."
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:17:57.658-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "Enero sin día exacto: ida el 10/01/2027 (próximo enero, ya que enero 2026 ya pasó), vuelta el 16/01/2027 por 7 días."
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá datos actuales con fuente (URL o memoria local mem-...) para un viaje de Mendoza a Bariloche, Argentina, para 2 personas, ida el 10/01/2027 y vuelta el 16/01/2027 (7 días). Temas a cubrir: (1) pasajes aéreos y/o terrestres Mendoza-Bariloche para 2 personas en esas fechas, con precio y unidad (ARS o USD) por persona y total; (2) alojamiento en Bariloche para 6 noches para 2 personas, con precio por noche y unidad; (3) comida: rango de precio promedio diario por persona en Bariloche; (4) actividades principales y sus precios aproximados; (5) cotización del dólar oficial/blue vigente para convertir precios en USD. Indicá la fuente de cada dato. Si la búsqueda web falla, usá la memoria local y avisalo explícitamente. Si no hay precios de pasajes, reintentá con forzar=true.",
+        "evaluacion": "Decisión 1 de 6. Todavía no hay aportes, así que ninguno de los puntos de la rúbrica está cumplido: R1 (cobertura) falta por completo, porque no hay pasajes, alojamiento, comida/actividades ni cotización del dólar; R2 (fuentes) y R3 (precios) no aplican aún sin datos; R4 (cálculo) no puede hacerse sin precios del investigador; R5 y R6 no hay nada que verificar. Hace falta primero investigar.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-05T21:18:22.654-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá datos actuales con fuente (URL o memoria local mem-...) para un viaje de Mendoza a Bariloche, Argentina, para 2 personas, ida el 10/01/2027 y vuelta el 16/01/2027 (7 días). Temas a cubrir: (1) pasajes aéreos y/o terrestres Mendoza-Bariloche para 2 personas en esas fechas, con precio y unidad (ARS o USD) por persona y total; (2) alojamiento en Bariloche para 6 noches para 2 personas, con precio por noche y unidad; (3) comida: rango de precio promedio diario por persona en Bariloche; (4) actividades principales y sus precios aproximados; (5) cotización del dólar oficial/blue vigente para convertir precios en USD. Indicá la fuente de cada dato. Si la búsqueda web falla, usá la memoria local y avisalo explícitamente. Si no hay precios de pasajes, reintentá con forzar=true.",
+        "contenido": "## Hallazgos\n\n### Pasajes aéreos (Mendoza MDZ – Bariloche BRC)\n- No hay precio para el tramo exacto 10/01/2027 ida y 16/01/2027 vuelta. Los datos encontrados son de otras fechas o son agregados de referencia:\n- Ida y vuelta, rango de los últimos 12 meses: $199.202 a $385.415, promedio $279.875 (moneda ARS según la fuente, unidad no especificada; no dice si es por persona) — [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- Ida y vuelta más económica en Google Flights: desde ARS 208.707, JetSMART, salida 8 ene y regreso 11 ene (año no indicado, unidad no especificada) — [https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419] (web)\n- Solo ida JetSMART desde ARS 42.578, fechas de referencia distintas (ej. dom 31 ene 2027); unidad no especificada — [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (web)\n- Solo ida Aerolíneas Argentinas en Google, Mendoza–Bariloche del 29 ene al 4 feb, desde ARS 146.354 (unidad no especificada) — [https://www.google.com/travel/flights?gl=AR&hl=es-419] (web)\n- Búsqueda reintentada con forzar=true: no se obtuvo precio para las fechas pedidas.\n\n### Pasajes terrestres (micro)\n- No se buscaron en esta ejecución.\n\n### Alojamiento en Bariloche (San Carlos de Bariloche)\n- Hotel Selva India Hotel Suite: \"1 noche, 2 personas desde\" ARS 124.325 (referencia 24/11/2026; tarifa tachada de ARS 248.650) — [https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] (web). Unidad: por noche, para 2 personas.\n- Despegar: \"1 noche, 2 personas desde\" ARS 66.412 (Selva India, ref. 29/10/2026) y ARS 101.822 (Casablanca Apart, ref. 30/10/2026); Alma del Lago Suites ARS 285.231 (ref. no visible) — [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] (web). Unidad: por noche, para 2 personas.\n- Kayak: habitación de 3 estrellas desde ARS 53.048 por noche, y de 4 estrellas desde ARS 117.943 por noche (fechas de fin de semana cercanas a la consulta, no a enero 2027); unidad: por noche, sin aclarar personas — [https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp] (web).\n- Trivago: \"de $58 a $473 por noche\", precio habitual de alrededor de $116 por noche; moneda y unidad no especificadas — [https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762] (web).\n- Booking: desde £77,20 por noche, 2 adultos (GBP, no ARS) — [https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html] (web).\n\n### Comida (costo diario por persona)\n- Numbeo: mínimo diario recomendado para comida de $7,04 por persona (moneda no clara en el extracto, probablemente USD; sin fecha) — [https://www.numbeo.com/food-prices/in/Bariloche-Argentina] (web).\n- Reddit (r/Bariloche, publicación de 2024): cena fuera de ~ARS 10.000 a 15.000 por persona; almuerzo/merienda más barato — [https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana] (web). Unidad: por persona, por comida.\n- Foro Facebook (fecha no visible): entre ARS 15.000 y 20.000 por persona por día, en un comentario de gasto en Cerro Catedral —",
+        "fuentes": [
+          {
+            "ref": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.numbeo.com/food-prices/in/Bariloche-Argentina",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.numbeo.com/food-prices/in/Bariloche-Argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.youtube.com/shorts/hLIrON0shf4",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.youtube.com/shorts/hLIrON0shf4",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.facebook.com/groups/barilocheturismo/posts/3698347910418451",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.facebook.com/groups/barilocheturismo/posts/3698347910418451",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://bariloche.org/tarifas-excursiones-bariloche",
+            "origen": "web",
+            "tema": "actividades",
+            "url": "https://bariloche.org/tarifas-excursiones-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral",
+            "origen": "web",
+            "tema": "actividades",
+            "url": "https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.nomades.com/bariloche/circuito-chico-id991",
+            "origen": "web",
+            "tema": "actividades",
+            "url": "https://www.nomades.com/bariloche/circuito-chico-id991",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral",
+            "origen": "web",
+            "tema": "actividades",
+            "url": "https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://barilocheturismo.gob.ar/es/circuito-chico",
+            "origen": "web",
+            "tema": "actividades",
+            "url": "https://barilocheturismo.gob.ar/es/circuito-chico",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://dolarhoy.com",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://dolarhoy.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.cronista.com/MercadosOnline/dolar.html",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.cronista.com/MercadosOnline/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.lanacion.com.ar/tema/dolar-blue-tid67294",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.lanacion.com.ar/tema/dolar-blue-tid67294",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.ambito.com/contenidos/dolar.html",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.ambito.com/contenidos/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://x.com/ValorDolarBlue",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://x.com/ValorDolarBlue",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.google.com/travel/flights?gl=AR&hl=es-419",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights?gl=AR&hl=es-419",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://promociones-aereas.com.ar",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://promociones-aereas.com.ar",
+            "fecha_busqueda": "2026-11-05"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes Mendoza a Bariloche enero 2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'pasajes Mendoza a Bariloche enero 2027 precio por persona' [destino=Bariloche, tema=pasajes]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:22.652-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento hotel Bariloche enero precio por noche para 2 personas",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'alojamiento hotel Bariloche enero precio por noche para 2 personas' [destino=Bariloche, tema=alojamiento]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:22.652-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio promedio comida restaurantes diario por persona",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'precio promedio comida restaurantes diario por persona' [destino=Bariloche, tema=otro]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "actividades principales precios excursiones cerro Catedral circuito chico",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'actividades principales precios excursiones cerro Catedral circuito chico' [destino=Bariloche, tema=actividades]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial blue hoy venta",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'cotización dólar oficial blue hoy venta' [destino=Bariloche, tema=cambio]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "pasajes Mendoza a Bariloche precio enero 2027 ida y vuelta por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'pasajes Mendoza a Bariloche precio enero 2027 ida y vuelta por persona' (guardados en memoria):\n\n[https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] origen=web | tema=pasajes | guardado como mem-ce983bdd5a45\nVuelos desde Mendoza a Bariloche desde ARS 42578 | JetSMART Argentina\n| Desde | Hacia | Tipo de tarifa | Fechas | Precio |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | vie 11 dic 2026 | desde  ARS 42.578\\  Visto hace: 9 horas |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | mar 8 dic 2026 | desde  ARS 42.578\\  Visto hace: 9 horas |\n| Me...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio alojamiento hotel Bariloche enero por noche para 2 personas",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'precio alojamiento hotel Bariloche enero por noche para 2 personas' (guardados en memoria):\n\n[https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] origen=web | tema=alojamiento | guardado como mem-cd94e5477766\nMejores hoteles en San Carlos de Bariloche | Viajes Falabella\n8.9\n\n Oferta de fin de año\n Elegido por parejas\n\n- 33 %- %\n\n1 noche, 2 personas desde\n\n$679.400\n\n$455.198\n\nFecha de referencia:\n\n10 mayo 2027\n\n## Los mejores hoteles de San Carlos de Bariloche\n\nEncuentra los hoteles en San Carlos de Bariloche con la mejor re...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio promedio comida restaurantes Bariloche por persona por día",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'precio promedio comida restaurantes Bariloche por persona por día' (guardados en memoria):\n\n[https://www.numbeo.com/food-prices/in/Bariloche-Argentina] origen=web | tema=otro | guardado como mem-d00a2160d89d\nFood Prices in Bariloche, Argentina\nPotatoes (0.20 kg), $0.19 ; Onions (0.10 kg), $0.08 ; Lettuce (0.10 Head), $0.20 ; Daily recommended minimum amount of money for food per person, $7.04 ; Monthly\n\n[https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana] origen=web | tema=otro | guardado como mem-afb899a61aec\nPresupuesto co...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "actividades Bariloche precios excursiones Cerro Catedral circuito chico",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'actividades Bariloche precios excursiones Cerro Catedral circuito chico' (guardados en memoria):\n\n[https://bariloche.org/tarifas-excursiones-bariloche] origen=web | tema=actividades | guardado como mem-f2962de0fd34\nTarifas de Excursiones en Bariloche - Bariloche - Patagonia\nMás info\n Reserva ONLINE Circuito Chico!\n\n#### Cerro Catedral\n\nEl Centro de Ski más grande de Sudamérica es, sin lugar a dudas, un sitio al que debes ir. Desde la cima es posible contemplar las altas cumbres de la Cordillera de los Andes. La excursión dura aproximadamente 4 horas e incluye ...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "cotización dólar oficial blue hoy venta Argentina",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'cotización dólar oficial blue hoy venta Argentina' (guardados en memoria):\n\n[https://dolarhoy.com] origen=web | tema=cambio | guardado como mem-4ce0b54fb9b9\nDólar hoy, Cotización del dólar | Dolarhoy.com\n{{titulo}} {{#label\\_boton}}{{label\\_boton}}{{/label\\_boton}}\n\n{{temp}}° {{fecha}}, Buenos Aires, Argentina\n\n# Dólar hoy, cotización del dólar, precio del dólar\n\nDólar blue\n\nCompra\n\n$1.540\n\n0.00%\n\nVenta\n\n$1.560\n\n0.00%\n\nActualizado por última vez: 05/11/26 06:28 AM\n\nDólar Blue Histórico\n\nDólar blue\n\nCompra\n\n$1.540\n\nVenta\n\n$1.560\n\n0.00%\n\nDólar Oficial\n\nCompra\n\n$...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "vuelo Mendoza Bariloche 10 enero 2027 regreso 16 enero 2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'vuelo Mendoza Bariloche 10 enero 2027 regreso 16 enero 2027 precio por persona' (guardados en memoria):\n\n[https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] origen=web | tema=pasajes | guardado como mem-ce983bdd5a45\nVuelos desde Mendoza a Bariloche desde ARS 42578 | JetSMART Argentina\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | mar 1 dic 2026 | desde  ARS 42.578\\  Visto hace: 11 horas |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | sáb 12 dic 2026 | desde  ARS 42.578\\  Visto hace: 10 horas |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | ...",
+            "timestamp": "2026-11-05T21:18:22.653-03:00"
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:18:27.316-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "investigador",
+        "instruccion": "Completá la búsqueda para Mendoza (MDZ) a Bariloche (BRC), ida 10/01/2027 y vuelta 16/01/2027, 2 personas. (1) Pasajes: buscá precios para esas fechas exactas (reintentá con forzar=true si no aparecen), indicando por persona y total, con unidad ARS o USD y fuente. Si hay opciones terrestres (micro) también. (2) Alojamiento: precio por noche para 2 personas en Bariloche para 6 noches del 10 al 16 de enero de 2027, en ARS, con fuente; descartá precios de otras fechas o convertí aclarando la moneda. (3) Comida: rango diario por persona en ARS con fuente. (4) Actividades principales con precio por persona en ARS y fuente. (5) Cotización del dólar oficial y blue vigente con fuente. Indicá explícitamente cuando un dato sea de otra fecha, moneda o unidad no confirmada.",
+        "evaluacion": "R1 Cobertura: faltan datos claros de pasajes para las fechas pedidas, cotización del dólar no aparece en el aporte visible y comida/actividades están incompletas o no verificadas en lo visible. R2 Fuentes: el aporte tiene URLs, aunque algunas fuentes son de fechas distintas. R3 Precios: pasajes sin unidad (ARS/USD) ni aclaración de si es por persona o total; alojamiento tiene montos pero mezcla fechas de referencia y monedas (GBP en Booking). R4 Cálculo: el analista todavía no trabajó; hay presupuesto, así que hace falta validar_viaje y calcular_presupuesto. R5 Observaciones: ninguna por código. R6 Coherencia: los precios mezclan fechas, personas (algunos sin aclarar) y monedas (GBP), hay que normalizarlos. Quedan 4 decisiones; conviene completar el investigador una vez más con foco en precios y dólar antes de calcular.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "investigador",
+      "timestamp": "2026-11-05T21:18:52.307-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Completá la búsqueda para Mendoza (MDZ) a Bariloche (BRC), ida 10/01/2027 y vuelta 16/01/2027, 2 personas. (1) Pasajes: buscá precios para esas fechas exactas (reintentá con forzar=true si no aparecen), indicando por persona y total, con unidad ARS o USD y fuente. Si hay opciones terrestres (micro) también. (2) Alojamiento: precio por noche para 2 personas en Bariloche para 6 noches del 10 al 16 de enero de 2027, en ARS, con fuente; descartá precios de otras fechas o convertí aclarando la moneda. (3) Comida: rango diario por persona en ARS con fuente. (4) Actividades principales con precio por persona en ARS y fuente. (5) Cotización del dólar oficial y blue vigente con fuente. Indicá explícitamente cuando un dato sea de otra fecha, moneda o unidad no confirmada.",
+        "contenido": "## Hallazgos\n\n### Pasajes (MDZ → BRC, ida 10/01/2027, vuelta 16/01/2027, 2 personas)\n- **No se encontró precio para las fechas exactas (10 al 16 de enero de 2027).** Ninguna fuente lo confirma.\n- JetSMART, solo ida desde MDZ: desde ARS 42.578, con fecha más cercana \"dom 31 ene 2027\". Es precio de otra fecha y de un tramo, no ida y vuelta. Unidad por persona no confirmada. — [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (web)\n- Kayak, rango ida y vuelta MDZ-BRC en los últimos 12 meses: entre $199.202 y $385.415, promedio $279.875. Es histórico, no para las fechas pedidas, y la unidad (por persona o total) no está especificada. — [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- Kayak, vuelo ida y vuelta más barato: $135.585 (JetSMART, directo). Fechas no válidas en la fuente, moneda no confirmada. — [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- Google Flights, ida y vuelta clase turista en JetSMART: desde ARS 208.707 (8 al 11 de enero, otra fecha, unidad no especificada). — [https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419] (memoria, mem-9594a81499af)\n- Google Flights, Aerolíneas Argentinas ida y vuelta: desde ARS 343.943 (28 de enero al 1 de febrero, otra fecha, unidad no especificada). — [https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419] (memoria, mem-9594a81499af)\n- Google Flights, vuelo directo MDZ-BRC: desde ARS 146.354 (29 de enero al 4 de febrero, otra fecha, unidad no especificada). — [https://www.google.com/travel/flights?gl=AR&hl=es-419] (memoria, mem-e77de8366af6)\n- **Micro (terrestre): no se encontraron opciones con precio.** La búsqueda web de micro no se ejecutó porque la memoria respondió; la memoria solo trae datos de avión.\n\n### Alojamiento (Bariloche, 6 noches del 10 al 16 de enero de 2027, 2 personas)\n- **No hay precio para esas fechas.** Los precios que aparecen son de otras fechas:\n- Despegar, \"1 noche, 2 personas desde\": $66.412 (Selva India Hotel Suite, referencia 29/10/2026, con oferta) y $101.822 (Casablanca Apart, referencia 30/10/2026). Moneda ARS según la fuente; la unidad figura como \"1 noche, 2 personas\", no está claro si es por habitación. — [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] (memoria, mem-f408466d015c; web)\n- Viajes Falabella, Hotel N",
+        "fuentes": [
+          {
+            "ref": "mem-7371421587d7",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-9594a81499af",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ce983bdd5a45",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ce45574ecd82",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-9530619359f6",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-f408466d015c",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-cd94e5477766",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-f5f80dcf527e",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-d00a2160d89d",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.numbeo.com/food-prices/in/Bariloche-Argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-6f39a3e976c5",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ee29d40d92e8",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.youtube.com/shorts/hLIrON0shf4",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-afb899a61aec",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-0f1b135e15f7",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://x.com/ValorDolarBlue",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-42f13e4597c1",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.ambito.com/contenidos/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-b48b81624b12",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.cronista.com/MercadosOnline/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-4ce0b54fb9b9",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://dolarhoy.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://tavily.com/knowledge/company/3Vgtb0GqNrbd",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://tavily.com/knowledge/company/3Vgtb0GqNrbd",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-e77de8366af6",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights?gl=AR&hl=es-419",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.co/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.kayak.com.co/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-96d7b6b3b08d",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.nomades.com/bariloche/circuito-chico-id991",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-59ddaa6158eb",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-764383d58932",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://barilocheturismo.gob.ar/es/circuito-chico",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-c1744caa9c27",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.tiktok.com/@barilochetipss/video/7587142995183521032",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.tiktok.com/@barilochetipss/video/7587142995183521032",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://bariloche.org/cuanto_me_cuesta",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://bariloche.org/cuanto_me_cuesta",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://bariloche.org/cuanto_me_cuesta/comment-page-7",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://bariloche.org/cuanto_me_cuesta/comment-page-7",
+            "fecha_busqueda": "2026-11-05"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes Mendoza a Bariloche 10/01/2027 16/01/2027 precio por persona avión micro",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'pasajes Mendoza a Bariloche 10/01/2027 16/01/2027 precio por persona avión micro':\n\n[mem-7371421587d7] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-05) | url=https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina\n#### Mar del Plata\n\nVuelo + Hotel 4\\\n\nDesde\n\n$ 1.155.381\n\nIncluye impuestos, tasas y cargos\n\n## Paquetes a Bariloche y San Martín de los Andes\n\nPaquete\n\nNoviembre - 8 noches\n\n#### Bariloche con Villa La Angostura\n\nVuelo + Hotel 4 ⭐ + Traslados + Excursión\n\nDesde\n\n$ 1.692.280\n\nIncluye impuestos, tasas y car...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento precio por noche 2 personas enero 2027 10 al 16",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'alojamiento precio por noche 2 personas enero 2027 10 al 16':\n\n[mem-9530619359f6] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-05) | url=https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html\n1 noche, 2 adultos\n\nVer disponibilidad\n\n### View Hotel BRC\n\nHotel en San Carlos de Bariloche\n\nEste hotel está situado en San Carlos de Bariloche, a 400 metros del centro de la ciudad y del lago Nahuel Huapi. Ofrece alojamiento elegante, un restaurante con vistas a Bariloche y wifi gratis.\n\nPuntaje de los huéspedes en una escala del 1 al 10...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "costo diario comida restaurantes por persona en ARS",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'costo diario comida restaurantes por persona en ARS':\n\n[mem-d00a2160d89d] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.numbeo.com/food-prices/in/Bariloche-Argentina\nPotatoes (0.20 kg), $0.19 ; Onions (0.10 kg), $0.08 ; Lettuce (0.10 Head), $0.20 ; Daily recommended minimum amount of money for food per person, $7.04 ; Monthly\n\n[mem-6f39a3e976c5] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html\nChim...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "actividades principales precio por persona en ARS",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'actividades principales precio por persona en ARS' [destino=Bariloche, tema=actividades]: 4 datos recientes pero poco parecido a la consulta. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial y blue hoy",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'cotización dólar oficial y blue hoy':\n\n[mem-0f1b135e15f7] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-05) | url=https://x.com/ValorDolarBlue\n10/29/2026\n\n  Dólar Blue se mantuvo y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,3%\n @ValorDolarBlue\n\n  Valor Dólar Blue@ValorDolarBlue\n\n  10/28/2026\n\n  Dólar Blue bajó 0,63% y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,4% [...] 10/30/2026\n\n  Dólar Blue se mantuvo y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,2%\n\n  2\n @V...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "vuelo Mendoza MDZ a Bariloche BRC ida 10 enero 2027 vuelta 16 enero 2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'vuelo Mendoza MDZ a Bariloche BRC ida 10 enero 2027 vuelta 16 enero 2027 precio por persona' (guardados en memoria):\n\n[https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] origen=web | tema=pasajes | guardado como mem-ce983bdd5a45\nVuelos desde Mendoza a Bariloche desde ARS 42578 | JetSMART Argentina\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | mar 1 dic 2026 | desde  ARS 42.578\\  Visto hace: 11 horas |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | sáb 12 dic 2026 | desde  ARS 42.578\\  Visto hace: 10 horas |\n| Mendoza (MDZ) | Bariloche (BRC) ...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "micro Mendoza a Bariloche precio pasaje por persona enero 2027",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no sirven, repetí con forzar=true).\n\nMEMORIA — 4 datos vigentes para 'micro Mendoza a Bariloche precio pasaje por persona enero 2027':\n\n[mem-9594a81499af] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-05) | url=https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419\nLos vuelos de ida y vuelta más económicos en clase turista de Mendoza a San Carlos de Bariloche comienzan en ARS 208,707 del vie, 8 ene al lun, 11 ene.\n\n¿Cómo puedo reservar viajes en clase ej...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "hotel Bariloche precio por noche 2 personas enero 2027 10 al 16",
+              "destino": "Bariloche",
+              "tema": "alojamiento",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'hotel Bariloche precio por noche 2 personas enero 2027 10 al 16' (guardados en memoria):\n\n[https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] origen=web | tema=alojamiento | guardado como mem-cd94e5477766\nMejores hoteles en San Carlos de Bariloche | Viajes Falabella\nEstadía en San Carlos de Bariloche\n\n8.9\n\n Oferta de fin de año\n Elegido por parejas\n\n1 noche, 2 personas desde\n\n$455.198\n\n $ 679.400\n\n- %- 33 %\n\nFecha de referencia:\n\n10 mayo 2027\n\n## Hoteles 3 estrellas en San Carlos de Bariloche\n\nReserva el hotel 3 estrellas ...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio comida restaurante almuerzo cena por persona ARS Bariloche 2026",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no sirven, repetí con forzar=true).\n\nMEMORIA — 4 datos vigentes para 'precio comida restaurante almuerzo cena por persona ARS Bariloche 2026':\n\n[mem-afb899a61aec] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana\nEstuve en bari la semana pasada, por persona para cenar estas gastando 10, 15k por persona si salís a cenar. Para almuerzo / merienda podés\n\n[mem-6f39a3e976c5] origen=memoria | tema=otro | buscado hace 0.0 d...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio entrada excursión actividades Bariloche cerro Catedral circuito chico cerveceria por persona ARS",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no sirven, repetí con forzar=true).\n\nMEMORIA — 4 datos vigentes para 'precio entrada excursión actividades Bariloche cerro Catedral circuito chico cerveceria por persona ARS':\n\n[mem-96d7b6b3b08d] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-05) | url=https://www.nomades.com/bariloche/circuito-chico-id991\nCircuito Chico · Alimentación · Telesilla Cerro Campanario (AR$ 20.000 por adulto, AR$ 10.000 niños entre 6 a 12 años, pago en efectivo el día del tour)\n\n[mem-59ddaa6158eb] origen=memoria | tema=acti...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "cuánto cuesta comer por día en Bariloche precio menú almuerzo cena pesos 2026",
+              "destino": "Bariloche",
+              "tema": "otro",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'cuánto cuesta comer por día en Bariloche precio menú almuerzo cena pesos 2026' (guardados en memoria):\n\n[https://www.tiktok.com/@barilochetipss/video/7587142995183521032] origen=web | tema=otro | guardado como mem-8c2682ff0b79\nCuánto sale comer en Bariloche 2026: precios de almuerzos\nSi se agrega una bebida, el total puede subir entre 4.000 y 8.000 pesos más. Para ahorrar, muchas personas recomiendan alojarse en departamentos\n\n[https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en] origen=web | tema=otro | guardado como mem-e76a89427667\nP...",
+            "timestamp": "2026-11-05T21:18:52.306-03:00"
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:18:56.495-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "investigador",
+        "instruccion": "Completá la búsqueda para un viaje Mendoza (MDZ) a Bariloche (BRC), ida 10/01/2027 y vuelta 16/01/2027, 2 personas, 6 noches. Priorizá: (1) Pasajes ida y vuelta para esas fechas exactas, con precio por persona y total, unidad ARS o USD y fuente; si no aparecen, reintentá con forzar=true en la búsqueda web. Buscá también micro terrestre Mendoza-Bariloche con precio y fuente, usando la web (no solo memoria). (2) Alojamiento: precio por noche para 2 personas en Bariloche, con check-in 10/01/2027 y check-out 16/01/2027, en ARS, con fuente; si solo hay precios de otras fechas, indicarlo explícitamente. (3) Comida: rango diario por persona en ARS con fuente. (4) Actividades principales con precio por persona en ARS y fuente. (5) Cotización del dólar oficial y blue vigente con fuente y fecha. Para cada dato indicá fuente (URL o mem-...), moneda, unidad y si corresponde a otra fecha. Si la web falla, avisalo explícitamente.",
+        "evaluacion": "R1 Cobertura: incompleta. Faltan precios confiables de pasajes para las fechas pedidas (solo hay tarifas de otras fechas o históricas), micro no buscada en web, alojamiento solo con precios de otras fechas, comida y actividades sin datos concretos, y cotización del dólar sin confirmar. R2 Fuentes: presentes en ambos aportes (URLs o mem-...). R3 Precios: pasajes y alojamiento traen montos, pero con unidad no confirmada (por persona/total, por habitación/persona) y algunos en GBP. R4 Cálculo: el analista aún no trabajó; hay presupuesto, así que hace falta validar_viaje y calcular_presupuesto. R5 Observaciones: ninguna por código. R6 Coherencia: los aportes usan fechas distintas a las pedidas (otras noches/fechas); hay que aclarar que no son datos de 10-16/01/2027. Es la decisión 3 de 6: queda una ronda de investigación para completar comida, actividades, dólar, micro y alojamiento para fechas exactas, y después el analista.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "investigador",
+      "timestamp": "2026-11-05T21:19:21.305-03:00",
+      "detalle": {
+        "ronda": 3,
+        "instruccion": "Completá la búsqueda para un viaje Mendoza (MDZ) a Bariloche (BRC), ida 10/01/2027 y vuelta 16/01/2027, 2 personas, 6 noches. Priorizá: (1) Pasajes ida y vuelta para esas fechas exactas, con precio por persona y total, unidad ARS o USD y fuente; si no aparecen, reintentá con forzar=true en la búsqueda web. Buscá también micro terrestre Mendoza-Bariloche con precio y fuente, usando la web (no solo memoria). (2) Alojamiento: precio por noche para 2 personas en Bariloche, con check-in 10/01/2027 y check-out 16/01/2027, en ARS, con fuente; si solo hay precios de otras fechas, indicarlo explícitamente. (3) Comida: rango diario por persona en ARS con fuente. (4) Actividades principales con precio por persona en ARS y fuente. (5) Cotización del dólar oficial y blue vigente con fuente y fecha. Para cada dato indicá fuente (URL o mem-...), moneda, unidad y si corresponde a otra fecha. Si la web falla, avisalo explícitamente.",
+        "contenido": "## Hallazgos\n\n### Pasajes avión MDZ–BRC (ida 10/01/2027, vuelta 16/01/2027)\n- No encontré tarifas para las fechas exactas. Tras reintentar con forzar=true, la web solo mostró precios de otras fechas:\n- JetSMART desde ARS 42.578 por tramo (solo ida), para vuelos del 31/01/2027 y otras fechas. La unidad no se aclara: parece por persona y por tramo, pero no está confirmado. [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (web)\n- Kayak indica que los ida y vuelta MDZ–BRC oscilan entre $199.202 y $385.415 por persona, con promedio de $279.875 en los últimos 12 meses. Moneda no aclarada (probablemente ARS). Sin fechas exactas. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- Trip.com muestra JetSMART a USD 47 con salida sáb 16/01 (vuelo de otra ruta/tramo, sin precio de vuelta del 10/01). Unidad no especificada, probablemente por persona y por tramo. [https://us.trip.com/flights/mendoza-to-san-carlos-de-bariloche/airfares-mdz-brc] (web)\n- Google Flights (memoria, buscado 05/11/2026): ida y vuelta más barato desde ARS 208.707 (JetSMART, 8–11 ene), por persona en clase turista, un adulto. Fechas distintas a las pedidas. [mem-9594a81499af] (memoria)\n\n### Micro terrestre Mendoza–Bariloche\n- Plataforma10: desde ARS 135.100; precio promedio ARS 193.018. En la oferta visible, ARS 193.000 por persona (semicama, 07/11 al 08/11, 19h 10m de viaje). Fechas distintas a las pedidas. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (web)\n- Rome2rio: precio estimado 60–133 (moneda y unidad no especificadas), operador Cata Internacional, frecuencia diaria. [https://www.rome2rio.com/es/s/Mendoza/Bariloche] (web)\n- CheckMyBus: CATA Internacional, Económica Premium desde 50 € por persona (salida 4/11/2026), y 112 € en otra salida. Fecha distinta a la pedida. [https://www.checkmybus.es/ciudad-de-mendoza-mz/san-carlos-de-bariloche-rn] (web)\n- Turismo Andesmar: paquete bus + hotel 4 noches desde $380.000 por persona. Es un paquete, no un pasaje suelto. [https://www.turismoandesmar.com] (web)\n\n### Alojamiento (check-in 10/01/2027, check-out 16/01/2027, 2 personas)\n- No encontré precios para esas fechas exactas.\n- Despegar (memoria): 1 noche, 2 personas desde ARS 101.822 (Alma del Lago/otro hotel, precio de referencia 30/10/2026). **Otra fecha.** [mem-f408466d015c] (memoria)\n- Despegar (memoria): Alma Del Lago Suites, 1 noche, 2 personas desde ARS 285.231, referencia 07/04/2027. **Otra fecha.** [mem-f408466d015c] (memoria)\n- Viajes Falabella (memoria): 1 noche, 2 personas desde ARS 455.198 (Estadía, Oferta de fin de año), referencia 10/05/2027. **Otra fecha.** [mem-cd94e5477766] (memoria)\n- Kayak (web): M382 Hotel Bariloche desde USD 28 por noche (habitación estándar, precio de otra fecha, 11–13 de diciembre). Unidad no especificada. [https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp] (web)\n\n###",
+        "fuentes": [
+          {
+            "ref": "mem-9dbbbf45a269",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://tavily.com/knowledge/company/3Vgtb0GqNrbd",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-7371421587d7",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-9594a81499af",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ce45574ecd82",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-31cc0b2e5dc1",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://promociones-aereas.com.ar",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-f5f80dcf527e",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-cd94e5477766",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-9530619359f6",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-f408466d015c",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-d00a2160d89d",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.numbeo.com/food-prices/in/Bariloche-Argentina",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-6f39a3e976c5",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ee29d40d92e8",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.youtube.com/shorts/hLIrON0shf4",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-afb899a61aec",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-0f1b135e15f7",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://x.com/ValorDolarBlue",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-42f13e4597c1",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.ambito.com/contenidos/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-b48b81624b12",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.cronista.com/MercadosOnline/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-4ce0b54fb9b9",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://dolarhoy.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://us.trip.com/flights/mendoza-to-san-carlos-de-bariloche/airfares-mdz-brc",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://us.trip.com/flights/mendoza-to-san-carlos-de-bariloche/airfares-mdz-brc",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.flightsfrom.com/MDZ-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.flightsfrom.com/MDZ-BRC",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.rome2rio.com/es/s/Mendoza/Bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.rome2rio.com/es/s/Mendoza/Bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.checkmybus.es/ciudad-de-mendoza-mz/san-carlos-de-bariloche-rn",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.checkmybus.es/ciudad-de-mendoza-mz/san-carlos-de-bariloche-rn",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.turismoandesmar.com",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.turismoandesmar.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://viabariloche.com.ar",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://viabariloche.com.ar",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.booking.com/hotel/ar/nevada.html",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/hotel/ar/nevada.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.patagoniahotel.com.ar/en/habitaciones",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.patagoniahotel.com.ar/en/habitaciones",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.trivago.com/es-US/opr/hoteles-cerca-de-aeropuerto-de-bariloche?search=500-1083940",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.trivago.com/es-US/opr/hoteles-cerca-de-aeropuerto-de-bariloche?search=500-1083940",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://tavily.com/knowledge/company/f7NiUo67zbYX",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://tavily.com/knowledge/company/f7NiUo67zbYX",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.facebook.com/groups/723133792746787/posts/1413820657011427",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.facebook.com/groups/723133792746787/posts/1413820657011427",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://bariloche.org/cuanto_me_cuesta",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://bariloche.org/cuanto_me_cuesta",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.tiktok.com/@barilochetipss/video/7587142995183521032",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.tiktok.com/@barilochetipss/video/7587142995183521032",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-c1744caa9c27",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-59ddaa6158eb",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-96d7b6b3b08d",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.nomades.com/bariloche/circuito-chico-id991",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-764383d58932",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://barilocheturismo.gob.ar/es/circuito-chico",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.infodolar.com/cotizacion-dolar-localidad-san-carlos-de-bariloche-provincia-rio-negro.aspx",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com/cotizacion-dolar-localidad-san-carlos-de-bariloche-provincia-rio-negro.aspx",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://dolarhoy.com",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://dolarhoy.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://llaollao.com/cotizacion",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://llaollao.com/cotizacion",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.lanacion.com.ar/dolar-hoy",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.lanacion.com.ar/dolar-hoy",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.ambito.com/contenidos/dolar.html",
+            "origen": "web",
+            "tema": "cambio",
+            "url": "https://www.ambito.com/contenidos/dolar.html",
+            "fecha_busqueda": "2026-11-05"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes avión Mendoza a Bariloche ida 10/01/2027 vuelta 16/01/2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'pasajes avión Mendoza a Bariloche ida 10/01/2027 vuelta 16/01/2027 precio por persona':\n\n[mem-9dbbbf45a269] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-05) | url=https://tavily.com/knowledge/company/3Vgtb0GqNrbd\n# BRC\nID: 3Vgtb0GqNrbd\nWebsite: www.brc.org\nHeadquarters: New York, New York, United States\nLinkedIn: www.linkedin.com/company/brc · 2,179 followers\nIndustry: IT Services and IT Consulting\nIndustry codes: SIC 83, 839, NAICS 62, 624\nCompany type: Privately Held\nSocial profiles: www.facebook.com/boweryresidentscommittee, www.instagram.c...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "micro terrestre Mendoza a Bariloche precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'micro terrestre Mendoza a Bariloche precio por persona':\n\n[mem-9594a81499af] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-05) | url=https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419\nLos vuelos de ida y vuelta más económicos en clase turista de Mendoza a San Carlos de Bariloche comienzan en ARS 208,707 del vie, 8 ene al lun, 11 ene.\n\n¿Cómo puedo reservar viajes en clase ejecutiva de Mendoza a San Carlos de Bariloche? [...] El vuelo de ida y vuelta más económico de Aerolíneas Argentinas de...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento hotel o departamento por noche para 2 personas enero 2027 check-in 10/01 check-out 16/01",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'alojamiento hotel o departamento por noche para 2 personas enero 2027 check-in 10/01 check-out 16/01':\n\n[mem-f5f80dcf527e] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-05) | url=https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762\nLos precios de los hoteles en San Carlos de Bariloche suelen ser más altos en Julio, cuando normalmente son de alrededor de $234 por noche.\n\nLos precios de los hoteles en San Carlos de Bariloche suelen ser de $42 a $474 por noche. El precio habitual es de alrededor de $108 ...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "costo diario de comida restaurantes por persona en ARS",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'costo diario de comida restaurantes por persona en ARS':\n\n[mem-d00a2160d89d] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.numbeo.com/food-prices/in/Bariloche-Argentina\nPotatoes (0.20 kg), $0.19 ; Onions (0.10 kg), $0.08 ; Lettuce (0.10 Head), $0.20 ; Daily recommended minimum amount of money for food per person, $7.04 ; Monthly\n\n[mem-6f39a3e976c5] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html\nC...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "actividades principales precio por persona excursiones",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'actividades principales precio por persona excursiones' [destino=Bariloche, tema=actividades]: 4 datos recientes pero poco parecido a la consulta. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial y blue hoy",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'cotización dólar oficial y blue hoy':\n\n[mem-0f1b135e15f7] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-05) | url=https://x.com/ValorDolarBlue\n10/29/2026\n\n  Dólar Blue se mantuvo y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,3%\n @ValorDolarBlue\n\n  Valor Dólar Blue@ValorDolarBlue\n\n  10/28/2026\n\n  Dólar Blue bajó 0,63% y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,4% [...] 10/30/2026\n\n  Dólar Blue se mantuvo y cerró el día a $1.565,00. La brecha con el Dólar Oficial desciende al 0,2%\n\n  2\n @V...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "vuelos Mendoza MDZ a Bariloche BRC ida 10 enero 2027 vuelta 16 enero 2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'vuelos Mendoza MDZ a Bariloche BRC ida 10 enero 2027 vuelta 16 enero 2027 precio por persona' (guardados en memoria):\n\n[https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] origen=web | tema=pasajes | guardado como mem-ce983bdd5a45\nVuelos desde Mendoza a Bariloche desde ARS 42578 | JetSMART Argentina\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | mar 1 dic 2026 | desde  ARS 42.578\\  Visto hace: 11 horas |\n| Mendoza (MDZ) | Bariloche (BRC) | Solo ida | sáb 12 dic 2026 | desde  ARS 42.578\\  Visto hace: 10 horas |\n| Mendoza (MDZ) | Bariloche (BRC)...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "micro terrestre Mendoza a Bariloche precio por persona tarifa empresa",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'micro terrestre Mendoza a Bariloche precio por persona tarifa empresa' (guardados en memoria):\n\n[https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] origen=web | tema=pasajes | guardado como mem-ea5fcf2bf407\nPasajes de Mendoza a San Carlos de Bariloche en micro 🚌 Precios y horarios\n### ¿Cuánto sale un pasaje de micro a San Carlos de Bariloche desde Mendoza?\n:   El precio del pasaje de micro de Mendoza a San Carlos de Bariloche arranca en ARS 135.100, llegando a un precio promedio de ARS 193.018. Para conseguir las tarifas más económicas, te rec...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "hotel precio por noche 2 personas check-in 10 enero 2027 check-out 16 enero 2027 ARS",
+              "destino": "Bariloche",
+              "tema": "alojamiento",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'hotel precio por noche 2 personas check-in 10 enero 2027 check-out 16 enero 2027 ARS' (guardados en memoria):\n\n[https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp] origen=web | tema=alojamiento | guardado como mem-a228aac98084\nM382 Hotel Bariloche from $28. San Carlos de Bariloche Hotel Deals & Reviews - KAYAK\n7.9\n\nGood\n\n1230 reviews\n\n## Latest deals for M382 Hotel Bariloche\n\nThu 11/12\n\n-\n\nFri 11/13\n\nDeals from\n\n$28\n\n•Cheapest rate per night\n\nCompare prices for Standard room, Double room and 6 more M382 Hotel Bariloche deals.\n\nSupe...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio comidas restaurantes por persona por día pesos argentinos",
+              "destino": "Bariloche",
+              "tema": "otro",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'precio comidas restaurantes por persona por día pesos argentinos' (guardados en memoria):\n\n[https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana] origen=web | tema=otro | guardado como mem-afb899a61aec\nPresupuesto comida para una semana : r/Bariloche\nunos 15k al día, Para comer si 10k-15k aprox por persona (pesos argentinos). Un cafe alrededor de los 2k, torta 4-6k, chocolates 38k el kilo.\n\n[https://www.facebook.com/groups/723133792746787/posts/1413820657011427] origen=web | tema=otro | guardado como mem-cccb67abb74b\nQuiero ir...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "actividades excursiones precio por persona ARS cerro Catedral circuito chico navegación",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no sirven, repetí con forzar=true).\n\nMEMORIA — 4 datos vigentes para 'actividades excursiones precio por persona ARS cerro Catedral circuito chico navegación':\n\n[mem-c1744caa9c27] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-05) | url=https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral\n### Cerro Catedral\n\nHalf-day tour to Cerro Catedral, the largest ski resort in South America, with panoramic views of Bariloche and the mountains.\n\nfromARS 29.400\n\nCamino de los 7 Lagos\n...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "cotización dólar oficial blue hoy venta",
+              "destino": "Bariloche",
+              "tema": "cambio",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 5 resultados para 'cotización dólar oficial blue hoy venta' (guardados en memoria):\n\n[https://www.infodolar.com/cotizacion-dolar-localidad-san-carlos-de-bariloche-provincia-rio-negro.aspx] origen=web | tema=cambio | guardado como mem-7da4f8f303eb\nCotización Dólar en San Carlos De Bariloche - InfoDolar.com\n## Precio Dólar Blue en San Carlos De Bariloche (Río Negro)\n\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue en San Carlos De Bariloche | $ 1.535,00  -$ 5,00 | $ 1.563,00  -$ 5,00 | -0,32 % | $ 28,00 | jueves, 5 de noviembre de 2026 18:01 Argentina |...",
+            "timestamp": "2026-11-05T21:19:21.304-03:00"
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 7,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:19:23.879-03:00",
+      "detalle": {
+        "paso": 4,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "evaluacion": "R1 Cobertura: pasajes avión y micro tienen datos de otras fechas (no de 10-16/01/2027); alojamiento sin precio para esas fechas; falta comida diaria confirmada, actividades con precio en ARS y cotización del dólar con fecha en el aporte #3 (no se ve completa). R2 Fuentes: todos los aportes traen URL o mem-. R3 Precios: pasajes y alojamiento tienen montos, pero con unidad no confirmada (por persona/por habitación/por noche). R4 Cálculo: no hay aporte del analista todavía. R5 Observaciones: ninguna por código. R6 Coherencia: los precios son de fechas distintas; hay que marcarlo y no mezclarlo con las fechas pedidas. Faltan datos clave, pero el investigador ya hizo tres rondas y reintentó con forzar=true; conviene cerrar con lo disponible tras un último pedido acotado para comida, actividades y dólar, que son los temas que no aparecen completos.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 8,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-05T21:19:31.147-03:00",
+      "detalle": {
+        "respuesta": "## No podemos confirmar si los 800.000 pesos alcanzan\n\nNo tenemos un presupuesto calculado para este viaje. Los aportes de los investigadores no tienen precios para el 10 al 16 de enero de 2027, y no hay un cálculo del analista que sume los renglones. Por eso no armamos el itinerario ni el desglose: sería inventar números.\n\nLo que sí encontramos, todo con fechas o unidades distintas a las que pediste:\n\n**Pasajes aéreos Mendoza–Bariloche**\n- Ida y vuelta, rango de los últimos 12 meses (histórico, no para tus fechas): entre $199.202 y $385.415, promedio $279.875. No aclara si es por persona o total. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n- Ida y vuelta más barato en Google Flights: desde ARS 208.707 (JetSMART, 8 al 11 de enero, otro año). [mem-9594a81499af]\n- Solo ida JetSMART desde ARS 42.578, con fecha de referencia del 31/01/2027. Es un tramo, no ida y vuelta. [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche]\n\n**Micro (terrestre)**\n- Plataforma10: desde ARS 135.100, con precio promedio de ARS 193.018. Fechas distintas a las tuyas. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]\n- Turismo Andesmar: paquete bus + hotel de 4 noches desde $380.000 por persona. Es un paquete, no un pasaje suelto. [https://www.turismoandesmar.com]\n\n**Alojamiento en Bariloche (por noche, 2 personas, fechas distintas)**\n- Despegar: desde ARS 66.412 (Selva India) y ARS 101.822 (Casablanca Apart). [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche]\n- Kayak: desde ARS 53.048 (3 estrellas) y ARS 117.943 (4 estrellas), sin aclarar cuántas personas. [https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp]\n\n**Comida**\n- Reddit (publicación de 2024): cena fuera de ARS 10.000 a 15.000 por persona. [https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana]\n\n## Lo que no pudimos averiguar\n\n- Precio de pasajes aéreos de ida y vuelta para el 10 al 16 de enero de 2027.\n- Precio de micro para esas fechas (el investigador no consiguió opciones con precio para tu tramo).\n- Precio de alojamiento para 6 noches en esas fechas.\n- Si los precios son por persona o por total, en la mayoría de las fuentes.\n\n## Próximo paso\n\nPara armar el presupuesto real hace falta una nueva búsqueda con fechas exactas de ida y vuelta, y confirmar si preferís avión o micro. Con esos precios se puede calcular si los 800.000 pesos alcanzan para 2 personas durante 7 días.\n\n## Fuentes\n- [web] https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina — pasajes, buscado el 2026-11-05\n- [web] https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [web] https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762 — alojamiento, buscado el 2026-11-05\n- [web] https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html — alojamiento, buscado el 2026-11-05\n- [web] https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp — alojamiento, buscado el 2026-11-05\n- [web] https://www.numbeo.com/food-prices/in/Bariloche-Argentina — otro, buscado el 2026-11-05\n- [web] https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana — otro, buscado el 2026-11-05\n- [web] https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html — otro, buscado el 2026-11-05\n- [web] https://www.youtube.com/shorts/hLIrON0shf4 — otro, buscado el 2026-11-05\n- [web] https://www.facebook.com/groups/barilocheturismo/posts/3698347910418451 — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-05\n- [web] https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://www.nomades.com/bariloche/circuito-chico-id991 — actividades, buscado el 2026-11-05\n- [web] https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://barilocheturismo.gob.ar/es/circuito-chico — actividades, buscado el 2026-11-05\n- [web] https://dolarhoy.com — cambio, buscado el 2026-11-05\n- [web] https://www.cronista.com/MercadosOnline/dolar.html — cambio, buscado el 2026-11-05\n- [web] https://www.lanacion.com.ar/tema/dolar-blue-tid67294 — cambio, buscado el 2026-11-05\n- [web] https://www.ambito.com/contenidos/dolar.html — cambio, buscado el 2026-11-05\n- [web] https://x.com/ValorDolarBlue — cambio, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://promociones-aereas.com.ar — pasajes, buscado el 2026-11-05\n- [memoria] mem-7371421587d7 → https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina — pasajes, buscado el 2026-11-05\n- [memoria] mem-9594a81499af → https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce983bdd5a45 → https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce45574ecd82 → https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [memoria] mem-9530619359f6 → https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html — alojamiento, buscado el 2026-11-05\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [memoria] mem-cd94e5477766 → https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [memoria] mem-f5f80dcf527e → https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762 — alojamiento, buscado el 2026-11-05\n- [memoria] mem-d00a2160d89d → https://www.numbeo.com/food-prices/in/Bariloche-Argentina — otro, buscado el 2026-11-05\n- [memoria] mem-6f39a3e976c5 → https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html — otro, buscado el 2026-11-05\n- [memoria] mem-ee29d40d92e8 → https://www.youtube.com/shorts/hLIrON0shf4 — otro, buscado el 2026-11-05\n- [memoria] mem-afb899a61aec → https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana — otro, buscado el 2026-11-05\n- [memoria] mem-0f1b135e15f7 → https://x.com/ValorDolarBlue — cambio, buscado el 2026-11-05\n- [memoria] mem-42f13e4597c1 → https://www.ambito.com/contenidos/dolar.html — cambio, buscado el 2026-11-05\n- [memoria] mem-b48b81624b12 → https://www.cronista.com/MercadosOnline/dolar.html — cambio, buscado el 2026-11-05\n- [memoria] mem-4ce0b54fb9b9 → https://dolarhoy.com — cambio, buscado el 2026-11-05\n- [web] https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc — pasajes, buscado el 2026-11-05\n- [web] https://tavily.com/knowledge/company/3Vgtb0GqNrbd — pasajes, buscado el 2026-11-05\n- [memoria] mem-e77de8366af6 → https://www.google.com/travel/flights?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.co/Hoteles-en-Bariloche.54322.hotel.ksp — alojamiento, buscado el 2026-11-05\n- [memoria] mem-96d7b6b3b08d → https://www.nomades.com/bariloche/circuito-chico-id991 — actividades, buscado el 2026-11-05\n- [memoria] mem-59ddaa6158eb → https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral — actividades, buscado el 2026-11-05\n- [memoria] mem-764383d58932 → https://barilocheturismo.gob.ar/es/circuito-chico — actividades, buscado el 2026-11-05\n- [memoria] mem-c1744caa9c27 → https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://www.tiktok.com/@barilochetipss/video/7587142995183521032 — otro, buscado el 2026-11-05\n- [web] https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/cuanto_me_cuesta — otro, buscado el 2026-11-05\n- [web] https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/cuanto_me_cuesta/comment-page-7 — otro, buscado el 2026-11-05\n- [memoria] mem-9dbbbf45a269 → https://tavily.com/knowledge/company/3Vgtb0GqNrbd — pasajes, buscado el 2026-11-05\n- [memoria] mem-31cc0b2e5dc1 → https://promociones-aereas.com.ar — pasajes, buscado el 2026-11-05\n- [web] https://us.trip.com/flights/mendoza-to-san-carlos-de-bariloche/airfares-mdz-brc — pasajes, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://www.flightsfrom.com/MDZ-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.rome2rio.com/es/s/Mendoza/Bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.checkmybus.es/ciudad-de-mendoza-mz/san-carlos-de-bariloche-rn — pasajes, buscado el 2026-11-05\n- [web] https://www.turismoandesmar.com — pasajes, buscado el 2026-11-05\n- [web] https://viabariloche.com.ar — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp — alojamiento, buscado el 2026-11-05\n- [web] https://www.booking.com/hotel/ar/nevada.html — alojamiento, buscado el 2026-11-05\n- [web] https://www.patagoniahotel.com.ar/en/habitaciones — alojamiento, buscado el 2026-11-05\n- [web] https://www.trivago.com/es-US/opr/hoteles-cerca-de-aeropuerto-de-bariloche?search=500-1083940 — alojamiento, buscado el 2026-11-05\n- [web] https://tavily.com/knowledge/company/f7NiUo67zbYX — alojamiento, buscado el 2026-11-05\n- [web] https://www.facebook.com/groups/723133792746787/posts/1413820657011427 — otro, buscado el 2026-11-05\n- [web] https://www.infodolar.com/cotizacion-dolar-localidad-san-carlos-de-bariloche-provincia-rio-negro.aspx — cambio, buscado el 2026-11-05\n- [web] https://llaollao.com/cotizacion — cambio, buscado el 2026-11-05\n- [web] https://www.lanacion.com.ar/dolar-hoy — cambio, buscado el 2026-11-05\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## No podemos confirmar si los 800.000 pesos alcanzan\n\nNo tenemos un presupuesto calculado para este viaje. Los aportes de los investigadores no tienen precios para el 10 al 16 de enero de 2027, y no hay un cálculo del analista que sume los renglones. Por eso no armamos el itinerario ni el desglose: sería inventar números.\n\nLo que sí encontramos, todo con fechas o unidades distintas a las que pediste:\n\n**Pasajes aéreos Mendoza–Bariloche**\n- Ida y vuelta, rango de los últimos 12 meses (histórico, no para tus fechas): entre $199.202 y $385.415, promedio $279.875. No aclara si es por persona o total. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n- Ida y vuelta más barato en Google Flights: desde ARS 208.707 (JetSMART, 8 al 11 de enero, otro año). [mem-9594a81499af]\n- Solo ida JetSMART desde ARS 42.578, con fecha de referencia del 31/01/2027. Es un tramo, no ida y vuelta. [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche]\n\n**Micro (terrestre)**\n- Plataforma10: desde ARS 135.100, con precio promedio de ARS 193.018. Fechas distintas a las tuyas. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]\n- Turismo Andesmar: paquete bus + hotel de 4 noches desde $380.000 por persona. Es un paquete, no un pasaje suelto. [https://www.turismoandesmar.com]\n\n**Alojamiento en Bariloche (por noche, 2 personas, fechas distintas)**\n- Despegar: desde ARS 66.412 (Selva India) y ARS 101.822 (Casablanca Apart). [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche]\n- Kayak: desde ARS 53.048 (3 estrellas) y ARS 117.943 (4 estrellas), sin aclarar cuántas personas. [https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp]\n\n**Comida**\n- Reddit (publicación de 2024): cena fuera de ARS 10.000 a 15.000 por persona. [https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana]\n\n## Lo que no pudimos averiguar\n\n- Precio de pasajes aéreos de ida y vuelta para el 10 al 16 de enero de 2027.\n- Precio de micro para esas fechas (el investigador no consiguió opciones con precio para tu tramo).\n- Precio de alojamiento para 6 noches en esas fechas.\n- Si los precios son por persona o por total, en la mayoría de las fuentes.\n\n## Próximo paso\n\nPara armar el presupuesto real hace falta una nueva búsqueda con fechas exactas de ida y vuelta, y confirmar si preferís avión o micro. Con esos precios se puede calcular si los 800.000 pesos alcanzan para 2 personas durante 7 días.\n\n## Fuentes\n- [web] https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina — pasajes, buscado el 2026-11-05\n- [web] https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [web] https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762 — alojamiento, buscado el 2026-11-05\n- [web] https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html — alojamiento, buscado el 2026-11-05\n- [web] https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/Hoteles-en-Bariloche.54322.hotel.ksp — alojamiento, buscado el 2026-11-05\n- [web] https://www.numbeo.com/food-prices/in/Bariloche-Argentina — otro, buscado el 2026-11-05\n- [web] https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana — otro, buscado el 2026-11-05\n- [web] https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html — otro, buscado el 2026-11-05\n- [web] https://www.youtube.com/shorts/hLIrON0shf4 — otro, buscado el 2026-11-05\n- [web] https://www.facebook.com/groups/barilocheturismo/posts/3698347910418451 — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-05\n- [web] https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://www.nomades.com/bariloche/circuito-chico-id991 — actividades, buscado el 2026-11-05\n- [web] https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://barilocheturismo.gob.ar/es/circuito-chico — actividades, buscado el 2026-11-05\n- [web] https://dolarhoy.com — cambio, buscado el 2026-11-05\n- [web] https://www.cronista.com/MercadosOnline/dolar.html — cambio, buscado el 2026-11-05\n- [web] https://www.lanacion.com.ar/tema/dolar-blue-tid67294 — cambio, buscado el 2026-11-05\n- [web] https://www.ambito.com/contenidos/dolar.html — cambio, buscado el 2026-11-05\n- [web] https://x.com/ValorDolarBlue — cambio, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://promociones-aereas.com.ar — pasajes, buscado el 2026-11-05\n- [memoria] mem-7371421587d7 → https://almundo.com.ar/paquetes-turisticos/regiones/paquetes-turisticos-a-argentina — pasajes, buscado el 2026-11-05\n- [memoria] mem-9594a81499af → https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce983bdd5a45 → https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce45574ecd82 → https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [memoria] mem-9530619359f6 → https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html — alojamiento, buscado el 2026-11-05\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [memoria] mem-cd94e5477766 → https://www.viajesfalabella.com.co/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-05\n- [memoria] mem-f5f80dcf527e → https://www.trivago.com/es-US/odr/hoteles-san-carlos-de-bariloche-argentina?search=200-97762 — alojamiento, buscado el 2026-11-05\n- [memoria] mem-d00a2160d89d → https://www.numbeo.com/food-prices/in/Bariloche-Argentina — otro, buscado el 2026-11-05\n- [memoria] mem-6f39a3e976c5 → https://www.tripadvisor.com/Restaurants-g312848-San_Carlos_de_Bariloche_Province_of_Rio_Negro_Patagonia.html — otro, buscado el 2026-11-05\n- [memoria] mem-ee29d40d92e8 → https://www.youtube.com/shorts/hLIrON0shf4 — otro, buscado el 2026-11-05\n- [memoria] mem-afb899a61aec → https://www.reddit.com/r/Bariloche/comments/1bfe3e5/presupuesto_comida_para_una_semana — otro, buscado el 2026-11-05\n- [memoria] mem-0f1b135e15f7 → https://x.com/ValorDolarBlue — cambio, buscado el 2026-11-05\n- [memoria] mem-42f13e4597c1 → https://www.ambito.com/contenidos/dolar.html — cambio, buscado el 2026-11-05\n- [memoria] mem-b48b81624b12 → https://www.cronista.com/MercadosOnline/dolar.html — cambio, buscado el 2026-11-05\n- [memoria] mem-4ce0b54fb9b9 → https://dolarhoy.com — cambio, buscado el 2026-11-05\n- [web] https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc — pasajes, buscado el 2026-11-05\n- [web] https://tavily.com/knowledge/company/3Vgtb0GqNrbd — pasajes, buscado el 2026-11-05\n- [memoria] mem-e77de8366af6 → https://www.google.com/travel/flights?gl=AR&hl=es-419 — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.co/Hoteles-en-Bariloche.54322.hotel.ksp — alojamiento, buscado el 2026-11-05\n- [memoria] mem-96d7b6b3b08d → https://www.nomades.com/bariloche/circuito-chico-id991 — actividades, buscado el 2026-11-05\n- [memoria] mem-59ddaa6158eb → https://www.civitatis.com/ar/bariloche/tour-circuito-chico-cerro-catedral — actividades, buscado el 2026-11-05\n- [memoria] mem-764383d58932 → https://barilocheturismo.gob.ar/es/circuito-chico — actividades, buscado el 2026-11-05\n- [memoria] mem-c1744caa9c27 → https://www.turaccion.com.ar/excursiones/terrestres/circuito-chico-y-cerro-catedral — actividades, buscado el 2026-11-05\n- [web] https://www.tiktok.com/@barilochetipss/video/7587142995183521032 — otro, buscado el 2026-11-05\n- [web] https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/cuanto_me_cuesta — otro, buscado el 2026-11-05\n- [web] https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US — otro, buscado el 2026-11-05\n- [web] https://bariloche.org/cuanto_me_cuesta/comment-page-7 — otro, buscado el 2026-11-05\n- [memoria] mem-9dbbbf45a269 → https://tavily.com/knowledge/company/3Vgtb0GqNrbd — pasajes, buscado el 2026-11-05\n- [memoria] mem-31cc0b2e5dc1 → https://promociones-aereas.com.ar — pasajes, buscado el 2026-11-05\n- [web] https://us.trip.com/flights/mendoza-to-san-carlos-de-bariloche/airfares-mdz-brc — pasajes, buscado el 2026-11-05\n- [web] https://www.google.com/travel/flights/flights-from-mendoza-to-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://www.flightsfrom.com/MDZ-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.rome2rio.com/es/s/Mendoza/Bariloche — pasajes, buscado el 2026-11-05\n- [web] https://www.checkmybus.es/ciudad-de-mendoza-mz/san-carlos-de-bariloche-rn — pasajes, buscado el 2026-11-05\n- [web] https://www.turismoandesmar.com — pasajes, buscado el 2026-11-05\n- [web] https://viabariloche.com.ar — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com/San-Carlos-de-Bariloche-Hotels-Hotel-Antartida.451473.ksp — alojamiento, buscado el 2026-11-05\n- [web] https://www.booking.com/hotel/ar/nevada.html — alojamiento, buscado el 2026-11-05\n- [web] https://www.patagoniahotel.com.ar/en/habitaciones — alojamiento, buscado el 2026-11-05\n- [web] https://www.trivago.com/es-US/opr/hoteles-cerca-de-aeropuerto-de-bariloche?search=500-1083940 — alojamiento, buscado el 2026-11-05\n- [web] https://tavily.com/knowledge/company/f7NiUo67zbYX — alojamiento, buscado el 2026-11-05\n- [web] https://www.facebook.com/groups/723133792746787/posts/1413820657011427 — otro, buscado el 2026-11-05\n- [web] https://www.infodolar.com/cotizacion-dolar-localidad-san-carlos-de-bariloche-provincia-rio-negro.aspx — cambio, buscado el 2026-11-05\n- [web] https://llaollao.com/cotizacion — cambio, buscado el 2026-11-05\n- [web] https://www.lanacion.com.ar/dolar-hoy — cambio, buscado el 2026-11-05\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → investigador → supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 4,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 3
+    },
+    "refinamientos": 2,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 16,
+      "buscar_en_web": 18
+    },
+    "busquedas_web": 14,
+    "fuentes_memoria": 23,
+    "fuentes_web": 52,
+    "observaciones": [],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "input_token_details": {
+        "cache_read": 0,
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0,
+        "cache_creation": 0
+      },
+      "input_tokens": 154550,
+      "output_token_details": {
+        "reasoning": 4793
+      },
+      "output_tokens": 17951,
+      "total_tokens": 172501
+    }
+  },
+  "archivo": "traces\\1_flujo_completo_real_20261105-211752.json"
+}
