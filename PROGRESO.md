@@ -44,10 +44,9 @@ Para retomar: `.venv\Scripts\python.exe -m pytest -q` (tiene que dar 117 passed)
 4. **Corridas mock** de los 8 escenarios, con traza (evidencia offline).
 5. **`demo.ipynb`** ejecutado con salidas visibles, que muestre el flujo de delegación.
 6. **README.md**: Mermaid (`python main.py --mermaid`), por qué la topología jerárquica, conflictos entre agentes, qué es Tavily y por qué la web, por qué ChromaDB y no Pinecone, `TavilySearch` en lugar de `TavilySearchResults`, `create_react_agent` deprecado (se usa igual porque lo nombra la consigna), async, instalación desde cero, tabla de escenarios, tabla de criterios y "lo que aprendimos de las corridas reales" (trazas `0_` y `0b_`).
-7. **EXTRA MCP** según `EXTRA_MCP.md` (servidor FastMCP + cliente para el analista con `--mcp`, tests y escenario #9). ⚠️ Este archivo apareció en la carpeta pero no lo hablamos en el chat: **confirmar antes de empezar.** Una diferencia a revisar: el archivo dice que `validar_viaje` usa `PedidoViaje`, pero en el código usa `ViajeValidado` (a propósito: `PedidoViaje` no valida reglas de negocio).
-8. **`requirements.txt` final** (sumar `langchain` 1.4.7, que entra como dependencia de `langchain-tavily`, y lo de MCP si va) y **prueba en un venv limpio**.
-9. **Revisión punto por punto** contra `CONSIGNA.md`, los 4 criterios y `MEJORAS_TICHER.md`.
-10. **Repo público `pre-entrega-6`** en GitHub (anukvilarasau) y push. NO entregar en Coderhouse.
+7. **`requirements.txt` final** (sumar `langchain` 1.4.7, que entra como dependencia de `langchain-tavily`) y **prueba en un venv limpio**.
+8. **Revisión punto por punto** contra `CONSIGNA.md`, los 4 criterios y `MEJORAS_TICHER.md`.
+9. **Repo público `pre-entrega-6`** en GitHub (anukvilarasau) y push. NO entregar en Coderhouse.
 
 ## 4. Decisiones que tomamos
 
