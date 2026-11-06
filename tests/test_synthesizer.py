@@ -114,3 +114,34 @@ def test_solo_se_listan_las_fuentes_citadas_y_sin_repetir_pagina() -> None:
     elegidas = fuentes_a_listar([web, mem, otra], f"Hace 22 °C [{URL_CLIMA}]", [])
     assert elegidas == [web]
     assert fuentes_a_listar([web, otra], "sin citas", []) == [web, otra]  # sin citas: las primeras
+
+
+# ------------------------------------------- actividades repetidas (corrida real 1)
+ITINERARIO_REAL = """## Itinerario
+- **Día 1 (sáb. 10/01/2027):** llegada desde Mendoza.
+- **Día 2:** Cerro Catedral, excursión de 4 horas, ARS 26.000 [https://bariloche.org/x].
+- **Día 3:** Circuito Chico y Cerro Catedral (día completo), desde ARS 29.400.
+- **Día 4:** Camino de los 7 Lagos (día completo).
+- **Día 7 (vie. 16/01/2027):** regreso a Mendoza."""
+
+
+def test_detecta_la_repeticion_de_la_corrida_real() -> None:
+    from agents.synthesizer import actividades_repetidas
+
+    assert actividades_repetidas(ITINERARIO_REAL) == {"Cerro Catedral": [2, 3]}
+    sin_repetir = ITINERARIO_REAL.replace("Circuito Chico y Cerro Catedral", "Circuito Chico")
+    assert actividades_repetidas(sin_repetir) == {}  # Mendoza en los días 1 y 7 no cuenta (ida y vuelta)
+
+
+async def test_si_repite_pide_una_correccion() -> None:
+    corregido = ITINERARIO_REAL.replace("Circuito Chico y Cerro Catedral", "Circuito Chico")
+    llm = LLMMock(politica=guion([AIMessage(content=ITINERARIO_REAL), AIMessage(content=corregido)]))
+    r = (await sintetizar([INV, ANA_ENTRA], llm=llm))["respuesta_final"]
+    assert "Circuito Chico (día completo)" in r and "Nota: el itinerario repite" not in r
+    assert "se repite: 'Cerro Catedral' en los días 2, 3" in str(llm.vistos[1][-1].content)
+
+
+async def test_si_sigue_repitiendo_avisa() -> None:
+    llm = LLMMock(politica=guion([AIMessage(content=ITINERARIO_REAL), AIMessage(content=ITINERARIO_REAL)]))
+    r = (await sintetizar([INV, ANA_ENTRA], llm=llm))["respuesta_final"]
+    assert "Nota: el itinerario repite Cerro Catedral" in r

@@ -1,0 +1,286 @@
+{
+  "pregunta": "¿Cómo llegar de Mendoza a Bariloche y cuánto sale el pasaje?",
+  "escenario": "6_refinamiento",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-05T21:37:18.016-03:00",
+  "fin": "2026-11-05T21:37:55.997-03:00",
+  "duracion_s": 37.98,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": null,
+    "fecha_vuelta": null,
+    "dias": null,
+    "personas": null,
+    "presupuesto": null,
+    "moneda": null,
+    "supuestos": []
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:37:21.839-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "supuestos": []
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá cómo viajar de Mendoza a Bariloche (Argentina) y el precio de referencia del pasaje. Incluí: opciones de transporte (micro/ómnibus de larga distancia, avión con escalas o vuelo directo si existe, y auto como alternativa), duración del viaje y rangos de precio de referencia (valores \"desde\" o promedios; no hace falta precio exacto para fechas específicas, porque no se informaron fechas). Indicá la fuente (URL o mem-...) de cada dato. Si hay precios en dólares, incluí también la cotización del dólar oficial, tarjeta y MEP (no el blue). No hace falta buscar alojamiento, comida ni actividades porque la pregunta solo pide cómo llegar y el costo del pasaje.",
+        "evaluacion": "Aún no hay aportes. R1 (cobertura): falta buscar pasajes Mendoza-Bariloche (medios de transporte y precios). R2 y R3: no hay fuentes ni precios todavía. R4: no hay presupuesto, así que el analista no es necesario. R5 y R6: no aplican aún. Hace falta una búsqueda del investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-05T21:37:45.557-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá cómo viajar de Mendoza a Bariloche (Argentina) y el precio de referencia del pasaje. Incluí: opciones de transporte (micro/ómnibus de larga distancia, avión con escalas o vuelo directo si existe, y auto como alternativa), duración del viaje y rangos de precio de referencia (valores \"desde\" o promedios; no hace falta precio exacto para fechas específicas, porque no se informaron fechas). Indicá la fuente (URL o mem-...) de cada dato. Si hay precios en dólares, incluí también la cotización del dólar oficial, tarjeta y MEP (no el blue). No hace falta buscar alojamiento, comida ni actividades porque la pregunta solo pide cómo llegar y el costo del pasaje.",
+        "contenido": "## Hallazgos\n\n### Opciones de transporte y duración\n- **Vuelo directo Mendoza (MDZ) – Bariloche (BRC):** existe, duración de 1 h 45 min. Distancia de vuelo de 948 km (o 589 millas). — [https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc] (web); también Skyscanner indica \"tiempo promedio de vuelo 1 h 45 min\" — [https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html] (web)\n- **Vuelo con escala:** con conexión en Córdoba (COR) 6 h 41 min; con conexión en Aeroparque (AEP) 6 h 52 min; con conexión en Ezeiza (EZE) 11 h 56 min. — [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- **Micro/ómnibus de larga distancia:** distancia de unos 944 km; duración media de 18 h 30 min; una conexión diaria, operada por Andesmar; salida a las 21:30 — [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] (web). Rome2rio indica ~18 h 18 min vía Tunuyán con Cata Internacional — [https://www.rome2rio.com/es/s/Mendoza/Bariloche] (web).\n- **Auto:** distancia de unos 1233 km y unas 14 h 17 min de manejo según una fuente — [https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html] (web). Rome2rio indica que se puede manejar y que la distancia por carretera es de 754.7 millas (≈1215 km) — [https://www.rome2rio.com/es/s/Mendoza/Bariloche] (web). Las cifras de distancia varían entre fuentes.\n\n### Precios de referencia del pasaje\n- **Micro (semicama, low cost):** desde ARS 135.100 por persona (precio con descuento -30%, precio anterior ARS 193.000); precio promedio de ARS 193.018. La unidad figura como \"Por pe...\" (texto cortado en la fuente, presumiblemente por persona). — [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (memoria, mem-ea5fcf2bf407)\n- **Micro (precio más bajo informado):** ARS 79.471,35; unidad no especificada. — [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] (web, mem-df74060ac15b)\n- **Micro (rome2rio):** \"$45-$130\"; moneda y unidad no especificadas. — [https://www.rome2rio.com/es/s/Mendoza/Bariloche] (web, mem-9702523f24c7)\n- **Avión, solo ida (JetSmart):** desde ARS 42.578 (varias fechas de diciembre 2026 a febrero 2027); unidad: solo ida, por tramo (la fuente no aclara si es por persona). — [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (memoria, mem-ce983bdd5a45)\n- **Avión, ida y vuelta (Despegar):** desde ARS 146.545 por persona, ida y vuelta (referencia de sept.). Es el precio más barato que muestra la fuente. — [https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza] (memoria, mem-789cf00c896f)\n- **Avión (Kayak):** desde $57.007; moneda y unidad no especificadas. — [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web)\n- **Avión (Skyscanner):** vuelo más barato encontrado $38; moneda (la URL sugiere USD) y unidad no especificadas. — [https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html] (web)\n\n### Cotización del dólar (dólar oficial, tarjeta y MEP; no se incluye blue)\n- **Oficial:** compra $1.520 / venta $1.570 — [https://dolarhoy.com] (memoria, mem-4ce0b54fb9b9). Otra fuente: compra $1.506 / venta $1.570 — [https://www.lanacion.com.ar/dolar-hoy] (memoria, mem-cd4486c8ba76).\n- **Tarjeta:** venta $2.008,20 — [https://www.infodolar.com] (memoria, mem-685deaa71b46, del 9/10/2026). Otra fuente: venta $2.041 — [https://www.lanacion.com.ar/dolar-hoy] (memoria, mem-cd4486c8ba76).\n- **MEP:** venta $1.539,72 — [https://www.infodolar.com] (memoria, mem-685deaa71b46, del 9/10/2026). Otra fuente: venta $1.570,56 — [https://www.lanacion.com.ar/dolar-hoy] (memoria, mem-cd4486c8ba76).\n\nNota: las cotizaciones de memoria tienen fechas distintas (9/10/2026 en infodolar y fecha no clara en La Nación), por lo que conviene verificarlas.\n\n## Datos que faltan\n- Los precios de los pasajes no tienen fecha de viaje específica. No hay precios exactos para una fecha concreta, y son de referencia.\n- Los precios de avión con escalas (Córdoba, Aeroparque, Ezeiza) no tienen monto por persona.\n- La moneda y la unidad de algunos precios no se especifican (Kayak, Skyscanner, rome2rio).\n- No se encontraron costos de combustible, peajes ni alquiler de auto para el trayecto en auto.\n- Las duraciones de micro varían entre fuentes (18 h 18 min a 18 h 30 min). Una fuente indica \"4 h 29 min incluyendo transbordos\", que no es consistente con las demás; no se usó.\n- Las cifras de distancia en auto varían entre 944 km y 1233 km según la fuente.",
+        "fuentes": [
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-ce983bdd5a45",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-789cf00c896f",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-685deaa71b46",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-4ce0b54fb9b9",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://dolarhoy.com",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-13d552ddd1f0",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.dolarito.ar",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-cd4486c8ba76",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.lanacion.com.ar/dolar-hoy",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-7a5e576131d8",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://www.viajeroscallejeros.com/que-hacer-en-bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "mem-573d06402752",
+            "origen": "memoria",
+            "tema": "otro",
+            "url": "https://viajeros30.com/2020/12/28/que-hacer-que-ver-en-bariloche-3-dias",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche",
+            "fecha_busqueda": "2026-11-05"
+          },
+          {
+            "ref": "https://www.rome2rio.com/es/s/Mendoza/Bariloche",
+            "origen": "web",
+            "tema": "otro",
+            "url": "https://www.rome2rio.com/es/s/Mendoza/Bariloche",
+            "fecha_busqueda": "2026-11-05"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes micro avión Mendoza a Bariloche precio duración",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'pasajes micro avión Mendoza a Bariloche precio duración':\n\n[mem-ea5fcf2bf407] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-05) | url=https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche\n### ¿Cuánto sale un pasaje de micro a San Carlos de Bariloche desde Mendoza?\n:   El precio del pasaje de micro de Mendoza a San Carlos de Bariloche arranca en ARS 135.100, llegando a un precio promedio de ARS 193.018. Para conseguir las tarifas más económicas, te recomendamos reservar los pasajes con anticipación. Los precios suelen subir a medida...",
+            "timestamp": "2026-11-05T21:37:45.556-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial tarjeta MEP",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'cotización dólar oficial tarjeta MEP':\n\n[mem-685deaa71b46] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-05) | url=https://www.infodolar.com\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue | $ 1.520,00  = $ 0,00 | $ 1.540,00  = $ 0,00 | = 0,00 % | $ 20,00 | viernes, 9 de octubre de 2026 18:00 Argentina |\n| Dólar MEP | $ 1.539,27  -$ 1,06 | $ 1.539,72  -$ 1,61 | -0,10 % | $ 0,45 | viernes, 9 de octubre de 2026 18:01 Argentina |\n| Dólar FiwindFiwind | $ 1.520,46  -$ 5,26 | $ 1.545,54  -$ 7,34 | -0,47 % | $ 25,09 | Opera...",
+            "timestamp": "2026-11-05T21:37:45.556-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "vuelo directo Mendoza Bariloche duración escalas aerolíneas",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 3 resultados para 'vuelo directo Mendoza Bariloche duración escalas aerolíneas' (guardados en memoria):\n\n[https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] origen=web | tema=pasajes | guardado como mem-a2293a0a5065\n$ 57.007 | Vuelos baratos desde Mendoza a Bariloche (MDZ - BRC) | KAYAK\nHacer conexión en Córdoba Pajas Blancas (COR) implica el viaje más corto con una escala, ya que tiene una duración de 6 h 41 m, en comparación con el tiempo de 6 h 52 m, tomando un vuelo con escala en Buenos Aires Aeroparque Jorge Newbery (AEP) o de ...",
+            "timestamp": "2026-11-05T21:37:45.556-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "Mendoza a Bariloche en auto distancia kilómetros tiempo de viaje ruta 40 ruta 7",
+              "destino": "Bariloche",
+              "tema": "otro"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no sirven, repetí con forzar=true).\n\nMEMORIA — 2 datos vigentes para 'Mendoza a Bariloche en auto distancia kilómetros tiempo de viaje ruta 40 ruta 7':\n\n[mem-7a5e576131d8] origen=memoria | tema=otro | buscado hace 0.0 días (2026-11-05) | url=https://www.viajeroscallejeros.com/que-hacer-en-bariloche\n¿Cuánto tiempo necesitas para conocer Bariloche? Aunque dependerá del ritmo de visitas que lleves, creemos que con unos 4 o 5 días es suficiente para disfrutar de las mejores experiencias que ofrece esta ciudad y los alrededore...",
+            "timestamp": "2026-11-05T21:37:45.556-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "distancia y tiempo en auto de Mendoza a San Carlos de Bariloche en kilómetros y horas",
+              "destino": "Bariloche",
+              "tema": "otro",
+              "forzar": true
+            },
+            "resultado": "WEB (Tavily) — 3 resultados para 'distancia y tiempo en auto de Mendoza a San Carlos de Bariloche en kilómetros y horas' (guardados en memoria):\n\n[https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html] origen=web | tema=otro | guardado como mem-63dd602a1b2e\ndistancia Mendoza - San Carlos De Bariloche\ndistancia en auto: En carro y en bus: 1233 km (766 mi) Duración / Tiempo : 14 Horas 17 Min. Velocidad media: 86.3 km (53.6 mi) /h. Velocidad. km/h, mi/h.Read more\n\n[https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] orige...",
+            "timestamp": "2026-11-05T21:37:45.556-03:00"
+          }
+        ],
+        "observaciones": [
+          "Se pidió el tema 'alojamiento' pero no se hizo ninguna búsqueda sobre él."
+        ]
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-05T21:37:48.263-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "evaluacion": "R1 Cobertura: la pregunta pide cómo llegar y cuánto sale el pasaje. Hay opciones de transporte (vuelo directo, con escala, micro, auto) y precios de referencia de micro y avión. Falta confirmar el precio de avión ida y vuelta completo, pero el aporte es suficiente para cubrir lo pedido. R2 Fuentes: todos los datos tienen URL o mem-. R3 Precios: pasajes con montos de referencia (micro desde ARS 135.100 por persona, avión solo ida desde ARS 42.578, ida y vuelta desde ARS 146.545 por persona). Alcanza. R4 Cálculo: no hay presupuesto ni se pide cuenta, no corresponde analista. R5 Observación pendiente: falta alojamiento, pero la pregunta no lo pide, así que no es un faltante real para esta consulta. La observación del chequeo queda descartada por no ser requerida. R6 Coherencia: las distancias varían entre fuentes (944 a 1233 km), pero es una diferencia de fuentes sin impacto en el pasaje; se aclara en la síntesis. No hay cotización del dólar, pero los precios están en pesos, así que no es necesaria.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-05T21:37:55.997-03:00",
+      "detalle": {
+        "respuesta": "## Opciones para ir de Mendoza a Bariloche\n\n**Avión (la opción más rápida)**\n- **Vuelo directo** de Mendoza (MDZ) a Bariloche (BRC): dura unas 1 h 45 min. [https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc] y [https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html]\n- **Con escala**: entre 6 h 41 min (vía Córdoba) y 11 h 56 min (vía Ezeiza). [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n\n**Micro (la opción más económica en pasaje)**\n- Viaje de unas 18 horas, con una conexión diaria operada por Andesmar, con salida a las 21:30. [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] Rome2rio estima unas 18 h 18 min. [https://www.rome2rio.com/es/s/Mendoza/Bariloche]\n\n**Auto**\n- Unos 1.215 a 1.233 km, con unas 14 h 17 min de manejo según una fuente. [https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html]\n\n## Cuánto sale el pasaje\n\nSon precios de referencia, sin fecha de viaje concreta, así que pueden cambiar mucho.\n\n- **Micro semicama (low cost):** desde ARS 135.100 por persona, con un 30% de descuento (antes ARS 193.000). [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (mem-ea5fcf2bf407)\n- **Micro, precio más bajo informado:** ARS 79.471,35. La fuente no aclara si es por persona. [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] (mem-df74060ac15b)\n- **Avión, ida y vuelta:** desde ARS 146.545 por persona (dato de septiembre). Es el más barato que muestra Despegar. [https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza] (mem-789cf00c896f)\n- **Avión, solo ida (JetSmart):** desde ARS 42.578 por tramo, para fechas entre diciembre de 2026 y febrero de 2027. La fuente no aclara si es por persona. [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (mem-ce983bdd5a45)\n- **Avión (Kayak):** desde $57.007, sin moneda ni unidad aclaradas. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n\n## Lo que no pudimos averiguar\n\n- Precios para una fecha exacta. Para cotizar bien necesitamos fecha de ida, fecha de vuelta y cantidad de personas.\n- Montos por persona de los vuelos con escala.\n- Costos de combustible, peajes y alquiler de auto para el viaje en auto.\n- Las fuentes no coinciden en la distancia en auto ni en la duración del micro, así que tomá esos números como aproximados.\n\nSi me pasás fechas y cantidad de personas, busco precios para esas fechas.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce983bdd5a45 → https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-789cf00c896f → https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc — pasajes, buscado el 2026-11-05\n- [web] https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html — otro, buscado el 2026-11-05\n- [web] https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche — otro, buscado el 2026-11-05\n- [web] https://www.rome2rio.com/es/s/Mendoza/Bariloche — otro, buscado el 2026-11-05\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Opciones para ir de Mendoza a Bariloche\n\n**Avión (la opción más rápida)**\n- **Vuelo directo** de Mendoza (MDZ) a Bariloche (BRC): dura unas 1 h 45 min. [https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc] y [https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html]\n- **Con escala**: entre 6 h 41 min (vía Córdoba) y 11 h 56 min (vía Ezeiza). [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n\n**Micro (la opción más económica en pasaje)**\n- Viaje de unas 18 horas, con una conexión diaria operada por Andesmar, con salida a las 21:30. [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] Rome2rio estima unas 18 h 18 min. [https://www.rome2rio.com/es/s/Mendoza/Bariloche]\n\n**Auto**\n- Unos 1.215 a 1.233 km, con unas 14 h 17 min de manejo según una fuente. [https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html]\n\n## Cuánto sale el pasaje\n\nSon precios de referencia, sin fecha de viaje concreta, así que pueden cambiar mucho.\n\n- **Micro semicama (low cost):** desde ARS 135.100 por persona, con un 30% de descuento (antes ARS 193.000). [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (mem-ea5fcf2bf407)\n- **Micro, precio más bajo informado:** ARS 79.471,35. La fuente no aclara si es por persona. [https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche] (mem-df74060ac15b)\n- **Avión, ida y vuelta:** desde ARS 146.545 por persona (dato de septiembre). Es el más barato que muestra Despegar. [https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza] (mem-789cf00c896f)\n- **Avión, solo ida (JetSmart):** desde ARS 42.578 por tramo, para fechas entre diciembre de 2026 y febrero de 2027. La fuente no aclara si es por persona. [https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche] (mem-ce983bdd5a45)\n- **Avión (Kayak):** desde $57.007, sin moneda ni unidad aclaradas. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n\n## Lo que no pudimos averiguar\n\n- Precios para una fecha exacta. Para cotizar bien necesitamos fecha de ida, fecha de vuelta y cantidad de personas.\n- Montos por persona de los vuelos con escala.\n- Costos de combustible, peajes y alquiler de auto para el viaje en auto.\n- Las fuentes no coinciden en la distancia en auto ni en la duración del micro, así que tomá esos números como aproximados.\n\nSi me pasás fechas y cantidad de personas, busco precios para esas fechas.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-ce983bdd5a45 → https://jetsmart.com/ofertas/es-ar/vuelos-desde-mendoza-a-bariloche — pasajes, buscado el 2026-11-05\n- [memoria] mem-789cf00c896f → https://www.despegar.com.ar/vuelos/mdz/brc/vuelos-a-san+carlos+de+bariloche-desde-mendoza — pasajes, buscado el 2026-11-05\n- [web] https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-05\n- [web] https://www.flightconnections.com/es/vuelos-desde-mdz-a-brc — pasajes, buscado el 2026-11-05\n- [web] https://www.skyscanner.com/us/es-mx/usd/rutas/mdz/brc/mendoza-a-san-carlos-de-bariloche.html — pasajes, buscado el 2026-11-05\n- [web] https://es.distancias.himmera.com/distancia_de-mendoza_a_san_carlos_de_bariloche_entre_mapa_carretera-12011.html — otro, buscado el 2026-11-05\n- [web] https://www.virail.com.ar/autobuses-mendoza-san_carlos_de_bariloche — otro, buscado el 2026-11-05\n- [web] https://www.rome2rio.com/es/s/Mendoza/Bariloche — otro, buscado el 2026-11-05\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 2,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 2,
+      "buscar_en_web": 3
+    },
+    "busquedas_web": 2,
+    "fuentes_memoria": 9,
+    "fuentes_web": 6,
+    "observaciones": [
+      "Se pidió el tema 'alojamiento' pero no se hizo ninguna búsqueda sobre él."
+    ],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "output_tokens": 6962,
+      "total_tokens": 45301,
+      "input_tokens": 38339,
+      "output_token_details": {
+        "reasoning": 1611
+      },
+      "input_token_details": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0,
+        "cache_read": 0,
+        "cache_creation": 0
+      }
+    }
+  },
+  "archivo": "traces\\6_refinamiento_real_20261105-213718.json"
+}

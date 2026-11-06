@@ -16,6 +16,7 @@ Hay partes que NO se dejan en manos del LLM, las agrega el código:
 """
 
 import logging
+import re
 from typing import Any
 
 from langchain_core.language_models import BaseChatModel
@@ -102,14 +103,59 @@ def seccion_fuentes(fuentes: list[Fuente]) -> str:
     return "\n".join(lineas)
 
 
+# Un lugar con nombre propio de 2+ palabras: "Cerro Catedral", "Isla Victoria", "Camino de los 7 Lagos".
+PATRON_LUGAR: re.Pattern[str] = re.compile(
+    r"\b[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:(?:\s+(?:de|del|la|las|los|el))*\s+(?:[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+|\d+))+"
+)
+NO_SON_LUGARES: frozenset[str] = frozenset({"Día", "Días", "Clima", "Regreso", "Llegada"})
+PATRON_DIA: re.Pattern[str] = re.compile(r"^\s*[-*]\s*\**\s*Día\s+(\d+)\b(.*)$", re.MULTILINE)
+
+
+def actividades_repetidas(cuerpo: str) -> dict[str, list[int]]:
+    """Chequeo POR CÓDIGO: lugares con nombre propio que aparecen en más de un día del itinerario.
+
+    Devuelve {lugar: [días]} solo para los repetidos. Ignora el primer y el último
+    día (viaje de ida y de vuelta) y las palabras del propio formato ("Día 3").
+    """
+    dias = [(int(n), texto) for n, texto in PATRON_DIA.findall(cuerpo)]
+    if len(dias) < 3:
+        return {}
+    extremos = {dias[0][0], dias[-1][0]}
+    vistos: dict[str, list[int]] = {}
+    for n, texto in dias:
+        if n in extremos:
+            continue
+        for lugar in {m.group(0) for m in PATRON_LUGAR.finditer(texto)}:
+            if lugar.split()[0] in NO_SON_LUGARES:
+                continue
+            vistos.setdefault(lugar, []).append(n)
+    return {lugar: ns for lugar, ns in vistos.items() if len(ns) > 1}
+
+
 def crear_nodo_sintesis(llm: BaseChatModel) -> NodoAsync:
-    async def sintesis(state: OrquestadorState) -> dict[str, Any]:
-        respuesta = await llm.ainvoke([SystemMessage(content=PROMPT_SINTESIS),
-                                       HumanMessage(content=mensaje_para_sintesis(state))])
+    async def redactar(mensajes: list[Any]) -> str:
+        respuesta = await llm.ainvoke(mensajes)
         cuerpo = (respuesta.text if isinstance(respuesta, AIMessage) else str(respuesta)).strip()
         if isinstance(respuesta, AIMessage) and respuesta.response_metadata.get("stop_reason") == "max_tokens":
             log.warning("[sintesis] la respuesta llegó al tope de tokens y quedó cortada")
             cuerpo += "\n\n_(La respuesta quedó cortada por el límite de longitud.)_"
+        return cuerpo
+
+    async def sintesis(state: OrquestadorState) -> dict[str, Any]:
+        mensajes: list[Any] = [SystemMessage(content=PROMPT_SINTESIS), HumanMessage(content=mensaje_para_sintesis(state))]
+        cuerpo = await redactar(mensajes)
+
+        # Validación por código del itinerario: si se repite una actividad, UNA corrección.
+        repetidas = actividades_repetidas(cuerpo)
+        if repetidas:
+            detalle = "; ".join(f"'{lugar}' en los días {', '.join(map(str, ns))}" for lugar, ns in repetidas.items())
+            log.warning("[sintesis] actividades repetidas: %s → se pide una corrección", detalle)
+            cuerpo = await redactar([*mensajes, AIMessage(content=cuerpo), HumanMessage(content=(
+                f"En el itinerario se repite: {detalle}. Reescribí la respuesta COMPLETA sin repetir ninguna "
+                "actividad entre días (usá días libres o de descanso si faltan actividades). El resto, igual."))])
+            if (siguen := actividades_repetidas(cuerpo)):
+                cuerpo += ("\n\n_Nota: el itinerario repite " + ", ".join(siguen) + "; tomalo como sugerencia y "
+                           "reemplazá un día por un día libre._")
 
         partes: list[str] = []
         if any(d.forzada for d in state.get("decisiones", [])):
