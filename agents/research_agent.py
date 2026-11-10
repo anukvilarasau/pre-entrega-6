@@ -7,8 +7,8 @@ fuente (pasajes, alojamiento, clima, actividades, tipo de cambio). No arma
 itinerarios ni hace cuentas: eso es trabajo de otros.
 
 Cómo se conecta con el grafo principal (nodo "investigador"):
-1. Recibe SOLO `instruccion_actual` (lo que le pidió el supervisor) + el
-   bloque "DATOS DEL PEDIDO" (origen, destino, fechas, personas,
+1. Recibe SOLO `instruccion_actual` (lo que le pidió el supervisor), la lista
+   estructurada TEMAS A BUSCAR (`temas_pedidos`) y el bloque "DATOS DEL PEDIDO" (origen, destino, fechas, personas,
    presupuesto), armado por código desde `state["pedido"]`. No recibe la
    pregunta original, ni el historial, ni los aportes de otros: así se evita
    la "contaminación de contexto" y no depende de que el supervisor se
@@ -35,7 +35,7 @@ from langgraph.prebuilt import create_react_agent
 
 import config
 from agents.common import NodoAsync, correr_react, extraer_llamadas, respuesta_final, resultados
-from state import Aporte, Fuente, OrquestadorState, cantidad, contexto_especialista, validar_actualizacion
+from state import PATRON_PRECIO, Aporte, CoberturaTema, Fuente, OrquestadorState, cantidad, contexto_especialista, validar_actualizacion
 
 log = logging.getLogger(__name__)
 
@@ -69,8 +69,6 @@ Formato de tu respuesta final (en castellano, breve):
 ## Datos que faltan
 - <lo que no se encontró, o "ninguno">"""
 
-# Un precio: "$480.000", "US$ 120", "USD 95", "ARS 60.000"...
-PATRON_PRECIO: re.Pattern[str] = re.compile(r"(\$|US\$|USD|U\$S|ARS)\s?\d", re.IGNORECASE)
 TEMAS_CON_PRECIO: tuple[str, ...] = ("pasajes", "alojamiento")
 
 
@@ -79,10 +77,44 @@ def crear_agente_investigador(llm: BaseChatModel, herramientas: list[BaseTool]) 
     return create_react_agent(llm, herramientas, prompt=PROMPT_INVESTIGADOR, name="investigador")
 
 
+def calcular_cobertura(mensajes: list[BaseMessage]) -> list[CoberturaTema]:
+    """Resumen por tema armado POR CÓDIGO: fuentes, de dónde salieron y si hay precios.
+
+    El supervisor lo ve junto al texto del investigador, así no depende de leer un
+    informe largo (en la corrida real del escenario 5 el texto le llegaba cortado y
+    volvió a pedir temas que ya estaban cubiertos).
+    """
+    _, _, argumentos_de = extraer_llamadas(mensajes)
+    por_tema: dict[str, dict[str, Any]] = {}
+    for m in resultados(mensajes):
+        tema = str(argumentos_de.get(m.tool_call_id, {}).get("tema", "otro"))
+        datos = por_tema.setdefault(tema, {"refs": {}, "precios": False})
+        texto = str(m.content)
+        if not texto.startswith("ERROR") and PATRON_PRECIO.search(texto):
+            datos["precios"] = True
+        for f in (m.artifact if isinstance(m.artifact, list) else []):
+            if isinstance(f, Fuente):
+                datos["refs"].setdefault(f.url or f.ref, f.origen)
+    return [
+        CoberturaTema(
+            tema=tema,  # type: ignore[arg-type]
+            fuentes=len(d["refs"]),
+            memoria=sum(1 for o in d["refs"].values() if o == "memoria"),
+            web=sum(1 for o in d["refs"].values() if o == "web"),
+            con_precios=d["precios"],
+        )
+        for tema, d in por_tema.items()
+    ]
+
+
 def chequear_investigacion(
-    instruccion: str, contenido: str, mensajes: list[BaseMessage], fuentes: list[Fuente]
+    temas_pedidos: list[str], contenido: str, mensajes: list[BaseMessage], fuentes: list[Fuente]
 ) -> list[str]:
-    """Chequeo POR CÓDIGO (no depende del LLM). Devuelve la lista de problemas encontrados."""
+    """Chequeo POR CÓDIGO (no depende del LLM). Devuelve la lista de problemas encontrados.
+
+    Los temas a controlar salen del campo ESTRUCTURADO `temas_pedidos` que escribió el
+    supervisor (no de buscar palabras en la instrucción: "no repitas pasajes" no es pedir pasajes).
+    """
     observaciones: list[str] = []
     hechos = resultados(mensajes)
     if not hechos:
@@ -94,18 +126,16 @@ def chequear_investigacion(
     for e in errores:
         observaciones.append(f"Falló una búsqueda: {e[:160]}")
 
-    # ¿Hay precios en lo que se encontró para pasajes y alojamiento?
+    # ¿Se buscó cada tema pedido? ¿Hay precios en pasajes y alojamiento?
     _, _, argumentos_de = extraer_llamadas(mensajes)
-    texto_instruccion = instruccion.lower()
-    for tema in TEMAS_CON_PRECIO:
-        if tema not in texto_instruccion:
-            continue
+    for tema in dict.fromkeys(temas_pedidos):
         del_tema = [m for m in hechos
                     if argumentos_de.get(m.tool_call_id, {}).get("tema") == tema and not str(m.content).startswith("ERROR")]
-        if del_tema and not any(PATRON_PRECIO.search(str(m.content)) for m in del_tema):
+        if not del_tema:
+            if not errores:
+                observaciones.append(f"Se pidió el tema '{tema}' pero no se hizo ninguna búsqueda sobre él.")
+        elif tema in TEMAS_CON_PRECIO and not any(PATRON_PRECIO.search(str(m.content)) for m in del_tema):
             observaciones.append(f"Se pidieron precios de {tema} pero los resultados encontrados no traen ningún precio.")
-        elif not del_tema and not errores:
-            observaciones.append(f"Se pidió el tema '{tema}' pero no se hizo ninguna búsqueda sobre él.")
 
     # ¿La respuesta cita al menos una de las fuentes reales?
     if fuentes and not any(f.ref in contenido or (f.url and f.url in contenido) for f in fuentes):
@@ -123,11 +153,13 @@ def crear_nodo_investigador(agente: CompiledStateGraph) -> NodoAsync:
 
         # Contexto acotado: la instrucción del supervisor + los datos estructurados del
         # pedido. Nada del historial general ni la pregunta original.
-        mensajes, cortado = await correr_react(agente, contexto_especialista(instruccion, state.get("pedido")))
+        temas = list(state.get("temas_pedidos", []))
+        extra = f"TEMAS A BUSCAR: {', '.join(temas)}" if temas else ""
+        mensajes, cortado = await correr_react(agente, contexto_especialista(instruccion, state.get("pedido"), extra))
 
         llamadas, fuentes, _ = extraer_llamadas(mensajes)
         contenido = respuesta_final(mensajes, "(el investigador no llegó a dar una respuesta final)")
-        observaciones = chequear_investigacion(instruccion, contenido, mensajes, fuentes)
+        observaciones = chequear_investigacion(temas, contenido, mensajes, fuentes)
         if cortado:
             observaciones.insert(0, f"El ciclo ReAct se cortó por el límite de {config.RECURSION_LIMIT_ESPECIALISTA} pasos.")
 
@@ -139,6 +171,7 @@ def crear_nodo_investigador(agente: CompiledStateGraph) -> NodoAsync:
             fuentes=fuentes,
             herramientas=list(dict.fromkeys(ll.herramienta for ll in llamadas)),
             llamadas=llamadas,
+            cobertura=calcular_cobertura(mensajes),
             observaciones=observaciones,
         )
         origenes = {o: sum(1 for f in aporte.fuentes if f.origen == o) for o in ("memoria", "web")}

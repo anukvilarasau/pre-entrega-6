@@ -70,6 +70,10 @@ def _resultados(mensajes: list[BaseMessage]) -> list[tuple[dict[str, Any], ToolM
 # ---------------------------------------------------------------------------
 def consultas_pedidas(instruccion: str) -> dict[str, str]:
     """Qué temas pide la instrucción y con qué consulta buscar cada uno."""
+    pedidos: list[str] = []
+    if (m := re.search(r"TEMAS A BUSCAR:\s*(.+)", instruccion)):  # lista estructurada del supervisor
+        pedidos = [t.strip() for t in m.group(1).split(",") if t.strip() in (*TEMAS, "comida")]
+        instruccion = instruccion.replace(m.group(0), "")
     explicitas = {
         t: c.strip()
         for t, c in re.findall(r"^\s*-\s*(" + "|".join(TEMAS) + r")\s*:\s*(.+)$", instruccion, re.IGNORECASE | re.MULTILINE)
@@ -80,7 +84,9 @@ def consultas_pedidas(instruccion: str) -> dict[str, str]:
     destino = _campo(instruccion, "destino", "Bariloche")
     origen = _campo(instruccion, "origen", "")
     mes = _campo(instruccion, "mes", "enero")
-    temas = [t for t in TEMAS if any(p in texto for p in PALABRAS_TEMA[t])] or ["pasajes", "alojamiento"]
+    # En el mock la comida viene en la misma página que las actividades.
+    temas = list(dict.fromkeys("actividades" if t == "comida" else t for t in pedidos)) \
+        or [t for t in TEMAS if any(p in texto for p in PALABRAS_TEMA[t])] or ["pasajes", "alojamiento"]
     return {
         t: re.sub(r"\s+", " ", CONSULTA_POR_TEMA[t].format(origen=origen, destino=destino, mes=mes)).strip()
         for t in temas
@@ -369,8 +375,9 @@ def decidir_mock(texto: str) -> "DecisionSupervisor":
             instr = "Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar."
         else:
             instr = f"Buscá lo que pide el usuario: {pregunta}"
+        temas = ["pasajes"] if "como llegar" in pregunta.lower().replace("ó", "o") else list(consultas_pedidas(instr))
         return DecisionSupervisor(evaluacion="R1: todavía no hay datos. Empieza el investigador.",
-                                  siguiente="investigador", instruccion=instr)
+                                  siguiente="investigador", instruccion=instr, temas=temas)  # type: ignore[arg-type]
 
     ultimo_inv = inv[-1]
     if "precio" in ultimo_inv["observaciones"].lower() and len(inv) < 2:
@@ -379,6 +386,7 @@ def decidir_mock(texto: str) -> "DecisionSupervisor":
             siguiente="investigador",
             instruccion=("Rehacer con forzar=true: la búsqueda anterior no trajo precios.\n"
                          f"- pasajes: precio pasaje vuelo micro {origen} {destino} ida y vuelta"),
+            temas=["pasajes"],
         )
     if con_presupuesto and not ana:
         return DecisionSupervisor(

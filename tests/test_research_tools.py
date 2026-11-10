@@ -56,13 +56,25 @@ async def test_segunda_vez_sale_de_memoria_sin_llamar_a_tavily(memoria: MemoriaB
     assert len(buscador.llamadas) == 1
 
 
-async def test_forzar_vuelve_a_la_web(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
+async def test_forzar_se_bloquea_si_la_memoria_tiene_precios(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
+    """Arreglo del escenario 5 real: el LLM forzaba la web teniendo precios vigentes en memoria."""
     _, web = herramientas(memoria, buscador)
-    await llamar(web, ARGS)
+    await llamar(web, ARGS)  # guarda resultados CON precios ($480.000, $70.000...)
     msg = await llamar(web, {**ARGS, "forzar": True})
+    assert str(msg.content).startswith("NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes CON PRECIOS")
+    assert all(f.origen == "memoria" for f in msg.artifact)
+    assert len(buscador.llamadas) == 1  # Tavily no se volvió a llamar
+
+
+async def test_forzar_va_a_la_web_si_la_memoria_no_tiene_precios(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
+    """Escenario 6: lo guardado ('cómo llegar') no trae precios → forzar sí busca en la web."""
+    _, web = herramientas(memoria, buscador)
+    sin_precio = {"consulta": "como llegar rutas aerolineas Mendoza Bariloche", "destino": "Bariloche", "tema": "pasajes"}
+    await llamar(web, sin_precio)
+    msg = await llamar(web, {**sin_precio, "forzar": True})
     assert str(msg.content).startswith("WEB (Tavily)")
     assert len(buscador.llamadas) == 2
-    assert memoria.cantidad() == len(msg.artifact)  # se actualizó, no se duplicó
+    assert memoria.cantidad() == 1  # la misma página se actualizó, no se duplicó
 
 
 async def test_tavily_caido_devuelve_error_sin_romper(memoria: MemoriaBusquedas) -> None:

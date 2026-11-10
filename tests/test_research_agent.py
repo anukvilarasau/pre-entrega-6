@@ -35,9 +35,12 @@ def armar_nodo(memoria: MemoriaBusquedas, buscador: BuscadorMock, llm: LLMMock |
     return crear_nodo_investigador(agente), llm
 
 
-def estado(instruccion: str = INSTRUCCION) -> OrquestadorState:
+TEMAS = ["pasajes", "alojamiento", "clima"]
+
+
+def estado(instruccion: str = INSTRUCCION, temas: list[str] | None = None) -> OrquestadorState:
     s = estado_inicial(PREGUNTA)
-    s.update(instruccion_actual=instruccion, pasos_supervisor=1, pedido=PEDIDO)
+    s.update(instruccion_actual=instruccion, pasos_supervisor=1, pedido=PEDIDO, temas_pedidos=temas or TEMAS)
     return s  # type: ignore[return-value]
 
 
@@ -91,7 +94,7 @@ async def test_contexto_acotado_solo_ve_su_instruccion(memoria: MemoriaBusquedas
     primera = llm.vistos[0]
     assert isinstance(primera[0], SystemMessage) and "INVESTIGADOR" in str(primera[0].content)
     assert [type(m) for m in primera] == [SystemMessage, HumanMessage]
-    assert primera[1].content == contexto_especialista(INSTRUCCION, PEDIDO)
+    assert primera[1].content == contexto_especialista(INSTRUCCION, PEDIDO, "TEMAS A BUSCAR: pasajes, alojamiento, clima")
     texto = str(primera[1].content)
     assert INSTRUCCION in texto and "DATOS DEL PEDIDO" in texto
     assert "- Origen: Mendoza" in texto and "- Fecha de ida: 2027-01-10" in texto and "- Personas: 2" in texto
@@ -111,15 +114,15 @@ async def test_sin_herramientas_queda_observado(memoria: MemoriaBusquedas, busca
 async def test_busqueda_sin_precios_queda_observada(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
     """Base del escenario 6: la búsqueda de pasajes no trae precios → el chequeo lo marca."""
     nodo, _ = armar_nodo(memoria, buscador)
-    aporte: Aporte = (await nodo(estado(SIN_PRECIOS)))["aportes"][0]
+    aporte: Aporte = (await nodo(estado(SIN_PRECIOS, ["pasajes"])))["aportes"][0]
     assert any("precios de pasajes" in o for o in aporte.observaciones)
 
 
 async def test_refinamiento_con_forzar_trae_precios(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
     nodo, _ = armar_nodo(memoria, buscador)
-    await nodo(estado(SIN_PRECIOS))
+    await nodo(estado(SIN_PRECIOS, ["pasajes"]))
     rehecho: Aporte = (await nodo(estado(
-        "Rehacer con forzar: faltan precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche"
+        "Rehacer con forzar: faltan precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche", ["pasajes"]
     )))["aportes"][0]
     assert rehecho.herramientas == ["buscar_en_web"]
     assert rehecho.observaciones == [] and "$" in rehecho.contenido
@@ -152,3 +155,33 @@ async def test_firma_falsa_es_imposible(memoria: MemoriaBusquedas, buscador: Bus
     salida = await nodo(estado())
     with pytest.raises(ErrorDeEstado):
         validar_actualizacion("analista", salida)
+
+
+# --------------------------------------------- arreglos 2 y 3 (escenario 5 real)
+async def test_cobertura_por_tema_la_calcula_el_codigo(memoria: MemoriaBusquedas, buscador: BuscadorMock) -> None:
+    nodo, _ = armar_nodo(memoria, buscador)
+    aporte: Aporte = (await nodo(estado()))["aportes"][0]
+    cob = {c.tema: c for c in aporte.cobertura}
+    assert set(cob) == {"pasajes", "alojamiento", "clima"}
+    assert cob["pasajes"].fuentes == 2 and cob["pasajes"].web == 2 and cob["pasajes"].con_precios
+    assert cob["clima"].con_precios is False  # el clima no trae montos
+    segunda: Aporte = (await nodo(estado()))["aportes"][0]
+    assert all(c.memoria == c.fuentes and c.web == 0 for c in segunda.cobertura)
+
+
+async def test_el_chequeo_usa_los_temas_estructurados_no_las_palabras(memoria: MemoriaBusquedas,
+                                                                    buscador: BuscadorMock) -> None:
+    """Corrida real 5: 'No repitas búsquedas de pasajes ni alojamiento' generaba una observación falsa."""
+    nodo, _ = armar_nodo(memoria, buscador)
+    instr = "Buscá el clima. No repitas búsquedas de pasajes ni alojamiento."
+    aporte: Aporte = (await nodo(estado(instr, ["clima"])))["aportes"][0]
+    assert aporte.observaciones == []
+    assert {ll.argumentos["tema"] for ll in aporte.llamadas} == {"clima"}
+
+
+def test_tema_pedido_y_no_buscado_queda_observado() -> None:
+    from agents.research_agent import chequear_investigacion
+
+    assert chequear_investigacion(["cambio"], "x", [], []) == [
+        "El investigador no usó ninguna herramienta: sus datos no tienen respaldo.",
+        "Se pidió el tema 'cambio' pero no se hizo ninguna búsqueda sobre él."]

@@ -74,7 +74,9 @@ async def test_primera_decision_extrae_el_pedido_y_delega_al_investigador() -> N
     assert p.supuestos and "enero sin día exacto" in p.supuestos[0]
     assert salida["siguiente"] == "investigador" and salida["pasos_supervisor"] == 1
     assert salida["decisiones"][0].paso == 1 and not salida["decisiones"][0].forzada
-    assert set(salida) <= {"messages", "pedido", "pasos_supervisor", "siguiente", "instruccion_actual", "decisiones"}
+    assert set(salida) <= {"messages", "pedido", "pasos_supervisor", "siguiente", "instruccion_actual",
+                           "temas_pedidos", "decisiones"}
+    assert salida["temas_pedidos"] and salida["decisiones"][0].temas == salida["temas_pedidos"]
 
 
 async def test_el_pedido_se_extrae_una_sola_vez() -> None:
@@ -165,7 +167,8 @@ async def test_sin_presupuesto_si_puede_finalizar_sin_analista() -> None:
 
 async def test_investigador_no_trabaja_una_tercera_vez() -> None:
     """Corrida real 1: el LLM pidió 3 rondas de búsqueda → la tercera se redirige al analista."""
-    pedir_mas = DecisionSupervisor(evaluacion="faltan precios exactos", siguiente="investigador", instruccion="buscá más")
+    pedir_mas = DecisionSupervisor(evaluacion="faltan precios exactos", siguiente="investigador", instruccion="buscá más",
+                                   temas=["pasajes"])
     dos_rondas = [aporte_inv(), aporte_inv()]
     salida = await crear_nodo_supervisor(llm_que_decide(pedir_mas))(estado(pedido=PEDIDO, pasos_supervisor=2, aportes=dos_rondas))
     assert salida["siguiente"] == "analista" and "ya trabajó 2 veces" in salida["decisiones"][0].evaluacion
@@ -177,3 +180,27 @@ async def test_investigador_no_trabaja_una_tercera_vez() -> None:
 
 def test_rubrica_acepta_precios_de_referencia() -> None:
     assert "NO exijas precios exactos" in PROMPT_SUPERVISOR and "UNA ronda de corrección" in PROMPT_SUPERVISOR
+
+
+# --------------------------------------------- arreglos 2 y 3 (escenario 5 real)
+def test_decision_al_investigador_exige_temas_y_los_demas_no_llevan() -> None:
+    from pydantic import ValidationError
+    with pytest.raises(ValidationError, match="temas"):
+        DecisionSupervisor(evaluacion="x", siguiente="investigador", instruccion="buscá")
+    with pytest.raises(ValidationError):
+        DecisionSupervisor(evaluacion="x", siguiente="investigador", instruccion="b", temas=["gastronomia"])
+    d = DecisionSupervisor(evaluacion="x", siguiente="analista", instruccion="calculá", temas=["pasajes"])
+    assert d.temas == []  # solo el investigador recibe temas
+
+
+async def test_el_supervisor_ve_la_cobertura_por_tema() -> None:
+    from state import CoberturaTema
+
+    con_cob = aporte_inv().model_copy(update={"cobertura": [
+        CoberturaTema(tema="pasajes", fuentes=3, memoria=2, web=1, con_precios=True),
+        CoberturaTema(tema="clima", fuentes=1, memoria=1, web=0, con_precios=False)]})
+    llm = LLMMock(politica_estructurada=politica_supervisor_estructurada)
+    await crear_nodo_supervisor(llm)(estado(pedido=PEDIDO, pasos_supervisor=1, aportes=[con_cob]))
+    visto = " ".join(str(m.content) for m in llm.vistos[-1])
+    assert "COBERTURA POR TEMA (calculada por código" in visto
+    assert "pasajes | 3 | 2 | 1 | sí" in visto and "clima | 1 | 1 | 0 | NO" in visto

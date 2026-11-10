@@ -33,7 +33,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 import config
 from agents.memory import MemoriaBusquedas, ResultadoBusquedaMemoria, ResultadoWeb, id_memoria, normalizar
-from state import Fuente, Tema, cantidad
+from state import PATRON_PRECIO, Fuente, Tema, cantidad
 
 log = logging.getLogger(__name__)
 
@@ -188,17 +188,20 @@ def crear_herramientas_investigador(memoria: MemoriaBusquedas, buscador: Buscado
     async def buscar_en_web(consulta: str, destino: str, tema: Tema, forzar: bool = False) -> tuple[str, list[Fuente]]:
         ahora = datetime.now().astimezone()
         # Guarda: si la memoria ya tiene datos vigentes, no se gasta una búsqueda web.
-        if not forzar:
-            try:
-                previo = await asyncio.to_thread(memoria.buscar, consulta, destino, tema, 4, ahora)
-                if previo.hay_utiles:
-                    log.info("buscar_en_web: evitada, datos vigentes en memoria: %d", len(previo.utiles))
-                    return (
-                        "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto "
-                        "(si no sirven, repetí con forzar=true).\n\n" + _formatear_memoria(previo, consulta, ahora)
-                    ), _fuentes_de_memoria(previo)
-            except Exception as e:  # si la memoria falla, se sigue a la web igual
-                log.warning("No se pudo consultar la memoria antes de la web: %s", e)
+        # forzar=true solo pasa si lo guardado NO trae precios: si los trae, se bloquea POR CÓDIGO
+        # (en la corrida real del escenario 5 el LLM forzaba la web teniendo precios en memoria).
+        try:
+            previo = await asyncio.to_thread(memoria.buscar, consulta, destino, tema, 4, ahora)
+            con_precios = any(PATRON_PRECIO.search(reg.texto) for reg in previo.utiles)
+            if previo.hay_utiles and (not forzar or con_precios):
+                log.info("buscar_en_web: evitada (forzar=%s), datos vigentes en memoria: %d", forzar, len(previo.utiles))
+                motivo = ("la memoria ya tiene datos vigentes CON PRECIOS sobre esto: forzar=true no aplica, usá estos"
+                          if forzar else
+                          "la memoria ya tiene datos vigentes sobre esto (si no traen precios, repetí con forzar=true)")
+                return (f"NO SE BUSCÓ EN LA WEB: {motivo}.\n\n" + _formatear_memoria(previo, consulta, ahora)), \
+                    _fuentes_de_memoria(previo)
+        except Exception as e:  # si la memoria falla, se sigue a la web igual
+            log.warning("No se pudo consultar la memoria antes de la web: %s", e)
 
         try:
             resultados = await buscador.buscar(f"{consulta} {destino}" if normalizar(destino) not in normalizar(consulta) else consulta)

@@ -44,6 +44,7 @@ log = logging.getLogger(__name__)
 
 LARGO_CONTENIDO_RESUMEN: int = 2500  # caracteres del contenido de cada aporte que ve el supervisor
 MAX_RONDAS_INVESTIGADOR: int = 2      # la búsqueda original + UNA corrección
+TODOS_LOS_TEMAS: tuple[str, ...] = ("pasajes", "alojamiento", "comida", "actividades", "clima", "cambio")
 
 PROMPT_PEDIDO: str = """Extraé los datos del pedido de viaje del usuario. Hoy es {hoy}.
 Reglas:
@@ -91,6 +92,8 @@ la síntesis le va a avisar al usuario qué faltó.
 - La instrucción tiene que ser concreta y autocontenida: el especialista NO ve la pregunta del usuario (sí ve los \
 DATOS DEL PEDIDO). Al investigador enumerale los temas a buscar (pasajes, alojamiento, comida, actividades, clima, \
 cambio) y pedile precios de referencia, no exactos.
+- Si mandás al investigador, completá "temas" con la lista de temas que tiene que buscar (solo los que faltan). \
+Mirá la COBERTURA POR TEMA (la calcula el sistema): no pidas de nuevo un tema que ya tiene fuentes y precios.
 - En "evaluacion", repasá la rúbrica punto por punto en una o dos líneas."""
 
 
@@ -110,10 +113,35 @@ def resumen_aporte(n: int, a: Aporte) -> str:
     )
 
 
+def tabla_cobertura(state: OrquestadorState) -> str:
+    """COBERTURA POR TEMA de todas las investigaciones, calculada por código.
+
+    El supervisor la ve antes que los textos: así sabe qué temas ya están cubiertos
+    (y con precios) aunque el informe del investigador sea largo. En la corrida real
+    del escenario 5 el texto le llegaba cortado y volvió a pedir temas ya cubiertos.
+    """
+    total: dict[str, dict[str, Any]] = {}
+    for a in aportes_de(state, "investigador"):
+        for c in a.cobertura:
+            t = total.setdefault(c.tema, {"fuentes": 0, "memoria": 0, "web": 0, "precios": False})
+            t["fuentes"] += c.fuentes
+            t["memoria"] += c.memoria
+            t["web"] += c.web
+            t["precios"] = t["precios"] or c.con_precios
+    if not total:
+        return "COBERTURA POR TEMA (calculada por código): todavía no hay búsquedas."
+    filas = ["COBERTURA POR TEMA (calculada por código, sumando todas las investigaciones):",
+             "tema | fuentes | de memoria | de la web | ¿trae precios?"]
+    filas += [f"{tema} | {t['fuentes']} | {t['memoria']} | {t['web']} | {'sí' if t['precios'] else 'NO'}"
+              for tema, t in total.items()]
+    return "\n".join(filas)
+
+
 def mensaje_para_supervisor(state: OrquestadorState, pedido: PedidoViaje) -> str:
     aportes = state.get("aportes", [])
     bloques = [f"PREGUNTA DEL USUARIO:\n{state['pregunta']}", pedido.como_texto()]
     if aportes:
+        bloques.append(tabla_cobertura(state))
         bloques.append("APORTES HASTA AHORA:\n\n" + "\n\n".join(resumen_aporte(i, a) for i, a in enumerate(aportes, 1)))
     else:
         bloques.append("APORTES HASTA AHORA: ninguno.")
@@ -130,6 +158,7 @@ def decision_por_reglas(state: OrquestadorState, pedido: PedidoViaje) -> Decisio
         return DecisionSupervisor(
             evaluacion="(por reglas) Todavía no hay datos.", siguiente="investigador",
             instruccion="Buscá pasajes, alojamiento, comida y actividades, clima y la cotización del dólar.",
+            temas=list(TODOS_LOS_TEMAS),
         )
     if pedido.presupuesto is not None and not aportes_de(state, "analista"):
         return DecisionSupervisor(
@@ -154,11 +183,13 @@ def aplicar_reglas_duras(
         return DecisionSupervisor(
             evaluacion=decision.evaluacion, siguiente="investigador",
             instruccion="Buscá los precios de pasajes, alojamiento, comida y actividades, y la cotización del dólar.",
+            temas=["pasajes", "alojamiento", "comida", "actividades", "cambio"],
         ), "regla dura: el analista no puede trabajar sin datos del investigador → investigador"
     if decision.siguiente == "FINALIZAR" and not state.get("aportes"):
         return DecisionSupervisor(
             evaluacion=decision.evaluacion, siguiente="investigador",
             instruccion=decision.instruccion or "Buscá los datos necesarios para responder la pregunta del pedido.",
+            temas=decision.temas or list(TODOS_LOS_TEMAS),
         ), "regla dura: no se puede finalizar sin ningún aporte → investigador"
 
     hay_presupuesto = pedido is not None and pedido.presupuesto is not None
@@ -246,8 +277,9 @@ def crear_nodo_supervisor(llm: BaseChatModel, max_pasos: int | None = None) -> N
         actualizacion.update(
             siguiente=decision.siguiente,
             instruccion_actual=decision.instruccion,
+            temas_pedidos=list(decision.temas),
             decisiones=[DecisionRegistrada(paso=paso, siguiente=decision.siguiente, instruccion=decision.instruccion,
-                                           evaluacion=evaluacion, forzada=forzada)],
+                                           temas=list(decision.temas), evaluacion=evaluacion, forzada=forzada)],
             messages=[AIMessage(
                 content=f"[supervisor] decisión {paso}: {decision.siguiente}"
                         f"{' (forzada por el freno de pasos)' if forzada else ''}. {evaluacion}",

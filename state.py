@@ -53,6 +53,9 @@ HERRAMIENTAS_POR_AGENTE: dict[str, frozenset[str]] = {
 Origen = Literal["memoria", "web"]
 Tema = Literal["pasajes", "alojamiento", "comida", "clima", "actividades", "cambio", "otro"]
 
+# Un precio: "$480.000", "US$ 120", "USD 95", "ARS 60.000"...
+PATRON_PRECIO: re.Pattern[str] = re.compile(r"(\$|US\$|USD|U\$S|ARS)\s?\d", re.IGNORECASE)
+
 # IDs de la memoria ChromaDB: "mem-" + 12 caracteres hexadecimales.
 PATRON_ID_MEMORIA: re.Pattern[str] = re.compile(r"^mem-[0-9a-f]{12}$")
 _VALIDADOR_URL: TypeAdapter[AnyHttpUrl] = TypeAdapter(AnyHttpUrl)
@@ -111,6 +114,18 @@ class LlamadaHerramienta(BaseModel):
     timestamp: str = Field(default_factory=ahora)
 
 
+class CoberturaTema(BaseModel):
+    """Qué se consiguió de UN tema en una investigación (lo calcula el CÓDIGO, no el LLM)."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    tema: Tema
+    fuentes: int = Field(ge=0, description="Fuentes distintas de este tema.")
+    memoria: int = Field(ge=0, description="Cuántas salieron de la memoria.")
+    web: int = Field(ge=0, description="Cuántas salieron de la web.")
+    con_precios: bool = Field(description="Si algún resultado de este tema trae un monto ($, US$, ARS...).")
+
+
 class Aporte(BaseModel):
     """Lo que aportó UN especialista en UNA intervención."""
 
@@ -124,6 +139,9 @@ class Aporte(BaseModel):
     herramientas: list[str] = Field(default_factory=list, description="Herramientas ejecutadas.")
     llamadas: list[LlamadaHerramienta] = Field(
         default_factory=list, description="Cada llamada a herramienta, en orden (para la traza)."
+    )
+    cobertura: list[CoberturaTema] = Field(
+        default_factory=list, description="(investigador) Resumen por tema armado por código."
     )
     observaciones: list[str] = Field(
         default_factory=list,
@@ -173,11 +191,23 @@ class DecisionSupervisor(BaseModel):
         ),
         max_length=1500,
     )
+    temas: list[Tema] = Field(
+        default_factory=list,
+        description=(
+            "SOLO si siguiente == 'investigador': los temas que tiene que buscar ('pasajes', 'alojamiento', "
+            "'comida', 'clima', 'actividades', 'cambio', 'otro'). Vacía en cualquier otro caso."
+        ),
+    )
 
     @model_validator(mode="after")
     def _instruccion_si_delega(self) -> "DecisionSupervisor":
         if self.siguiente != "FINALIZAR" and not self.instruccion.strip():
             raise ValueError("Si delega a un especialista, la instrucción no puede estar vacía.")
+        if self.siguiente == "investigador" and not self.temas:
+            raise ValueError("Si delega al investigador, 'temas' tiene que tener al menos un tema.")
+        if self.siguiente != "investigador":
+            self.temas = []  # los temas solo tienen sentido para el investigador
+        self.temas = list(dict.fromkeys(self.temas))  # sin repetidos
         return self
 
 
@@ -255,6 +285,7 @@ class DecisionRegistrada(BaseModel):
     paso: int = Field(ge=1)
     siguiente: Destino
     instruccion: str = ""
+    temas: list[Tema] = Field(default_factory=list)
     evaluacion: str = ""
     forzada: bool = Field(default=False, description="True si la impuso el freno de pasos, no el LLM.")
     timestamp: str = Field(default_factory=ahora)
@@ -275,6 +306,7 @@ class OrquestadorState(MessagesState):
     - pasos_supervisor    → supervisor (el contador del freno).
     - siguiente           → supervisor (a quién le toca).
     - instruccion_actual  → supervisor (lo que debe hacer el especialista elegido).
+    - temas_pedidos       → supervisor (temas que tiene que buscar el investigador; estructurado).
     - decisiones          → supervisor (historial de decisiones, se suma).
     - respuesta_final     → síntesis.
     """
@@ -285,6 +317,7 @@ class OrquestadorState(MessagesState):
     pasos_supervisor: int
     siguiente: Destino
     instruccion_actual: str
+    temas_pedidos: list[Tema]
     decisiones: Annotated[list[DecisionRegistrada], operator.add]
     respuesta_final: str
 
@@ -292,7 +325,8 @@ class OrquestadorState(MessagesState):
 # Qué campos puede escribir cada nodo. `messages` lo pueden usar todos para
 # dejar un mensaje corto (firmado con su nombre) en el historial.
 CAMPOS_POR_NODO: dict[str, frozenset[str]] = {
-    "supervisor": frozenset({"messages", "pedido", "pasos_supervisor", "siguiente", "instruccion_actual", "decisiones"}),
+    "supervisor": frozenset({"messages", "pedido", "pasos_supervisor", "siguiente", "instruccion_actual",
+                             "temas_pedidos", "decisiones"}),
     "investigador": frozenset({"messages", "aportes"}),
     "analista": frozenset({"messages", "aportes"}),
     "sintesis": frozenset({"messages", "respuesta_final"}),
@@ -351,6 +385,7 @@ def estado_inicial(pregunta: str) -> dict[str, Any]:
         "pasos_supervisor": 0,
         "siguiente": "investigador",
         "instruccion_actual": "",
+        "temas_pedidos": [],
         "decisiones": [],
         "respuesta_final": "",
     }

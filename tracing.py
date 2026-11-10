@@ -162,6 +162,8 @@ class Traza:
                 L.append(f"           evaluación: {d.get('evaluacion', '')}")
                 if d.get("instruccion"):
                     L.append("           instrucción: " + d["instruccion"].replace("\n", " / "))
+                if d.get("temas"):
+                    L.append("           temas pedidos: " + ", ".join(d["temas"]))
             elif e.nodo in ("investigador", "analista"):
                 L.append(f"[{hora}] {e.nodo.upper()} · ronda {d.get('ronda')} · herramientas: "
                          f"{', '.join(d.get('herramientas', [])) or 'ninguna'}")
@@ -173,6 +175,10 @@ class Traza:
                 fuentes = d.get("fuentes", [])
                 if fuentes:
                     L.append("           fuentes: " + ", ".join(f"{f['ref']} ({f['origen']}, {f['tema']})" for f in fuentes))
+                if d.get("cobertura"):
+                    L.append("           cobertura: " + "; ".join(
+                        f"{c['tema']} {c['fuentes']} ({c['memoria']} mem / {c['web']} web"
+                        f"{', con precios' if c['con_precios'] else ', sin precios'})" for c in d["cobertura"]))
                 L.append(f"           chequeo por código: {' | '.join(d.get('observaciones', [])) or 'sin observaciones'}")
             elif e.nodo == "sintesis":
                 L.append(f"[{hora}] SÍNTESIS · respuesta final ({len(d.get('respuesta', ''))} caracteres)")
