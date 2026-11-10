@@ -1,0 +1,142 @@
+{
+  "pregunta": "¿Qué clima hace en Bariloche en enero?",
+  "escenario": "2_solo_clima",
+  "modo": "mock",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:06:21.865-03:00",
+  "fin": "2026-11-10T15:06:21.888-03:00",
+  "duracion_s": 0.02,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": null,
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": null,
+    "dias": null,
+    "personas": null,
+    "presupuesto": null,
+    "moneda": null,
+    "supuestos": [
+      "enero sin día exacto: se asume del 10/01/2027"
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:06:21.870-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "supuestos": [
+            "enero sin día exacto: se asume del 10/01/2027"
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá lo que pide el usuario: ¿Qué clima hace en Bariloche en enero?",
+        "temas": [
+          "clima"
+        ],
+        "evaluacion": "R1: todavía no hay datos. Empieza el investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:06:21.885-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá lo que pide el usuario: ¿Qué clima hace en Bariloche en enero?",
+        "contenido": "## Hallazgos\n### Clima\n- Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar. — [mem-db0bd2ddbb9d] (memoria)\n## Datos que faltan\n- ninguno",
+        "fuentes": [
+          {
+            "ref": "mem-db0bd2ddbb9d",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://clima.mock-viajes.example/bariloche-enero",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima en Bariloche en enero",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "MEMORIA — 1 dato vigente para 'clima en Bariloche en enero':\n\n[mem-db0bd2ddbb9d] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://clima.mock-viajes.example/bariloche-enero\nEnero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar.",
+            "timestamp": "2026-11-10T15:06:21.884-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "clima",
+            "fuentes": 1,
+            "memoria": 1,
+            "web": 0,
+            "con_precios": false
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:06:21.887-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1-R6 OK: hay datos con fuentes.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:06:21.888-03:00",
+      "detalle": {
+        "respuesta": "## Lo que encontramos\n- Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar. — [mem-db0bd2ddbb9d] (memoria)\n\n## Fuentes\n- [memoria] mem-db0bd2ddbb9d → https://clima.mock-viajes.example/bariloche-enero — clima, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Lo que encontramos\n- Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar. — [mem-db0bd2ddbb9d] (memoria)\n\n## Fuentes\n- [memoria] mem-db0bd2ddbb9d → https://clima.mock-viajes.example/bariloche-enero — clima, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 2,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 1
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 1,
+    "fuentes_web": 0,
+    "observaciones": [],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {},
+  "archivo": "traces\\2_solo_clima_mock_20261110-150621.json"
+}

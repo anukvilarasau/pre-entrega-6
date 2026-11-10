@@ -1,0 +1,61 @@
+==========================================================================================
+TRAZA MULTI-AGENTE | escenario: 4_fechas_invalidas | modo: mock | modelo: LLMMock
+MAX_PASOS_SUPERVISOR: 6 | RECURSION_LIMIT: 20 | inicio: 2026-11-10T15:14:10.157-03:00
+==========================================================================================
+PREGUNTA: Quiero ir a Bariloche del 16 al 10 de enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Nos alcanza?
+RUTA: supervisor → investigador → supervisor → analista → supervisor → sintesis
+
+[15:14:10.164] SUPERVISOR · pedido extraído: {"origen": "Mendoza", "destino": "Bariloche", "fecha_ida": "2027-01-16", "fecha_vuelta": "2027-01-10", "personas": 2, "presupuesto": 800000.0, "moneda": "ARS", "supuestos": []}
+[15:14:10.164] SUPERVISOR · decisión 1 → investigador
+           evaluación: R1: todavía no hay datos. Empieza el investigador.
+           instrucción: Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar.
+           temas pedidos: pasajes, alojamiento, clima, actividades, cambio
+[15:14:10.237] INVESTIGADOR · ronda 1 · herramientas: buscar_en_memoria
+           ACCIÓN: buscar_en_memoria({"consulta": "precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta", "destino": "Bariloche", "tema": "pasajes"})
+           OBSERVACIÓN: MEMORIA — 2 datos vigentes para 'precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta':  [mem-df9efd11b444] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://vuelos.mock-viajes.example/mendoza-bariloche-enero Vuelos Mendoza - San Carlos de Bariloche para enero 2...
+           ACCIÓN: buscar_en_memoria({"consulta": "precio alojamiento hostel hotel habitacion doble por noche Bariloche", "destino": "Bariloche", "tema": "alojamiento"})
+           OBSERVACIÓN: MEMORIA — 1 dato vigente para 'precio alojamiento hostel hotel habitacion doble por noche Bariloche':  [mem-60e1f4552419] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-10) | url=https://alojamiento.mock-viajes.example/bariloche-enero-precios Precios por noche POR HABITACIÓN DOBL...
+           ACCIÓN: buscar_en_memoria({"consulta": "clima en Bariloche en enero", "destino": "Bariloche", "tema": "clima"})
+           OBSERVACIÓN: MEMORIA — 1 dato vigente para 'clima en Bariloche en enero':  [mem-db0bd2ddbb9d] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://clima.mock-viajes.example/bariloche-enero Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (...
+           ACCIÓN: buscar_en_memoria({"consulta": "que hacer actividades excursiones y comida en Bariloche", "destino": "Bariloche", "tema": "actividades"})
+           OBSERVACIÓN: MEMORIA — 1 dato vigente para 'que hacer actividades excursiones y comida en Bariloche':  [mem-071cdddb63ee] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-10) | url=https://actividades.mock-viajes.example/bariloche-verano Actividades gratuitas: trekking al Refugio Frey, playas d...
+           ACCIÓN: buscar_en_memoria({"consulta": "cotizacion dolar oficial tarjeta MEP hoy", "destino": "Bariloche", "tema": "cambio"})
+           OBSERVACIÓN: MEMORIA — 1 dato vigente para 'cotizacion dolar oficial tarjeta MEP hoy':  [mem-2bb8e362fa35] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://cotizaciones.mock-viajes.example/dolar-hoy Cotizaciones de referencia (venta): dólar oficial $1.450; dólar tarjeta $1.885 (ofi...
+           fuentes: mem-df9efd11b444 (memoria, pasajes), mem-ae9aa9bf303f (memoria, pasajes), mem-60e1f4552419 (memoria, alojamiento), mem-db0bd2ddbb9d (memoria, clima), mem-071cdddb63ee (memoria, actividades), mem-2bb8e362fa35 (memoria, cambio)
+           cobertura: pasajes 2 (2 mem / 0 web, con precios); alojamiento 1 (1 mem / 0 web, con precios); clima 1 (1 mem / 0 web, sin precios); actividades 1 (1 mem / 0 web, con precios); cambio 1 (1 mem / 0 web, con precios)
+           chequeo por código: sin observaciones
+[15:14:10.240] SUPERVISOR · decisión 2 → analista
+           evaluación: R1-R3 OK (hay datos con fuentes y precios). R4 pendiente: falta validar y calcular.
+           instrucción: Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto (opción económica; si no alcanza, una alternativa) con los precios de los hallazgos.
+[15:14:10.255] ANALISTA · ronda 2 · herramientas: validar_viaje
+           ACCIÓN: validar_viaje({"origen": "Mendoza", "destino": "Bariloche", "fecha_ida": "2027-01-16", "fecha_vuelta": "2027-01-10", "personas": 2, "presupuesto": 800000.0, "moneda": "ARS"})
+           OBSERVACIÓN: INVÁLIDO: el viaje no cumple las reglas. - viaje: la vuelta (2027-01-10) tiene que ser DESPUÉS de la ida (2027-01-16) No calcules el presupuesto hasta que se corrijan estos datos.
+           chequeo por código: sin observaciones
+[15:14:10.259] SUPERVISOR · decisión 3 → FINALIZAR
+           evaluación: R1-R6 OK: hay datos con fuentes, validación y cálculo del analista.
+[15:14:10.260] SÍNTESIS · respuesta final (1157 caracteres)
+
+RESPUESTA FINAL:
+## El viaje no se puede armar tal como está pedido
+- viaje: la vuelta (2027-01-10) tiene que ser DESPUÉS de la ida (2027-01-16)
+
+Corregí esos datos (por ejemplo, que la vuelta sea después de la ida) y lo armamos.
+
+## Lo que no pudimos averiguar
+- fechas válidas
+
+## Fuentes
+- [memoria] mem-df9efd11b444 → https://vuelos.mock-viajes.example/mendoza-bariloche-enero — pasajes, buscado el 2026-11-10
+- [memoria] mem-ae9aa9bf303f → https://micros.mock-viajes.example/mendoza-bariloche — pasajes, buscado el 2026-11-10
+- [memoria] mem-60e1f4552419 → https://alojamiento.mock-viajes.example/bariloche-enero-precios — alojamiento, buscado el 2026-11-10
+- [memoria] mem-db0bd2ddbb9d → https://clima.mock-viajes.example/bariloche-enero — clima, buscado el 2026-11-10
+- [memoria] mem-071cdddb63ee → https://actividades.mock-viajes.example/bariloche-verano — actividades, buscado el 2026-11-10
+- [memoria] mem-2bb8e362fa35 → https://cotizaciones.mock-viajes.example/dolar-hoy — cambio, buscado el 2026-11-10
+
+_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._
+
+------------------------------------------------------------------------------------------
+ESTADO: completo | DURACIÓN: 0.1 s | DECISIONES DEL SUPERVISOR: 3
+REFINAMIENTOS: 0 | BÚSQUEDAS WEB SIMULADAS: 0 | DATOS: 6 de memoria · 0 de la web
+VALIDACIÓN: rechazada | PRESUPUESTO ENTRA: None | HERRAMIENTAS: {"buscar_en_memoria": 5, "validar_viaje": 1}
+TOKENS: n/a (modo mock)

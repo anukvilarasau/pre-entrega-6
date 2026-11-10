@@ -1,0 +1,569 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "5_memoria",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:00:44.436-03:00",
+  "fin": "2026-11-10T15:01:55.819-03:00",
+  "duracion_s": 71.38,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "analista",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "Enero sin día exacto: se asume ida el 10/01/2027 (el próximo enero, ya que el de 2026 ya pasó) y vuelta el 16/01/2027 (7 días)."
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:00:49.387-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "Enero sin día exacto: se asume ida el 10/01/2027 (el próximo enero, ya que el de 2026 ya pasó) y vuelta el 16/01/2027 (7 días)."
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá datos para un viaje de Mendoza a Bariloche, ida 2027-01-10 y vuelta 2027-01-16 (7 días, 2 personas). Necesito: pasajes aéreos y/o terrestres Mendoza-Bariloche para 2 personas (precios de referencia, rangos o 'desde', no hace falta el precio exacto de esas fechas); alojamiento en Bariloche para 6 noches para 2 personas (precio por noche de referencia); comida (rango de precio por persona por día en restaurantes/supermercado) y actividades principales con costo aproximado; clima esperado en Bariloche en enero; y cotización del dólar oficial, tarjeta y MEP (no el blue). Indicá la fuente (URL o mem-...) de cada dato y aclará las unidades de cada precio (por persona, por noche, total, etc.).",
+        "temas": [
+          "pasajes",
+          "alojamiento",
+          "comida",
+          "actividades",
+          "clima",
+          "cambio"
+        ],
+        "evaluacion": "Todavía no hay aportes. La pregunta pide armar el viaje y saber si alcanza el presupuesto (800.000 ARS), así que hacen falta pasajes Mendoza-Bariloche, alojamiento, comida/actividades, clima y cotización del dólar (oficial, tarjeta y MEP). Ninguna rúbrica se cumple todavía (R1 a R6 pendientes). Corresponde mandar al investigador con todos los temas.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:01:09.034-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá datos para un viaje de Mendoza a Bariloche, ida 2027-01-10 y vuelta 2027-01-16 (7 días, 2 personas). Necesito: pasajes aéreos y/o terrestres Mendoza-Bariloche para 2 personas (precios de referencia, rangos o 'desde', no hace falta el precio exacto de esas fechas); alojamiento en Bariloche para 6 noches para 2 personas (precio por noche de referencia); comida (rango de precio por persona por día en restaurantes/supermercado) y actividades principales con costo aproximado; clima esperado en Bariloche en enero; y cotización del dólar oficial, tarjeta y MEP (no el blue). Indicá la fuente (URL o mem-...) de cada dato y aclará las unidades de cada precio (por persona, por noche, total, etc.).",
+        "contenido": "## Hallazgos\n\n### Pasajes Mendoza–Bariloche\n- Micro a San Carlos de Bariloche: desde ARS 135.100, precio promedio ARS 193.018. Unidad no especificada (probablemente por persona, tramo no indicado). Duración aprox. 19h 21m. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (memoria, mem-ea5fcf2bf407)\n- Vuelo ida y vuelta: entre $199.202 y $385.415 (promedio $279.875 en los últimos 12 meses). Unidad no especificada; el más barato reciente fue $135.585 con JetSMART (dato del comparador, no se aclara si es por tramo o por persona). [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (memoria, mem-a2293a0a5065)\n- Referencias de la guía de rutas (unidad no especificada): avión desde USD 94 (2,3–2,8 h, USD 94–170); micro desde USD 24 (13–15 h, USD 24–38); auto desde USD 75. [https://maps.com.ar/como-ir/mendoza/bariloche] (memoria, mem-f103fb9db68b)\n\n### Alojamiento en Bariloche\n- Cabañas: desde ARS 60.800 por noche. Unidad no especificada (probablemente por unidad, no por persona). [https://www.interpatagonia.com/bariloche/cabanas.html] (memoria, mem-c2495737d6f1)\n- Hoteles económicos: \"desde 22 €/noche\" y precio medio de 26 € en noviembre. Unidad no especificada, moneda en euros, sin fecha de enero. [https://www.kayak.es/Hoteles-en-Bariloche.54322.hotel.ksp] (memoria, mem-fa09ccfa8473)\n- Listados de hoteles/posadas para 2 personas en 1 habitación, sin precio publicado en el resultado. [https://www.alojamiento.ar/bariloche-department-argentina] (memoria, mem-f0c458476353)\n- Booking muestra un precio en UAH 3.833,14 por 1 noche para 2 adultos, en moneda no pesificada y sin fecha clara; no sirve como referencia en ARS. [https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html] (memoria, mem-9530619359f6)\n\n### Comida\n- Tenedor libre frente al lago: $38.000 por persona (abre todos los días; sin fecha de precio). [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en] (memoria, mem-850c9ab297f2)\n- Precios sueltos (unidad: por plato o producto, no por día): chocolate caliente $11.000; budín $6.000; alfajor $6.000; limonada $4.500; cerveza lata $8.500; club sándwich $25.000; tostón $25.000; café lungo $5.000; porción de torta $19.500. [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en] (memoria, mem-850c9ab297f2)\n- Guía de restaurantes con menús y precios (sin montos legibles en el resultado). [https://barilocheparabrasileiros.com.br/es/2024/05/27/restaurantes-em-bariloche-menus-e-valores] (memoria, mem-b2865627a739)\n- Una fondue para varias personas costó $106.700 (total de mesa, cantidad de personas no indicada). [https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US] (memoria, mem-5f1d3b96f1ef)\n\n### Actividades (costo aproximado)\n- Cerro Catedral: $26.000 (excursión de ~4 h con transporte, ascenso y guía en español). Unidad no especificada (probablemente por persona). [https://bariloche.org/tarifas-excursiones-bariloche] (memoria, mem-f2962de0fd34)\n- Teleférico Cerro Otto: $18.000 adultos y $10.000 niños de 6 a 12 años. Unidad: por persona (según el texto). [https://bariloche.org/tarifas-excursiones-bariloche] (memoria, mem-f2962de0fd34)\n- Tour medio día Circuito Chico + Cerro Catedral (Viator): desde 76,98 €. Unidad no especificada (probablemente por persona), en euros, duración ~3 h, entrada no incluida. [https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45] (memoria, mem-961443e2c772)\n- Actividades en Cerro Catedral en verano (ruedas sin motor, mountain bike, vistas): sin precio en el resultado. [https://barilocheturismo.gob.ar/es/actividades-cerro-catedral] (memoria, mem-de0ce81c515a)\n\n### Clima esperado en enero\n- Fuentes con datos inconsistentes entre sí:\n  - Temperaturas medias de 33° / 17 °C, con 3 días de lluvia y 93 mm promedio en enero. [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January] (memoria, mem-50c2da0fbcec)\n  - Enero: máxima media de 19 °C y mínima de 5 °C; es el mes más cálido. [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche] (memoria, mem-01e3282facc3)\n  - Días de 20–28 °C, ocasionalmente más de 30 °C; noches de unos 15 °C. [https://bariloche.org/el-clima-en-bariloche] (memoria, mem-2d9900f8a7be)\n\n### Cotización del dólar (venta, ARS por USD)\n- Oficial: $1.570 (compra $1.520). [https://pagliaccio.com.ar/dolarhoy] (memoria, mem-6a10ac52826e) y [https://www.dolarito.ar] (memoria, mem-13d552ddd1f0), con datos de 6 de noviembre según dolarito.\n- MEP: $1.539,72 (compra $1.539,27), al 9/10/2026. [https://www.infodolar.com] (memoria, mem-685deaa71b46)\n- Tarjeta: $2.008,20, al 9/10/2026. [https://www.infodolar.com] (memoria, mem-685deaa71b46)\n- Dólar blue (solo referencia, no usar): $1.540 venta. [https://www.infodolar.com] (memoria, mem-685deaa71b46)\n\n## Datos que faltan\n- Precios de pasajes y alojamiento con unidad explícita (por persona, por noche por habitación) y con fecha de enero 2027; los de la memoria no especifican unidad.\n- Costo diario de comida por persona (rango total por día): solo hay precios sueltos de platos, no un presupuesto diario.\n- Precio de hospedaje en ARS con fecha de enero; la referencia de booking está en UAH.\n- Clima: las fuentes no coinciden en las temperaturas máximas de enero; conviene verificar con el SMN antes de confirmar.\n- Cotizaciones con fecha de octubre/noviembre de 2026; no hay dato del día de la consulta ni del dólar oficial en infodolar.",
+        "fuentes": [
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f103fb9db68b",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://maps.com.ar/como-ir/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-a2293a0a5065",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f0c458476353",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.alojamiento.ar/bariloche-department-argentina",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-c2495737d6f1",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.interpatagonia.com/bariloche/cabanas.html",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-9530619359f6",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-fa09ccfa8473",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.kayak.es/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-850c9ab297f2",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-b2865627a739",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://barilocheparabrasileiros.com.br/es/2024/05/27/restaurantes-em-bariloche-menus-e-valores",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-5f1d3b96f1ef",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://www.youtube.com/watch?v=wlfcnaYDcyA&vl=en-US",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-50c2da0fbcec",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-01e3282facc3",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-2d9900f8a7be",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://bariloche.org/el-clima-en-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-685deaa71b46",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-13d552ddd1f0",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.dolarito.ar",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-6a10ac52826e",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://pagliaccio.com.ar/dolarhoy",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-de0ce81c515a",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://barilocheturismo.gob.ar/es/actividades-cerro-catedral",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f2962de0fd34",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://bariloche.org/tarifas-excursiones-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-961443e2c772",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes aéreos o micro Mendoza a Bariloche enero 2027 precio por persona",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'pasajes aéreos o micro Mendoza a Bariloche enero 2027 precio por persona':\n\n[mem-ea5fcf2bf407] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche\n### ¿Cuánto sale un pasaje de micro a San Carlos de Bariloche desde Mendoza?\n:   El precio del pasaje de micro de Mendoza a San Carlos de Bariloche arranca en ARS 135.100, llegando a un precio promedio de ARS 193.018. Para conseguir las tarifas más económicas, te recomendamos reservar los pasajes con anticipación. Los precios suel...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento precio por noche enero 2027 para 2 personas",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 4 datos vigentes para 'alojamiento precio por noche enero 2027 para 2 personas':\n\n[mem-f0c458476353] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-10) | url=https://www.alojamiento.ar/bariloche-department-argentina\n* Guías de Viajes y Preguntas Frecuentes ### Ahorrá hasta un 93% Las Mejores Ofertas de Alojamiento Económicas en Alquiler Temporario cerca de Bariloche Posada · 2 Personas · 1 Habitación HOPA-Home Patagonia Hostel & Bar Hostel · 2 Personas · 1 Habitación Hostel · 2 Personas · 1 Habitación Hostel · 2 Personas · 1 Habitación Hotel · 2 Personas · 1 Habit...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio comida restaurantes supermercado por persona por día",
+              "destino": "Bariloche",
+              "tema": "comida"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'precio comida restaurantes supermercado por persona por día':\n\n[mem-850c9ab297f2] origen=memoria | tema=comida | buscado hace 0.0 días (2026-11-10) | url=https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en\nTienen 2 locales \n📍Cuenca 1299\n📍Fragata Sarmiento 800\npinchu.travel.food's profile picture\nAbrió un tenedor libre en Bariloche. Se encuentra frente al lago y del puerto. El precio es de $38.000 por persona y abre todos los días. Pueden encontrar fiambres, rabas, parrilla, milanesas, y muchas cosas más. Los postres estan incluidos y son...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "actividades principales y costo aproximado",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'actividades principales y costo aproximado' [destino=Bariloche, tema=actividades]: 3 datos recientes pero poco parecido a la consulta. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima esperado en enero temperaturas",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'clima esperado en enero temperaturas':\n\n[mem-50c2da0fbcec] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January\nTemperaturas en Bariloche en enero - gráfico meteorológico\n\nLluvia en Bariloche en enero - tabla meteorológica\n\n## Viaja a Bariloche en enero - Preguntas frecuentes\n\n¿Cuál es la temperatura promedio en Bariloche en enero?\n\nLas temperaturas promedio en Bariloche para el mes de enero son de 33° / 17°C.\n\n¿Cuál es la probabilidad de lluvia en Bar...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial tarjeta MEP",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'cotización dólar oficial tarjeta MEP':\n\n[mem-685deaa71b46] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://www.infodolar.com\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue | $ 1.520,00  = $ 0,00 | $ 1.540,00  = $ 0,00 | = 0,00 % | $ 20,00 | viernes, 9 de octubre de 2026 18:00 Argentina |\n| Dólar MEP | $ 1.539,27  -$ 1,06 | $ 1.539,72  -$ 1,61 | -0,10 % | $ 0,45 | viernes, 9 de octubre de 2026 18:01 Argentina |\n| Dólar FiwindFiwind | $ 1.520,46  -$ 5,26 | $ 1.545,54  -$ 7,34 | -0,47 % | $ 25,09 | Opera...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "actividades principales Bariloche precios excursiones cerro Catedral circuito chico navegación lago costo",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no traen precios, repetí con forzar=true).\n\nMEMORIA — 3 datos vigentes para 'actividades principales Bariloche precios excursiones cerro Catedral circuito chico navegación lago costo':\n\n[mem-de0ce81c515a] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-10) | url=https://barilocheturismo.gob.ar/es/actividades-cerro-catedral\nEn verano podés disfrutar de hermosas vistas, gastronomía y un área de ruedas sin motor. Además, podés disfrutar de diferentes eventos de descenso en Mountain Bike y otros deportes.\n\n...",
+            "timestamp": "2026-11-10T15:01:09.032-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "alojamiento",
+            "fuentes": 4,
+            "memoria": 4,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "comida",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "actividades",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "clima",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "cambio",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:01:13.562-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "analista",
+        "instruccion": "Validá el viaje (Mendoza a Bariloche, ida 2027-01-10, vuelta 2027-01-16, 7 días, 6 noches, 2 personas, presupuesto total ARS 800.000). Usá como precios de referencia de la ronda 1 del investigador: pasajes Mendoza-Bariloche ida y vuelta desde ARS 135.100 (micro, unidad no especificada) hasta ARS 385.415 (vuelo ida y vuelta, promedio ARS 279.875); alojamiento cabañas desde ARS 60.800 por noche (por unidad); comida: tenedor libre ARS 38.000 por persona (referencia), y precios sueltos de referencia. Aclará explícitamente las unidades dudosas (si el pasaje es por persona o por tramo, si el alojamiento es por unidad). Ejecutá validar_viaje y calcular_presupuesto, y decí si entra en ARS 800.000 con escenario económico (micro + cabañas) y con escenario de vuelo.",
+        "temas": [],
+        "evaluacion": "R1 Cobertura: faltan datos de clima (sin precios, pero el tema clima tiene fuentes de memoria; la pregunta de cobertura lo pide como dato informativo) y la cotización del dólar tiene fuentes pero conviene confirmar oficial/tarjeta/MEP. Pasajes, alojamiento y comida/actividades tienen fuentes. R2 Fuentes: todos los aportes tienen mem-... o URL. R3 Precios: pasajes y alojamiento traen montos, aunque con unidades no aclaradas (por persona/por tramo/por unidad). Alojamiento en pesos es solo cabañas desde ARS 60.800/noche; los demás están en euros o UAH y no sirven. R4 Cálculo: no hay cálculo todavía; el analista debe ejecutar validar_viaje y calcular_presupuesto. R5 Observaciones: ninguna por código. R6 Coherencia: sin contradicciones de noches (6) ni personas (2), pero las unidades de pasajes son dudosas y deben aclararse. Falta el clima con datos concretos (la tabla marca 'NO' en precios, pero es clima) y aclarar unidades de pasajes y alojamiento.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "analista",
+      "timestamp": "2026-11-10T15:01:31.688-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Validá el viaje (Mendoza a Bariloche, ida 2027-01-10, vuelta 2027-01-16, 7 días, 6 noches, 2 personas, presupuesto total ARS 800.000). Usá como precios de referencia de la ronda 1 del investigador: pasajes Mendoza-Bariloche ida y vuelta desde ARS 135.100 (micro, unidad no especificada) hasta ARS 385.415 (vuelo ida y vuelta, promedio ARS 279.875); alojamiento cabañas desde ARS 60.800 por noche (por unidad); comida: tenedor libre ARS 38.000 por persona (referencia), y precios sueltos de referencia. Aclará explícitamente las unidades dudosas (si el pasaje es por persona o por tramo, si el alojamiento es por unidad). Ejecutá validar_viaje y calcular_presupuesto, y decí si entra en ARS 800.000 con escenario económico (micro + cabañas) y con escenario de vuelo.",
+        "contenido": "## Validación\nVÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.\n\n## Presupuesto\n\n**Supuestos de unidades (aclarados):**\n- **Pasaje micro (ARS 135.100):** la unidad no está especificada. Lo traté como **por persona, ida y vuelta** (el supuesto más caro, y el que indica la fuente como \"ida y vuelta\").\n- **Pasaje avión (promedio ARS 279.875):** igual, tratado como **por persona, ida y vuelta**.\n- **Alojamiento cabaña (ARS 60.800/noche):** tratado como **por noche por habitación** (para 2 personas), según la indicación del supervisor (\"por unidad\"). Si en realidad fuera por persona, el costo de alojamiento se duplicaría, así que conviene confirmarlo.\n- **Comida (ARS 38.000):** tratada como **por persona por día** (tenedor libre). Es un supuesto, porque la fuente no aclara si es por día o por comida.\n- No incluí actividades ni extras, porque no hay precios diarios confiables.\n- Todo está en ARS, así que no hubo conversión de moneda.\n\n**Opción 1: económica (micro + cabañas), 7 días / 6 noches**\n- Pasajes micro: $ 270.200 ($ 135.100 por persona × 2)\n- Alojamiento cabaña: $ 364.800 ($ 60.800 por noche × 6 noches × 1 habitación)\n- Comida: $ 532.000 ($ 38.000 por persona por día × 7 días × 2)\n- **Total: $ 1.167.000**\n- **NO ENTRA.** Faltan $ 367.000.\n- Costo por día: $ 166.714 (por persona por día: $ 83.357)\n\n**Opción 2: escenario de vuelo (promedio), 7 días / 6 noches**\n- Pasajes avión: $ 559.750 ($ 279.875 por persona × 2)\n- Alojamiento cabaña: $ 364.800\n- Comida: $ 532.000\n- **Total: $ 1.456.550**\n- **NO ENTRA.** Faltan $ 656.550.\n- Costo por día: $ 208.079 (por persona por día: $ 104.039)\n\n**Opción 3 (alternativa): micro + cabañas, 4 días / 3 noches**\n- Pasajes micro: $ 270.200\n- Alojamiento cabaña: $ 182.400 ($ 60.800 × 3 noches × 1 habitación)\n- Comida: $ 304.000 ($ 38.000 × 4 días × 2)\n- **Total: $ 756.600**\n- **ENTRA.** Sobran $ 43.400.\n- Costo por día: $ 189.150 (por persona por día: $ 94.575)\n\n## Conclusión\nCon 7 días no alcanza en ningún escenario: el micro con cabañas faltan $ 367.000 y con avión faltan $ 656.550. Con micro y cabañas por 4 días / 3 noches sí entra, con $ 43.400 de margen. Antes de confirmar, hay que verificar si la cabaña es por habitación o por persona, ya que si es por persona el escenario de 4 días también se pasaría del presupuesto.\n\n## Datos que faltan\n- Unidad confirmada del pasaje micro y del avión (por persona o por tramo).\n- Unidad confirmada del alojamiento (por habitación o por persona) y precio con fecha de enero 2027.\n- Costo diario de comida real (el tenedor libre es una referencia sin fecha y no está claro si es por día).\n- Precio de actividades por persona (Cerro Catedral $ 26.000 y teleférico $ 18.000 podrían sumarse, pero no se incluyeron).\n- Cotizaciones de dólar desactualizadas (octubre/noviembre 2026); no afectan los cálculos porque todo está en ARS.",
+        "fuentes": [
+          {
+            "ref": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "https://www.interpatagonia.com/bariloche/cabanas.html",
+            "origen": "web",
+            "tema": "alojamiento",
+            "url": "https://www.interpatagonia.com/bariloche/cabanas.html",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "origen": "web",
+            "tema": "comida",
+            "url": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "validar_viaje",
+          "calcular_presupuesto"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "validar_viaje",
+            "argumentos": {
+              "origen": "Mendoza",
+              "destino": "Bariloche",
+              "fecha_ida": "2027-01-10",
+              "fecha_vuelta": "2027-01-16",
+              "personas": 2,
+              "presupuesto": 800000,
+              "moneda": "ARS",
+              "dias_pedidos": 7
+            },
+            "resultado": "VÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.",
+            "timestamp": "2026-11-10T15:01:31.687-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "económica (micro + cabañas)",
+              "personas": 2,
+              "noches": 6,
+              "presupuesto": 800000,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 135100,
+                "moneda": "ARS",
+                "tramo": "ida_y_vuelta",
+                "medio": "micro",
+                "fuente": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche"
+              },
+              "alojamiento": {
+                "monto": 60800,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "cabaña",
+                "fuente": "https://www.interpatagonia.com/bariloche/cabanas.html"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 38000,
+                "moneda": "ARS",
+                "fuente": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en"
+              }
+            },
+            "resultado": "PRESUPUESTO — opción 'económica (micro + cabañas)' (7 días, 6 noches, 2 personas):\n- Pasajes micro: $ 270.200  [$ 135.100 por persona (ida y vuelta) × 2 personas]\n- Alojamiento cabaña: $ 364.800  [$ 60.800 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 532.000  [$ 38.000 por persona por día × 7 días × 2 personas]\nTOTAL: $ 1.167.000 | PRESUPUESTO: $ 800.000\nRESULTADO: NO ENTRA en el presupuesto. Faltan $ 367.000.\nCosto por día: $ 166.714 | por persona por día: $ 83.357\nConversiones de moneda: ninguna (todo en la misma moneda).",
+            "timestamp": "2026-11-10T15:01:31.687-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "escenario de vuelo (ida y vuelta promedio)",
+              "personas": 2,
+              "noches": 6,
+              "presupuesto": 800000,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 279875,
+                "moneda": "ARS",
+                "tramo": "ida_y_vuelta",
+                "medio": "avión",
+                "fuente": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC"
+              },
+              "alojamiento": {
+                "monto": 60800,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "cabaña",
+                "fuente": "https://www.interpatagonia.com/bariloche/cabanas.html"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 38000,
+                "moneda": "ARS",
+                "fuente": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en"
+              }
+            },
+            "resultado": "PRESUPUESTO — opción 'escenario de vuelo (ida y vuelta promedio)' (7 días, 6 noches, 2 personas):\n- Pasajes avión: $ 559.750  [$ 279.875 por persona (ida y vuelta) × 2 personas]\n- Alojamiento cabaña: $ 364.800  [$ 60.800 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 532.000  [$ 38.000 por persona por día × 7 días × 2 personas]\nTOTAL: $ 1.456.550 | PRESUPUESTO: $ 800.000\nRESULTADO: NO ENTRA en el presupuesto. Faltan $ 656.550.\nCosto por día: $ 208.079 | por persona por día: $ 104.039\nConversiones de moneda: ninguna (todo en la misma moneda).",
+            "timestamp": "2026-11-10T15:01:31.687-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "alternativa con menos días (micro + cabañas, 3 noches)",
+              "personas": 2,
+              "noches": 3,
+              "presupuesto": 800000,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 135100,
+                "moneda": "ARS",
+                "tramo": "ida_y_vuelta",
+                "medio": "micro",
+                "fuente": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche"
+              },
+              "alojamiento": {
+                "monto": 60800,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "cabaña",
+                "fuente": "https://www.interpatagonia.com/bariloche/cabanas.html"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 38000,
+                "moneda": "ARS",
+                "fuente": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en"
+              },
+              "dias": 4
+            },
+            "resultado": "PRESUPUESTO — opción 'alternativa con menos días (micro + cabañas, 3 noches)' (4 días, 3 noches, 2 personas):\n- Pasajes micro: $ 270.200  [$ 135.100 por persona (ida y vuelta) × 2 personas]\n- Alojamiento cabaña: $ 182.400  [$ 60.800 por noche por habitación × 3 noches × 1 habitación (de 2 personas)]\n- Comida: $ 304.000  [$ 38.000 por persona por día × 4 días × 2 personas]\nTOTAL: $ 756.600 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 43.400.\nCosto por día: $ 189.150 | por persona por día: $ 94.575\nConversiones de moneda: ninguna (todo en la misma moneda).",
+            "timestamp": "2026-11-10T15:01:31.687-03:00"
+          }
+        ],
+        "cobertura": [],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:01:35.019-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1 Cobertura: pasajes, alojamiento, comida, actividades y cambio tienen fuentes de memoria con precios; falta clima con precios (no hace falta precio, pero el clima no tiene datos cuantitativos verificables en el aporte; la pregunta es de presupuesto, el clima sirve para armar el viaje y está en la lista de temas de la ronda 1 con fuentes). R2: todos los aportes tienen fuentes mem-/URL. R3: pasajes y alojamiento tienen montos, aunque las unidades son dudosas. R4: el analista ejecutó validar_viaje y calcular_presupuesto y dijo que NO entra en 7 días. R5: sin observaciones de código. R6: el analista asumió cabaña por habitación y pasaje por persona, supuestos no confirmados; pero el resultado (no entra) es conservador en el escenario micro y el de cabaña por persona solo empeora. Las unidades dudosas están aclaradas en el aporte. Las unidades no afectan la conclusión principal de que 7 días no alcanzan. El aporte del analista es utilizable y la respuesta puede comunicar el supuesto y la alternativa de 4 días. Falta ya solo la unidad confirmada, que no se puede resolver con otra búsqueda sin una rebúsqueda. Conviene finalizar informando las incertidumbres.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:01:55.819-03:00",
+      "detalle": {
+        "respuesta": "## Respuesta corta\n\n**Para 7 días no alcanza.** Con micro y cabañas faltan **$367.000**, y con avión faltan **$656.550**. **Para 4 días sí alcanza** con micro y cabañas, y sobran **$43.400**.\n\n## Itinerario (7 días, Mendoza–Bariloche, 10 al 16 de enero de 2027)\n\nHay pocas actividades encontradas, así que varios días quedan libres. Clima esperado: días de 20 a 28 °C y noches de unos 15 °C, con posible lluvia. Las fuentes no coinciden en las máximas, así que conviene verificar con el SMN [https://bariloche.org/el-clima-en-bariloche] [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January].\n\n- **Día 1 (10/01):** Viaje en micro, unas 19 h y 21 min [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]. Llegada y descanso.\n- **Día 2 (11/01):** Teleférico Cerro Otto, $18.000 por adulto [https://bariloche.org/tarifas-excursiones-bariloche].\n- **Día 3 (12/01):** Excursión a Cerro Catedral, unas 4 h con transporte y guía, $26.000 [https://bariloche.org/tarifas-excursiones-bariloche].\n- **Día 4 (13/01):** Libre.\n- **Día 5 (14/01):** Libre.\n- **Día 6 (15/01):** Libre.\n- **Día 7 (16/01):** Regreso en micro.\n\nEl tour de medio día Circuito Chico + Cerro Catedral de Viator [https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45] no está incluido porque repite Cerro Catedral. Si preferís verlo, podés reemplazar el Día 3 por ese tour, pero no ambos.\n\n## Presupuesto\n\nTodo está en pesos, así que no hubo conversión. No usé ningún tipo de dólar. Las cotizaciones de referencia son de octubre y noviembre de 2026, y no afectan los cálculos.\n\nSupuestos del analista, que no están confirmados por las fuentes:\n- Pasajes: por persona, ida y vuelta.\n- Cabaña: por habitación, para 2 personas.\n- Comida: $38.000 por persona por día (tenedor libre frente al lago) [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en].\n\n**Opción 1: micro + cabañas, 7 días / 6 noches**\n- Pasajes micro: $270.200 (2 × $135.100) [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]\n- Cabaña: $364.800 (6 noches × $60.800) [https://www.interpatagonia.com/bariloche/cabanas.html]\n- Comida: $532.000 (7 días × 2 personas × $38.000)\n- **Total: $1.167.000. No entra; faltan $367.000.**\n- Costo por día: $166.714\n\n**Opción 2: avión promedio + cabañas, 7 días / 6 noches**\n- Pasajes avión: $559.750 (2 × $279.875) [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n- Cabaña y comida: $896.800\n- **Total: $1.456.550. No entra; faltan $656.550.**\n\n**Opción 3: micro + cabañas, 4 días / 3 noches**\n- Pasajes micro: $270.200\n- Cabaña: $182.400 (3 noches × $60.800)\n- Comida: $304.000 (4 días × 2 personas × $38.000)\n- **Total: $756.600. Entra; sobran $43.400.**\n- Costo por día: $189.150\n\n## Alternativas para bajar costos\n\n- **Confirmar la unidad de la cabaña antes de decidir.** Si el precio es por persona, la opción de 4 días también superaría el presupuesto.\n- **Hacer el viaje de 7 días con menos gasto en comida:** cocinar en la cabaña y reservar el tenedor libre para uno o dos almuerzos. El precio de comida real por día no está confirmado.\n- **Priorizar actividades gratuitas** como caminatas y vistas del lago, y sumar solo una o dos excursiones pagas (no están incluidas en el presupuesto).\n- **Buscar alojamiento compartido o posadas** para bajar el costo de la habitación.\n\n## Lo que no pudimos averiguar\n\n- Unidad confirmada de pasajes y alojamiento, y precios con fecha de enero de 2027.\n- Costo diario real de comida por persona.\n- Precio de actividades por persona en el presupuesto. Cerro Catedral ($26.000) y el teleférico ($18.000) podrían sumarse, pero no están incluidos.\n- Clima confiable de enero: las fuentes no coinciden.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-a2293a0a5065 → https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-10\n- [memoria] mem-c2495737d6f1 → https://www.interpatagonia.com/bariloche/cabanas.html — alojamiento, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 → https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — comida, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-2d9900f8a7be → https://bariloche.org/el-clima-en-bariloche — clima, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-961443e2c772 → https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45 — actividades, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Respuesta corta\n\n**Para 7 días no alcanza.** Con micro y cabañas faltan **$367.000**, y con avión faltan **$656.550**. **Para 4 días sí alcanza** con micro y cabañas, y sobran **$43.400**.\n\n## Itinerario (7 días, Mendoza–Bariloche, 10 al 16 de enero de 2027)\n\nHay pocas actividades encontradas, así que varios días quedan libres. Clima esperado: días de 20 a 28 °C y noches de unos 15 °C, con posible lluvia. Las fuentes no coinciden en las máximas, así que conviene verificar con el SMN [https://bariloche.org/el-clima-en-bariloche] [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January].\n\n- **Día 1 (10/01):** Viaje en micro, unas 19 h y 21 min [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]. Llegada y descanso.\n- **Día 2 (11/01):** Teleférico Cerro Otto, $18.000 por adulto [https://bariloche.org/tarifas-excursiones-bariloche].\n- **Día 3 (12/01):** Excursión a Cerro Catedral, unas 4 h con transporte y guía, $26.000 [https://bariloche.org/tarifas-excursiones-bariloche].\n- **Día 4 (13/01):** Libre.\n- **Día 5 (14/01):** Libre.\n- **Día 6 (15/01):** Libre.\n- **Día 7 (16/01):** Regreso en micro.\n\nEl tour de medio día Circuito Chico + Cerro Catedral de Viator [https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45] no está incluido porque repite Cerro Catedral. Si preferís verlo, podés reemplazar el Día 3 por ese tour, pero no ambos.\n\n## Presupuesto\n\nTodo está en pesos, así que no hubo conversión. No usé ningún tipo de dólar. Las cotizaciones de referencia son de octubre y noviembre de 2026, y no afectan los cálculos.\n\nSupuestos del analista, que no están confirmados por las fuentes:\n- Pasajes: por persona, ida y vuelta.\n- Cabaña: por habitación, para 2 personas.\n- Comida: $38.000 por persona por día (tenedor libre frente al lago) [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en].\n\n**Opción 1: micro + cabañas, 7 días / 6 noches**\n- Pasajes micro: $270.200 (2 × $135.100) [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]\n- Cabaña: $364.800 (6 noches × $60.800) [https://www.interpatagonia.com/bariloche/cabanas.html]\n- Comida: $532.000 (7 días × 2 personas × $38.000)\n- **Total: $1.167.000. No entra; faltan $367.000.**\n- Costo por día: $166.714\n\n**Opción 2: avión promedio + cabañas, 7 días / 6 noches**\n- Pasajes avión: $559.750 (2 × $279.875) [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC]\n- Cabaña y comida: $896.800\n- **Total: $1.456.550. No entra; faltan $656.550.**\n\n**Opción 3: micro + cabañas, 4 días / 3 noches**\n- Pasajes micro: $270.200\n- Cabaña: $182.400 (3 noches × $60.800)\n- Comida: $304.000 (4 días × 2 personas × $38.000)\n- **Total: $756.600. Entra; sobran $43.400.**\n- Costo por día: $189.150\n\n## Alternativas para bajar costos\n\n- **Confirmar la unidad de la cabaña antes de decidir.** Si el precio es por persona, la opción de 4 días también superaría el presupuesto.\n- **Hacer el viaje de 7 días con menos gasto en comida:** cocinar en la cabaña y reservar el tenedor libre para uno o dos almuerzos. El precio de comida real por día no está confirmado.\n- **Priorizar actividades gratuitas** como caminatas y vistas del lago, y sumar solo una o dos excursiones pagas (no están incluidas en el presupuesto).\n- **Buscar alojamiento compartido o posadas** para bajar el costo de la habitación.\n\n## Lo que no pudimos averiguar\n\n- Unidad confirmada de pasajes y alojamiento, y precios con fecha de enero de 2027.\n- Costo diario real de comida por persona.\n- Precio de actividades por persona en el presupuesto. Cerro Catedral ($26.000) y el teleférico ($18.000) podrían sumarse, pero no están incluidos.\n- Clima confiable de enero: las fuentes no coinciden.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-a2293a0a5065 → https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-10\n- [memoria] mem-c2495737d6f1 → https://www.interpatagonia.com/bariloche/cabanas.html — alojamiento, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 → https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — comida, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-2d9900f8a7be → https://bariloche.org/el-clima-en-bariloche — clima, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-961443e2c772 → https://www.viator.com/es-ES/tours/Bariloche/Half-Day-Tour-to-Circuito-Chico-and-Cerro-Catedral-with-Transportation/d938-161924P45 — actividades, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → analista → supervisor → sintesis",
+    "pasos_supervisor": 3,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 1,
+      "analista": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 6,
+      "buscar_en_web": 1,
+      "validar_viaje": 1,
+      "calcular_presupuesto": 3
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 19,
+    "fuentes_web": 0,
+    "observaciones": [],
+    "validacion": "aprobada",
+    "presupuesto_entra": false,
+    "alternativa_calculada": true
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "output_token_details": {
+        "reasoning": 3522
+      },
+      "input_token_details": {
+        "ephemeral_5m_input_tokens": 0,
+        "cache_creation": 0,
+        "ephemeral_1h_input_tokens": 0,
+        "cache_read": 0
+      },
+      "total_tokens": 107434,
+      "output_tokens": 16208,
+      "input_tokens": 91226
+    }
+  },
+  "archivo": "traces\\5_memoria_real_20261110-150044.json"
+}

@@ -1,0 +1,36 @@
+==========================================================================================
+TRAZA MULTI-AGENTE | escenario: 2_solo_clima | modo: mock | modelo: LLMMock
+MAX_PASOS_SUPERVISOR: 6 | RECURSION_LIMIT: 20 | inicio: 2026-11-10T15:14:10.031-03:00
+==========================================================================================
+PREGUNTA: ¿Qué clima hace en Bariloche en enero?
+RUTA: supervisor → investigador → supervisor → sintesis
+
+[15:14:10.037] SUPERVISOR · pedido extraído: {"destino": "Bariloche", "fecha_ida": "2027-01-10", "supuestos": ["enero sin día exacto: se asume del 10/01/2027"]}
+[15:14:10.037] SUPERVISOR · decisión 1 → investigador
+           evaluación: R1: todavía no hay datos. Empieza el investigador.
+           instrucción: Buscá lo que pide el usuario: ¿Qué clima hace en Bariloche en enero?
+           temas pedidos: clima
+[15:14:10.054] INVESTIGADOR · ronda 1 · herramientas: buscar_en_memoria
+           ACCIÓN: buscar_en_memoria({"consulta": "clima en Bariloche en enero", "destino": "Bariloche", "tema": "clima"})
+           OBSERVACIÓN: MEMORIA — 1 dato vigente para 'clima en Bariloche en enero':  [mem-db0bd2ddbb9d] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://clima.mock-viajes.example/bariloche-enero Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (...
+           fuentes: mem-db0bd2ddbb9d (memoria, clima)
+           cobertura: clima 1 (1 mem / 0 web, sin precios)
+           chequeo por código: sin observaciones
+[15:14:10.056] SUPERVISOR · decisión 2 → FINALIZAR
+           evaluación: R1-R6 OK: hay datos con fuentes.
+[15:14:10.058] SÍNTESIS · respuesta final (593 caracteres)
+
+RESPUESTA FINAL:
+## Lo que encontramos
+- Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar. — [mem-db0bd2ddbb9d] (memoria)
+
+## Fuentes
+- [memoria] mem-db0bd2ddbb9d → https://clima.mock-viajes.example/bariloche-enero — clima, buscado el 2026-11-10
+
+_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._
+
+------------------------------------------------------------------------------------------
+ESTADO: completo | DURACIÓN: 0.03 s | DECISIONES DEL SUPERVISOR: 2
+REFINAMIENTOS: 0 | BÚSQUEDAS WEB SIMULADAS: 0 | DATOS: 1 de memoria · 0 de la web
+VALIDACIÓN: no se validó | PRESUPUESTO ENTRA: None | HERRAMIENTAS: {"buscar_en_memoria": 1}
+TOKENS: n/a (modo mock)

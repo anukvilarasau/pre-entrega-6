@@ -81,8 +81,11 @@ def ultima_traza(n: int, modo: str) -> dict | None:
     return json.loads(archivos[-1].read_text(encoding="utf-8")) | {"_archivo": archivos[-1].name} if archivos else None
 
 
-def tabla() -> str:
-    """Tabla markdown con la última traza de cada escenario, en mock y en real."""
+def tabla(prefijo: str = "") -> str:
+    """Tabla markdown con la última traza de cada escenario, en mock y en real.
+
+    `prefijo`: carpeta a anteponer a los links ("" dentro de traces/, "traces/" en el README).
+    """
     filas = ["| # | Escenario | Modo | Ruta del supervisor | Decisiones | Refin. | Validación | ¿Entra? | "
              "Datos (memoria · web) | Búsquedas web | Traza |",
              "|---|---|---|---|---|---|---|---|---|---|---|"]
@@ -99,7 +102,7 @@ def tabla() -> str:
             busq = f"{m['busquedas_web']}{' (simuladas)' if modo == 'mock' else ''}"
             filas.append(f"| {n} | {ESCENARIOS[n].nombre.replace('_', ' ')} | {modo} | {ruta} | "
                          f"{m['pasos_supervisor']}{freno} | {m['refinamientos']} | {m['validacion']} | {entra} | "
-                         f"{m['fuentes_memoria']} · {m['fuentes_web']} | {busq} | [{t['_archivo']}](traces/{t['_archivo']}) |")
+                         f"{m['fuentes_memoria']} · {m['fuentes_web']} | {busq} | [{t['_archivo']}]({prefijo}{t['_archivo']}) |")
     return "\n".join(filas)
 
 

@@ -1,0 +1,406 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "5_memoria",
+  "modo": "mock",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:14:09.966-03:00",
+  "fin": "2026-11-10T15:14:10.020-03:00",
+  "duracion_s": 0.05,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "analista",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "enero sin día exacto: se asume del 10/01/2027 al 16/01/2027"
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:09.971-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "enero sin día exacto: se asume del 10/01/2027 al 16/01/2027"
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar.",
+        "temas": [
+          "pasajes",
+          "alojamiento",
+          "clima",
+          "actividades",
+          "cambio"
+        ],
+        "evaluacion": "R1: todavía no hay datos. Empieza el investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:14:09.996-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar.",
+        "contenido": "## Hallazgos\n### Pasajes\n- Vuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 por persona comprando con 60 días de anticipación. Duración: 5 a 7 horas con la escala. — [mem-df9efd11b444] (memoria)\n- Micro directo Mendoza - Bariloche (aprox. 18 horas, por la ruta 40). Semicama: $70.000 por persona por tramo; cama ejecutivo: $95.000 por persona por tramo. Ida y vuelta en semicama: $140.000 por persona. Se paga en pesos con tarjeta de débito o crédito. — [mem-ae9aa9bf303f] (memoria)\n### Alojamiento\n- Precios por noche POR HABITACIÓN DOBLE (2 personas) en enero 2027: hostel con habitación doble privada desde $35.000; hotel 3 estrellas en el centro desde $120.000 con desayuno; cabaña para 2 en el Circuito Chico desde $150.000. Cama en habitación compartida de hostel: $18.000 por persona por noche. Se paga en pesos con tarjeta. — [mem-60e1f4552419] (memoria)\n### Clima\n- Enero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar. — [mem-db0bd2ddbb9d] (memoria)\n### Actividades\n- Actividades gratuitas: trekking al Refugio Frey, playas del lago Gutiérrez, miradores del Circuito Chico; con alguna actividad paga (aerosilla, alquiler de bici) el gasto promedio es de $4.000 por persona por día. Excursión a Isla Victoria y Bosque de Arrayanes: US$ 30 por persona (se paga en dólares con tarjeta). Comida: cocinando en el hostel, $9.000 por persona por día; comiendo afuera, $35.000 por persona por día. — [mem-071cdddb63ee] (memoria)\n### Cambio\n- Cotizaciones de referencia (venta): dólar oficial $1.450; dólar tarjeta $1.885 (oficial + 30% de percepción); dólar MEP $1.500. Los consumos en dólares con tarjeta de crédito se liquidan al dólar tarjeta. — [mem-2bb8e362fa35] (memoria)\n## Datos que faltan\n- ninguno",
+        "fuentes": [
+          {
+            "ref": "mem-df9efd11b444",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://vuelos.mock-viajes.example/mendoza-bariloche-enero",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-ae9aa9bf303f",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://micros.mock-viajes.example/mendoza-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-60e1f4552419",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://alojamiento.mock-viajes.example/bariloche-enero-precios",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-db0bd2ddbb9d",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://clima.mock-viajes.example/bariloche-enero",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-071cdddb63ee",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://actividades.mock-viajes.example/bariloche-verano",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-2bb8e362fa35",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://cotizaciones.mock-viajes.example/dolar-hoy",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 2 datos vigentes para 'precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta':\n\n[mem-df9efd11b444] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://vuelos.mock-viajes.example/mendoza-bariloche-enero\nVuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 por persona comprando con 60 días de anticipación. Duración: 5 a 7 horas con la escala.\n\n[mem-ae9aa9bf303f] origen...",
+            "timestamp": "2026-11-10T15:14:09.995-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio alojamiento hostel hotel habitacion doble por noche Bariloche",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 1 dato vigente para 'precio alojamiento hostel hotel habitacion doble por noche Bariloche':\n\n[mem-60e1f4552419] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-10) | url=https://alojamiento.mock-viajes.example/bariloche-enero-precios\nPrecios por noche POR HABITACIÓN DOBLE (2 personas) en enero 2027: hostel con habitación doble privada desde $35.000; hotel 3 estrellas en el centro desde $120.000 con desayuno; cabaña para 2 en el Circuito Chico desde $150.000. Cama en habitación compartida de hostel: $18.000 por persona por noche. Se paga en pesos con tarjeta.",
+            "timestamp": "2026-11-10T15:14:09.995-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima en Bariloche en enero",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "MEMORIA — 1 dato vigente para 'clima en Bariloche en enero':\n\n[mem-db0bd2ddbb9d] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://clima.mock-viajes.example/bariloche-enero\nEnero es pleno verano en Bariloche: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar.",
+            "timestamp": "2026-11-10T15:14:09.995-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "que hacer actividades excursiones y comida en Bariloche",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "MEMORIA — 1 dato vigente para 'que hacer actividades excursiones y comida en Bariloche':\n\n[mem-071cdddb63ee] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-10) | url=https://actividades.mock-viajes.example/bariloche-verano\nActividades gratuitas: trekking al Refugio Frey, playas del lago Gutiérrez, miradores del Circuito Chico; con alguna actividad paga (aerosilla, alquiler de bici) el gasto promedio es de $4.000 por persona por día. Excursión a Isla Victoria y Bosque de Arrayanes: US$ 30 por persona (se paga en dólares con tarjeta). Comida: cocinando en el hostel, $9.000 po...",
+            "timestamp": "2026-11-10T15:14:09.995-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotizacion dolar oficial tarjeta MEP hoy",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 1 dato vigente para 'cotizacion dolar oficial tarjeta MEP hoy':\n\n[mem-2bb8e362fa35] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://cotizaciones.mock-viajes.example/dolar-hoy\nCotizaciones de referencia (venta): dólar oficial $1.450; dólar tarjeta $1.885 (oficial + 30% de percepción); dólar MEP $1.500. Los consumos en dólares con tarjeta de crédito se liquidan al dólar tarjeta.",
+            "timestamp": "2026-11-10T15:14:09.995-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 2,
+            "memoria": 2,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "alojamiento",
+            "fuentes": 1,
+            "memoria": 1,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "clima",
+            "fuentes": 1,
+            "memoria": 1,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "actividades",
+            "fuentes": 1,
+            "memoria": 1,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "cambio",
+            "fuentes": 1,
+            "memoria": 1,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:09.998-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "analista",
+        "instruccion": "Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto (opción económica; si no alcanza, una alternativa) con los precios de los hallazgos.",
+        "temas": [],
+        "evaluacion": "R1-R3 OK (hay datos con fuentes y precios). R4 pendiente: falta validar y calcular.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "analista",
+      "timestamp": "2026-11-10T15:14:10.016-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto (opción económica; si no alcanza, una alternativa) con los precios de los hallazgos.",
+        "contenido": "## Validación\nVÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.\n## Presupuesto\nPRESUPUESTO — opción 'económica' (7 días, 6 noches, 2 personas):\n- Pasajes micro semicama: $ 280.000  [$ 140.000 por persona (ida y vuelta) × 2 personas]\n- Alojamiento hostel habitación doble: $ 210.000  [$ 35.000 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 126.000  [$ 9.000 por persona por día × 7 días × 2 personas]\n- Actividades: $ 56.000  [$ 4.000 por persona por día × 7 días × 2 personas]\n- excursión Isla Victoria: $ 113.100  [$ 56.550 × 2 personas]\nTOTAL: $ 785.100 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 14.900.\nCosto por día: $ 112.157 | por persona por día: $ 56.079\nConversiones de moneda:\n- excursión Isla Victoria: US$ 30,00 → $ 56.550 con dólar tarjeta $1.885 (pago con tarjeta; fuente: mem-2bb8e362fa35)\n## Conclusión\nCon la opción económica el viaje ENTRA en el presupuesto.\n## Datos que faltan\n- ninguno",
+        "fuentes": [
+          {
+            "ref": "mem-ae9aa9bf303f",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-60e1f4552419",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-071cdddb63ee",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-071cdddb63ee",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-2bb8e362fa35",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "validar_viaje",
+          "calcular_presupuesto"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "validar_viaje",
+            "argumentos": {
+              "origen": "Mendoza",
+              "destino": "Bariloche",
+              "fecha_ida": "2027-01-10",
+              "fecha_vuelta": "2027-01-16",
+              "personas": 2,
+              "presupuesto": 800000.0,
+              "moneda": "ARS",
+              "dias_pedidos": 7
+            },
+            "resultado": "VÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.",
+            "timestamp": "2026-11-10T15:14:10.015-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "económica",
+              "personas": 2,
+              "noches": 6,
+              "presupuesto": 800000.0,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 140000.0,
+                "moneda": "ARS",
+                "tramo": "ida_y_vuelta",
+                "medio": "micro semicama",
+                "fuente": "mem-ae9aa9bf303f"
+              },
+              "alojamiento": {
+                "monto": 35000.0,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "hostel habitación doble",
+                "fuente": "mem-60e1f4552419"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 9000.0,
+                "moneda": "ARS",
+                "fuente": "mem-071cdddb63ee"
+              },
+              "tipos_de_cambio": [
+                {
+                  "tipo": "oficial",
+                  "valor_ars": 1450.0,
+                  "fuente": "mem-2bb8e362fa35"
+                },
+                {
+                  "tipo": "tarjeta",
+                  "valor_ars": 1885.0,
+                  "fuente": "mem-2bb8e362fa35"
+                },
+                {
+                  "tipo": "MEP",
+                  "valor_ars": 1500.0,
+                  "fuente": "mem-2bb8e362fa35"
+                }
+              ],
+              "actividades_por_persona_por_dia": {
+                "monto": 4000.0,
+                "moneda": "ARS",
+                "fuente": "mem-071cdddb63ee"
+              },
+              "extras": [
+                {
+                  "descripcion": "excursión Isla Victoria",
+                  "monto": 30.0,
+                  "moneda": "USD",
+                  "medio_pago": "tarjeta",
+                  "fuente": "mem-071cdddb63ee"
+                }
+              ]
+            },
+            "resultado": "PRESUPUESTO — opción 'económica' (7 días, 6 noches, 2 personas):\n- Pasajes micro semicama: $ 280.000  [$ 140.000 por persona (ida y vuelta) × 2 personas]\n- Alojamiento hostel habitación doble: $ 210.000  [$ 35.000 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 126.000  [$ 9.000 por persona por día × 7 días × 2 personas]\n- Actividades: $ 56.000  [$ 4.000 por persona por día × 7 días × 2 personas]\n- excursión Isla Victoria: $ 113.100  [$ 56.550 × 2 personas]\nTOTAL: $ 785.100 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 14.900.\nCosto por d...",
+            "timestamp": "2026-11-10T15:14:10.015-03:00"
+          }
+        ],
+        "cobertura": [],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:10.017-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1-R6 OK: hay datos con fuentes, validación y cálculo del analista.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:14:10.020-03:00",
+      "detalle": {
+        "respuesta": "## Itinerario\n- Día 1 (10/01): viaje desde Mendoza y llegada a Bariloche\n- Día 2 (11/01): Circuito Chico en bici\n- Día 3 (12/01): trekking al Refugio Frey\n- Día 4 (13/01): playas del lago Gutiérrez\n- Día 5 (14/01): excursión a Isla Victoria y Bosque de Arrayanes\n- Día 6 (15/01): día libre: descanso y paseo por el centro\n- Día 7 (16/01): regreso a Mendoza\n\nClima esperado: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar.\n\n## Presupuesto\nPRESUPUESTO — opción 'económica' (7 días, 6 noches, 2 personas):\n- Pasajes micro semicama: $ 280.000  [$ 140.000 por persona (ida y vuelta) × 2 personas]\n- Alojamiento hostel habitación doble: $ 210.000  [$ 35.000 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 126.000  [$ 9.000 por persona por día × 7 días × 2 personas]\n- Actividades: $ 56.000  [$ 4.000 por persona por día × 7 días × 2 personas]\n- excursión Isla Victoria: $ 113.100  [$ 56.550 × 2 personas]\nTOTAL: $ 785.100 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 14.900.\nCosto por día: $ 112.157 | por persona por día: $ 56.079\nConversiones de moneda:\n- excursión Isla Victoria: US$ 30,00 → $ 56.550 con dólar tarjeta $1.885 (pago con tarjeta; fuente: mem-2bb8e362fa35)\n\n**Con la opción económica el viaje ENTRA en el presupuesto.**\n\n## Fuentes\n- [memoria] mem-2bb8e362fa35 → https://cotizaciones.mock-viajes.example/dolar-hoy — cambio, buscado el 2026-11-10\n- [memoria] mem-2bb8e362fa35 — cambio, buscado el 2026-11-10\n- [memoria] mem-ae9aa9bf303f — pasajes, buscado el 2026-11-10\n- [memoria] mem-60e1f4552419 — alojamiento, buscado el 2026-11-10\n- [memoria] mem-071cdddb63ee — comida, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Itinerario\n- Día 1 (10/01): viaje desde Mendoza y llegada a Bariloche\n- Día 2 (11/01): Circuito Chico en bici\n- Día 3 (12/01): trekking al Refugio Frey\n- Día 4 (13/01): playas del lago Gutiérrez\n- Día 5 (14/01): excursión a Isla Victoria y Bosque de Arrayanes\n- Día 6 (15/01): día libre: descanso y paseo por el centro\n- Día 7 (16/01): regreso a Mendoza\n\nClima esperado: máximas promedio de 22 °C y mínimas de 7 °C, con días largos (anochece cerca de las 21:30). Llueve poco (unos 4 días al mes), pero hay viento y las noches son frescas: conviene llevar abrigo liviano y protector solar.\n\n## Presupuesto\nPRESUPUESTO — opción 'económica' (7 días, 6 noches, 2 personas):\n- Pasajes micro semicama: $ 280.000  [$ 140.000 por persona (ida y vuelta) × 2 personas]\n- Alojamiento hostel habitación doble: $ 210.000  [$ 35.000 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 126.000  [$ 9.000 por persona por día × 7 días × 2 personas]\n- Actividades: $ 56.000  [$ 4.000 por persona por día × 7 días × 2 personas]\n- excursión Isla Victoria: $ 113.100  [$ 56.550 × 2 personas]\nTOTAL: $ 785.100 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 14.900.\nCosto por día: $ 112.157 | por persona por día: $ 56.079\nConversiones de moneda:\n- excursión Isla Victoria: US$ 30,00 → $ 56.550 con dólar tarjeta $1.885 (pago con tarjeta; fuente: mem-2bb8e362fa35)\n\n**Con la opción económica el viaje ENTRA en el presupuesto.**\n\n## Fuentes\n- [memoria] mem-2bb8e362fa35 → https://cotizaciones.mock-viajes.example/dolar-hoy — cambio, buscado el 2026-11-10\n- [memoria] mem-2bb8e362fa35 — cambio, buscado el 2026-11-10\n- [memoria] mem-ae9aa9bf303f — pasajes, buscado el 2026-11-10\n- [memoria] mem-60e1f4552419 — alojamiento, buscado el 2026-11-10\n- [memoria] mem-071cdddb63ee — comida, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → analista → supervisor → sintesis",
+    "pasos_supervisor": 3,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 1,
+      "analista": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 5,
+      "validar_viaje": 1,
+      "calcular_presupuesto": 1
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 6,
+    "fuentes_web": 0,
+    "observaciones": [],
+    "validacion": "aprobada",
+    "presupuesto_entra": true,
+    "alternativa_calculada": false
+  },
+  "tokens": {},
+  "archivo": "traces\\5_memoria_mock_20261110-151409.json"
+}

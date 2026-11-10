@@ -204,3 +204,30 @@ async def test_el_supervisor_ve_la_cobertura_por_tema() -> None:
     visto = " ".join(str(m.content) for m in llm.vistos[-1])
     assert "COBERTURA POR TEMA (calculada por código" in visto
     assert "pasajes | 3 | 2 | 1 | sí" in visto and "clima | 1 | 1 | 0 | NO" in visto
+
+
+# ------------------------------------------------ escenario 4 real: fechas supuestas
+def test_validacion_del_pedido_ignora_fechas_inventadas() -> None:
+    from state import validacion_del_pedido
+
+    malo = PEDIDO.model_copy(update={"fecha_ida": date(2027, 1, 16), "fecha_vuelta": date(2027, 1, 10)})
+    llamadas = [
+        LlamadaHerramienta(herramienta="validar_viaje", resultado="INVÁLIDO: la vuelta ...",
+                           argumentos={"fecha_ida": "2027-01-16", "fecha_vuelta": "2027-01-10"}),
+        LlamadaHerramienta(herramienta="validar_viaje", resultado="VÁLIDO: del 16 al 22",   # inventada
+                           argumentos={"fecha_ida": "2027-01-16", "fecha_vuelta": "2027-01-22"}),
+    ]
+    assert validacion_del_pedido(llamadas, malo) == "invalido"
+    assert validacion_del_pedido([], malo) is None
+
+
+async def test_no_se_vuelve_al_analista_si_el_pedido_es_invalido() -> None:
+    malo = PEDIDO.model_copy(update={"fecha_ida": date(2027, 1, 16), "fecha_vuelta": date(2027, 1, 10)})
+    analista = Aporte(agente="analista", ronda=2, instruccion="validá", contenido="INVÁLIDO",
+                      herramientas=["validar_viaje"], llamadas=[LlamadaHerramienta(
+                          herramienta="validar_viaje", resultado="INVÁLIDO: la vuelta ...",
+                          argumentos={"fecha_ida": "2027-01-16", "fecha_vuelta": "2027-01-10"})])
+    otra_vez = DecisionSupervisor(evaluacion="suponé otra fecha", siguiente="analista", instruccion="usá vuelta 22/01")
+    salida = await crear_nodo_supervisor(llm_que_decide(otra_vez))(
+        estado(pedido=malo, pasos_supervisor=2, aportes=[aporte_inv(), analista]))
+    assert salida["siguiente"] == "FINALIZAR" and "rechazó el pedido del usuario" in salida["decisiones"][0].evaluacion

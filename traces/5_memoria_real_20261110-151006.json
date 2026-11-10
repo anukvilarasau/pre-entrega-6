@@ -1,0 +1,536 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "5_memoria",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:10:06.186-03:00",
+  "fin": "2026-11-10T15:11:06.744-03:00",
+  "duracion_s": 60.56,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "analista",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "Enero sin día exacto: ida el 10/01/2027 (el próximo enero, ya que enero 2026 ya pasó), vuelta el 16/01/2027 (7 días)."
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:10:11.140-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "Enero sin día exacto: ida el 10/01/2027 (el próximo enero, ya que enero 2026 ya pasó), vuelta el 16/01/2027 (7 días)."
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá datos con fuente (URL o mem-...) para un viaje Mendoza → Bariloche, ida 2027-01-10, vuelta 2027-01-16 (7 días), 2 personas. Temas: (1) pasajes aéreos o de micro Mendoza-Bariloche para 2 personas, con precios de referencia en ARS (rangos, 'desde' o promedios de fechas cercanas; no hace falta precio exacto para esas fechas); (2) alojamiento en Bariloche para 6 noches, 2 personas, con precio por noche de referencia en ARS; (3) comida: costo aproximado diario por persona en Bariloche; (4) actividades: precios de referencias principales; (5) clima de Bariloche en enero; (6) cotización del dólar oficial, tarjeta y MEP (no el blue). Indicá la unidad de cada precio (por persona, por noche, total, etc.).",
+        "temas": [
+          "pasajes",
+          "alojamiento",
+          "comida",
+          "actividades",
+          "clima",
+          "cambio"
+        ],
+        "evaluacion": "Pregunta pide armar viaje y verificar si alcanza el presupuesto (800.000 ARS, 2 personas, 7 días). Rúbrica: R1 cobertura no cumplida (no hay aportes de pasajes, alojamiento, comida/actividades ni cotización). R2 no aplica aún. R3 sin precios. R4 no hay cálculo. R5 sin observaciones pendientes. R6 sin aportes que contrasten. Hace falta investigar todo antes de que el analista pueda validar y calcular.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:10:32.131-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá datos con fuente (URL o mem-...) para un viaje Mendoza → Bariloche, ida 2027-01-10, vuelta 2027-01-16 (7 días), 2 personas. Temas: (1) pasajes aéreos o de micro Mendoza-Bariloche para 2 personas, con precios de referencia en ARS (rangos, 'desde' o promedios de fechas cercanas; no hace falta precio exacto para esas fechas); (2) alojamiento en Bariloche para 6 noches, 2 personas, con precio por noche de referencia en ARS; (3) comida: costo aproximado diario por persona en Bariloche; (4) actividades: precios de referencias principales; (5) clima de Bariloche en enero; (6) cotización del dólar oficial, tarjeta y MEP (no el blue). Indicá la unidad de cada precio (por persona, por noche, total, etc.).",
+        "contenido": "## Hallazgos\n\n### Pasajes (micro Mendoza → San Carlos de Bariloche)\n- Desde ARS 135.100 (mínimo) y promedio ARS 193.018 por tramo, según la fuente. La fuente no aclara si es por persona o por tramo; la tarjeta del resultado muestra \"Por persona\" a ARS 193.000 en semicama. Precios de referencia de fechas de noviembre; no son de enero. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (memoria) [mem-ea5fcf2bf407]\n- Promedio ARS 193.025 y mínimo ARS 135.100. Unidad no especificada. Los precios suben al acercarse la fecha. [https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche] (memoria) [mem-b6468acfdb03]\n- Empresas que operan el tramo: Andesmar, CATA Internacional y Flecha Bus (semicama, cama y cama premium). Sin precios en esa página. [https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes] (memoria) [mem-e10c651c981c]\n- Duración aproximada del viaje: 19 h 10 min (según tarjeta de horario). [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (memoria) [mem-ea5fcf2bf407]\n\n### Alojamiento (Bariloche, 1 noche, 2 personas)\n- Selva India Hotel Suite: desde ARS 72.420 por 1 noche para 2 personas (tarifa con descuento del 50 %; referencia 10/11/2026). Unidad: por noche, para 2 personas; tipo de unidad no especificado. [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] (memoria) [mem-f408466d015c]\n- Gran Hotel Panamericano: desde ARS 96.947 por 1 noche para 2 personas. Unidad: por noche, para 2 personas. Mismo origen. (memoria) [mem-f408466d015c]\n- Villa Huapi (alquiler temporario): desde ARS 95.008 por 1 noche para 2 personas (referencia 20/12/2026). Mismo origen. (memoria) [mem-f408466d015c]\n- Villa Sofía Apart Hotel & Spa: desde ARS 92.458 por 1 noche para 2 personas (referencia 16/11/2026). Mismo origen. (memoria) [mem-f408466d015c]\n- Precio más bajo de habitación de 3 estrellas en Kayak: desde USD 28 por noche (moneda y unidad según la fuente, sin fecha exacta; valor no confiable para ARS). [https://www.es.kayak.com/Hoteles-en-Bariloche.54322.hotel.ksp] (memoria) [mem-374bc333ef93]\n\n### Comida (costo por persona)\n- Tenedor libre frente al lago: ARS 38.000 por persona (incluye postres). [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en] (memoria) [mem-850c9ab297f2]\n- Café cortado con medialuna: ARS 9.000; pizza grande: ARS 40.000–50.000; hamburguesa completa: ARS 22.000–30.000; pastas: ARS 25.000. Unidad: por plato, según el ítem. [https://bariloche.org/cuanto_me_cuesta] (memoria) [mem-0019ce230e02]\n- Parrillada para 2 personas: ARS 80.000–90.000 (total para 2). [https://bariloche.org/cuanto_me_cuesta] (memoria) [mem-0019ce230e02]\n- Comida en restaurante promedio: ARS 900–2.000 por persona; gasto diario promedio: ARS 3.000–6.000 (cifra probablemente desactualizada y muy inferior a los precios anteriores; tomar con cautela). [https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo] (memoria) [mem-760d72e28e6f]\n\n### Actividades\n- Teleférico Cerro Catedral (base a 5 km de la ciudad, excursión de 3 a 4 h con confitería giratoria): ARS 40.000 por adulto; ARS 20.000 para niños de 6 a 12 años y jubilados (por persona). [https://bariloche.org/tarifas-excursiones-bariloche] (memoria) [mem-f2962de0fd34]\n- Excursión \"Travesía Nocturna en la Nieve y Cena en Cerro…\" y tours de Tangol: precios listados pero ilegibles en el resumen (valor visible ARS 629.713 con 10 % off, sin unidad clara). [https://www.tangol.com/es/excursiones/bariloche/d-5] (memoria) [mem-42bc3c7dcff9]\n- Noche nórdica en Cerro Otto: listada en Tangol, sin precio legible. [https://www.tangol.com/es/excursiones/bariloche/d-5] (memoria) [mem-42bc3c7dcff9]\n\n### Clima (enero)\n- Temperatura media de enero: 15 °C; máxima media 19 °C; mínima media 5 °C. [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche] (memoria) [mem-01e3282facc3]\n- Promedio 15 °C en enero, con máximas de 19 °C. [https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118] (memoria) [mem-296dd4d2d2e7]\n- Enero: 3 días de lluvia, 28 días secos, 93 mm de lluvia promedio. La fuente indica \"33° / 17°\", cifra que contradice las otras fuentes (posible error). [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January] (memoria) [mem-50c2da0fbcec]\n\n### Cotización del dólar (ARS por USD)\n- Oficial: compra ARS 1.520 / venta ARS 1.570 (6/11/2026). [https://www.dolarito.ar] (memoria) [mem-13d552ddd1f0]\n- Oficial: compra ARS 1.520 / venta ARS 1.570 (referencia de cotización actual). [https://pagliaccio.com.ar/dolarhoy] (memoria) [mem-6a10ac52826e]\n- MEP: compra ARS 1.539,27 / venta ARS 1.539,72 (9/10/2026). [https://www.infodolar.com] (memoria) [mem-685deaa71b46]\n- Tarjeta: venta ARS 2.008,20 (9/10/2026). [https://www.infodolar.com] (memoria) [mem-685deaa71b46]\n\n## Datos que faltan\n- Pasajes con precio para fechas de enero 2027 (los datos son de noviembre) y precio de avión (no encontrado).\n- Precios de alojamiento para 6 noches consecutivas en enero (solo hay precios por noche de referencia en otras fechas).\n- Precio del circuito chico, del telesilla o pase de Cerro Catedral en temporada de verano, y de rafting/kayak.\n- Cotización tarjeta actualizada (el dato de tarjeta es del 9/10/2026).\n- Costo diario de comida consistente: las fuentes se contradicen (ARS 3.000–6.000 diarios frente a precios de comidas de ARS 9.000–90.000).\n- No se hizo búsqueda web en actividades porque la memoria tenía datos; si se necesitan precios completos de tours, hace falta forzar una nueva búsqueda.",
+        "fuentes": [
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-b6468acfdb03",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-e10c651c981c",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f408466d015c",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-9530619359f6",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-374bc333ef93",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.es.kayak.com/Hoteles-en-Bariloche.54322.hotel.ksp",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-850c9ab297f2",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-0019ce230e02",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://bariloche.org/cuanto_me_cuesta",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-760d72e28e6f",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-50c2da0fbcec",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-296dd4d2d2e7",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-01e3282facc3",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-685deaa71b46",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-13d552ddd1f0",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.dolarito.ar",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-6a10ac52826e",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://pagliaccio.com.ar/dolarhoy",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f2962de0fd34",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://bariloche.org/tarifas-excursiones-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-42bc3c7dcff9",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.tangol.com/es/excursiones/bariloche/d-5",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes Mendoza Bariloche avión o micro precio",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'pasajes Mendoza Bariloche avión o micro precio':\n\n[mem-ea5fcf2bf407] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche\n### ¿Cuánto sale un pasaje de micro a San Carlos de Bariloche desde Mendoza?\n:   El precio del pasaje de micro de Mendoza a San Carlos de Bariloche arranca en ARS 135.100, llegando a un precio promedio de ARS 193.018. Para conseguir las tarifas más económicas, te recomendamos reservar los pasajes con anticipación. Los precios suelen subir a medida que se a...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento precio por noche habitación 2 personas enero",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'alojamiento precio por noche habitación 2 personas enero':\n\n[mem-f408466d015c] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-10) | url=https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche\nLandingID: generic-hotels-city\n\n# Hoteles en San Carlos de Bariloche\n\nNoches desde $38.950\n\nHoteles en San Carlos de Bariloche\n\n## Hoteles con el mejor costo-beneficio\n\n##### Selva India Hotel Suite\n\n1 noche, 2 personas desde\n\n$72.420\n\n $ 144.841\n\n- 50 %\n\nFecha de referencia:\n\n10 noviembre 2026\n\n##### Villa Huapi\n\n8.7\n\nAlquiler ...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "costo diario comida por persona restaurantes supermercado",
+              "destino": "Bariloche",
+              "tema": "comida"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'costo diario comida por persona restaurantes supermercado':\n\n[mem-850c9ab297f2] origen=memoria | tema=comida | buscado hace 0.0 días (2026-11-10) | url=https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en\nTienen 2 locales \n📍Cuenca 1299\n📍Fragata Sarmiento 800\npinchu.travel.food's profile picture\nAbrió un tenedor libre en Bariloche. Se encuentra frente al lago y del puerto. El precio es de $38.000 por persona y abre todos los días. Pueden encontrar fiambres, rabas, parrilla, milanesas, y muchas cosas más. Los postres estan incluidos y son l...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precios actividades excursiones cerro Catedral circuito chico",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'precios actividades excursiones cerro Catedral circuito chico' [destino=Bariloche, tema=actividades]: 3 datos recientes pero poco parecido a la consulta. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima enero temperaturas promedio",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'clima enero temperaturas promedio':\n\n[mem-50c2da0fbcec] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January\nTemperaturas en Bariloche en enero - gráfico meteorológico\n\nLluvia en Bariloche en enero - tabla meteorológica\n\n## Viaja a Bariloche en enero - Preguntas frecuentes\n\n¿Cuál es la temperatura promedio en Bariloche en enero?\n\nLas temperaturas promedio en Bariloche para el mes de enero son de 33° / 17°C.\n\n¿Cuál es la probabilidad de lluvia en Barilo...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial tarjeta MEP",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'cotización dólar oficial tarjeta MEP':\n\n[mem-685deaa71b46] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://www.infodolar.com\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue | $ 1.520,00  = $ 0,00 | $ 1.540,00  = $ 0,00 | = 0,00 % | $ 20,00 | viernes, 9 de octubre de 2026 18:00 Argentina |\n| Dólar MEP | $ 1.539,27  -$ 1,06 | $ 1.539,72  -$ 1,61 | -0,10 % | $ 0,45 | viernes, 9 de octubre de 2026 18:01 Argentina |\n| Dólar FiwindFiwind | $ 1.520,46  -$ 5,26 | $ 1.545,54  -$ 7,34 | -0,47 % | $ 25,09 | Opera...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio excursiones actividades Bariloche Cerro Catedral circuito chico tarifas",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes sobre esto (si no traen precios, repetí con forzar=true).\n\nMEMORIA — 2 datos vigentes para 'precio excursiones actividades Bariloche Cerro Catedral circuito chico tarifas':\n\n[mem-f2962de0fd34] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-10) | url=https://bariloche.org/tarifas-excursiones-bariloche\nA tan sólo 5 km de la ciudad de San Carlos de Bariloche se encuentra la base principal del teleférico. Además de poder disfrutar de increíbles vistas desde la altura, en la base superior del mismo se encuentra un escenar...",
+            "timestamp": "2026-11-10T15:10:32.130-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "alojamiento",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "comida",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "actividades",
+            "fuentes": 2,
+            "memoria": 2,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "clima",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "cambio",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:10:36.240-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "analista",
+        "instruccion": "Validá el viaje con fechas de ida 2027-01-10 y vuelta 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto total ARS 800.000. Ejecutá validar_viaje y calcular_presupuesto usando los precios de referencia del investigador: pasajes entre ARS 135.100 (mínimo) y ARS 193.018 (promedio) por tramo; aclarar si son por persona o por tramo (si es por persona, multiplicar por 2 y por ida y vuelta según corresponda, y señalar la duda); alojamiento desde ARS 72.420 por noche para 2 personas (Selva India) a ARS 96.947 (Gran Hotel Panamericano), usar 6 noches; comida ARS 38.000 por persona por día como referencia de tenedor libre, estimá un costo diario por persona razonable y multiplicá por 2 personas y 7 días; actividades según los precios del investigador. Indicá si el presupuesto entra o no en ARS 800.000, con el rango bajo y alto, y aclará las unidades dudosas.",
+        "temas": [],
+        "evaluacion": "R1 Cobertura: pasajes, alojamiento, comida, actividades y cambio tienen fuentes y precios; clima tiene fuentes pero sin precios (no requiere precio, es dato informativo y tiene fuentes de memoria). Cubierto. R2 Fuentes: todos los aportes tienen URL o mem-. OK. R3 Precios: pasajes (135.100 a 193.018) y alojamiento (desde 72.420 a 96.947 por noche para 2) traen montos de referencia; alcanzan. R4 Cálculo: falta que el analista ejecute validar_viaje y calcular_presupuesto con estos precios y diga si entra en ARS 800.000. R5 Observaciones: ninguna pendiente. R6 Coherencia: hay ambigüedad de unidad en pasajes (por persona vs por tramo) que el analista debe aclarar; las noches (6) son coherentes con 7 días. Falta el cálculo, así que no se puede finalizar.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "analista",
+      "timestamp": "2026-11-10T15:10:56.894-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Validá el viaje con fechas de ida 2027-01-10 y vuelta 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto total ARS 800.000. Ejecutá validar_viaje y calcular_presupuesto usando los precios de referencia del investigador: pasajes entre ARS 135.100 (mínimo) y ARS 193.018 (promedio) por tramo; aclarar si son por persona o por tramo (si es por persona, multiplicar por 2 y por ida y vuelta según corresponda, y señalar la duda); alojamiento desde ARS 72.420 por noche para 2 personas (Selva India) a ARS 96.947 (Gran Hotel Panamericano), usar 6 noches; comida ARS 38.000 por persona por día como referencia de tenedor libre, estimá un costo diario por persona razonable y multiplicá por 2 personas y 7 días; actividades según los precios del investigador. Indicá si el presupuesto entra o no en ARS 800.000, con el rango bajo y alto, y aclará las unidades dudosas.",
+        "contenido": "## Validación\n**VÁLIDO:** Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.\n\n## Presupuesto\n\n**Opción económica (7 días, 6 noches, pasaje por tramo por persona):**\n- Pasajes micro semicama (mínimo): $ 540.400 [$ 135.100 por persona por tramo × 2 tramos × 2 personas]\n- Alojamiento Selva India Hotel Suite, habitación para 2: $ 434.520 [$ 72.420 por noche por habitación × 6 noches × 1 habitación]\n- Comida: $ 420.000 [$ 30.000 por persona por día × 7 días × 2 personas] (30.000 es estimación del analista; referencia: tenedor libre a $ 38.000)\n- Teleférico Cerro Catedral (adulto, una vez): $ 80.000 [$ 40.000 × 2 personas]\n- **Total: $ 1.474.920. NO ENTRA. Faltan $ 674.920.**\n- Costo por día: $ 210.703 (por persona por día: $ 105.351)\n\nSolo los dos alojamientos y los pasajes (si son por tramo) ya suman $ 974.920, por encima de los $ 800.000.\n\n**Alternativa (5 días, 4 noches, pasaje ida y vuelta por persona, sin extras):**\n- Pasajes micro semicama (mínimo): $ 270.200 [$ 135.100 por persona × 2 personas]\n- Alojamiento Selva India, habitación para 2: $ 289.680 [$ 72.420 × 4 noches × 1 habitación]\n- Comida: $ 150.000 [$ 15.000 por persona por día × 5 días × 2 personas] (estimación del analista)\n- **Total: $ 709.880. ENTRA. Sobran $ 90.120.**\n- Costo por día: $ 141.976 (por persona por día: $ 70.988)\n\n**Rango con el pedido original (7 días, 6 noches):** el rango bajo (pasaje mínimo, alojamiento más barato, sin actividades) ya supera el presupuesto si el pasaje es por tramo por persona. Solo entraría si el pasaje fuera ida y vuelta por persona, y aun así quedaría muy ajustado con comida de $ 15.000 por día, sin excursiones.\n\n**Unidades dudosas:**\n- **Pasaje:** la fuente no dice si el precio es por persona o por tramo. La tarjeta de Plataforma10 muestra \"Por persona\" a $ 193.000 en semicama, lo que sugiere por persona, pero no aclara si es por tramo o ida y vuelta. Lo calculé como por tramo en la opción principal y como ida y vuelta en la alternativa. Es la duda más importante del cálculo.\n- **Alojamiento:** tomé el precio \"para 2 personas\" como por noche por habitación. Si fuera por persona, el costo se duplicaría.\n- **Comida:** la fuente de $ 38.000 por persona (tenedor libre) contradice los precios de restaurantes ($ 3.000–6.000 diarios). Usé un valor intermedio estimado.\n- **Precios de noviembre:** los pasajes y alojamientos son de otras fechas; enero suele ser más caro.\n\n## Conclusión\nCon el pedido original (7 días, 6 noches) el viaje **no entra** en $ 800.000, y falta al menos $ 674.920 con el pasaje por tramo. Una opción que sí entra es de 5 días y 4 noches (≈ $ 710.000), pero depende de que el pasaje sea ida y vuelta por persona. Conviene confirmar el precio del pasaje con la empresa antes de decidir.\n\n## Datos que faltan\n- Confirmación de si el pasaje es por persona, por tramo o ida y vuelta.\n- Precios de pasajes y alojamiento para fechas de enero 2027 (los datos son de noviembre o de otras fechas).\n- Precio de avión (no encontrado) y de otras actividades (circuito chico, telesilla, rafting; los tours de Tangol son ilegibles).\n- Costo diario de comida consistente (las fuentes se contradicen).",
+        "fuentes": [
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f408466d015c",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-850c9ab297f2",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f2962de0fd34",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": null,
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "validar_viaje",
+          "calcular_presupuesto"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "validar_viaje",
+            "argumentos": {
+              "origen": "Mendoza",
+              "destino": "Bariloche",
+              "fecha_ida": "2027-01-10",
+              "fecha_vuelta": "2027-01-16",
+              "personas": 2,
+              "presupuesto": 800000,
+              "moneda": "ARS",
+              "dias_pedidos": 7
+            },
+            "resultado": "VÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.",
+            "timestamp": "2026-11-10T15:10:56.893-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "económica",
+              "personas": 2,
+              "noches": 6,
+              "dias": 7,
+              "presupuesto": 800000,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 135100,
+                "moneda": "ARS",
+                "tramo": "por_tramo",
+                "medio": "micro semicama (mínimo)",
+                "fuente": "mem-ea5fcf2bf407"
+              },
+              "alojamiento": {
+                "monto": 72420,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "Selva India Hotel Suite, habitación para 2",
+                "fuente": "mem-f408466d015c"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 30000,
+                "moneda": "ARS",
+                "fuente": "estimación del analista (referencia: mem-850c9ab297f2 tenedor libre ARS 38.000)"
+              },
+              "actividades_por_persona_por_dia": null,
+              "extras": [
+                {
+                  "descripcion": "Teleférico Cerro Catedral (adulto, una vez)",
+                  "monto": 40000,
+                  "moneda": "ARS",
+                  "por_persona": true,
+                  "fuente": "mem-f2962de0fd34"
+                }
+              ]
+            },
+            "resultado": "PRESUPUESTO — opción 'económica' (7 días, 6 noches, 2 personas):\n- Pasajes micro semicama (mínimo): $ 540.400  [$ 135.100 por persona por tramo × 2 tramos × 2 personas]\n- Alojamiento Selva India Hotel Suite, habitación para 2: $ 434.520  [$ 72.420 por noche por habitación × 6 noches × 1 habitación (de 2 personas)]\n- Comida: $ 420.000  [$ 30.000 por persona por día × 7 días × 2 personas]\n- Teleférico Cerro Catedral (adulto, una vez): $ 80.000  [$ 40.000 × 2 personas]\nTOTAL: $ 1.474.920 | PRESUPUESTO: $ 800.000\nRESULTADO: NO ENTRA en el presupuesto. Faltan $ 674.920.\nCosto por día: $ 210.703 | p...",
+            "timestamp": "2026-11-10T15:10:56.893-03:00"
+          },
+          {
+            "herramienta": "calcular_presupuesto",
+            "argumentos": {
+              "opcion": "alternativa: 4 noches, pasaje ida y vuelta (interpretación dudosa), sin extras",
+              "personas": 2,
+              "noches": 4,
+              "dias": 5,
+              "presupuesto": 800000,
+              "moneda_presupuesto": "ARS",
+              "pasaje": {
+                "monto": 135100,
+                "moneda": "ARS",
+                "tramo": "ida_y_vuelta",
+                "medio": "micro semicama (mínimo), supuesto por persona ida y vuelta",
+                "fuente": "mem-ea5fcf2bf407"
+              },
+              "alojamiento": {
+                "monto": 72420,
+                "moneda": "ARS",
+                "unidad": "por_noche_por_habitacion",
+                "personas_por_habitacion": 2,
+                "tipo": "Selva India Hotel Suite, habitación para 2",
+                "fuente": "mem-f408466d015c"
+              },
+              "comida_por_persona_por_dia": {
+                "monto": 15000,
+                "moneda": "ARS",
+                "fuente": "estimación del analista (sin fuente confiable)"
+              },
+              "actividades_por_persona_por_dia": null,
+              "extras": []
+            },
+            "resultado": "PRESUPUESTO — opción 'alternativa: 4 noches, pasaje ida y vuelta (interpretación dudosa), sin extras' (5 días, 4 noches, 2 personas):\n- Pasajes micro semicama (mínimo), supuesto por persona ida y vuelta: $ 270.200  [$ 135.100 por persona (ida y vuelta) × 2 personas]\n- Alojamiento Selva India Hotel Suite, habitación para 2: $ 289.680  [$ 72.420 por noche por habitación × 4 noches × 1 habitación (de 2 personas)]\n- Comida: $ 150.000  [$ 15.000 por persona por día × 5 días × 2 personas]\nTOTAL: $ 709.880 | PRESUPUESTO: $ 800.000\nRESULTADO: ENTRA en el presupuesto. Sobran $ 90.120.\nCosto por día: $ ...",
+            "timestamp": "2026-11-10T15:10:56.893-03:00"
+          }
+        ],
+        "cobertura": [],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:10:59.799-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1 Cobertura: pasajes, alojamiento, comida, actividades y cambio tienen fuentes y precios; clima tiene fuentes de memoria pero SIN precios (aceptable, el clima no requiere monto, pero se pidió clima en el pedido y está cubierto con fuente). R2 Fuentes: los aportes del investigador tienen fuentes mem-... o URL; hay algunos ítems sin URL pero con mem-. R3 Precios: pasajes y alojamiento traen montos de referencia. R4 Cálculo: el analista ejecutó validar_viaje (VÁLIDO) y calcular_presupuesto, y dijo que el presupuesto NO entra en el pedido de 7 días (faltan $674.920) y que sí entra en una alternativa de 5 días. R5 Observaciones: ninguna pendiente en ambos aportes. R6 Coherencia: el analista usó 6 noches y 2 personas, consistente con el pedido; la duda de unidades (pasaje por tramo vs. persona) está explicitada y no requiere otra ronda obligatoria. El resultado principal ya responde si alcanza. Se puede finalizar; la síntesis debe presentar la duda de unidades de pasajes y la alternativa de 5 días.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:11:06.744-03:00",
+      "detalle": {
+        "respuesta": "## Itinerario\n\nEl viaje completo de 7 días (6 noches) no entra en el presupuesto, así que el itinerario que propongo es el de la **alternativa de 5 días y 4 noches**, que sí alcanza. Las actividades disponibles en los datos son pocas, así que varios días quedan libres.\n\n- **Día 1 (ida):** salida en micro desde Mendoza, unas 19 h de viaje según Plataforma10 [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] [mem-ea5fcf2bf407]. Llegada a San Carlos de Bariloche y check-in.\n- **Día 2:** Teleférico Cerro Catedral (excursión de 3 a 4 h con confitería giratoria). Clima esperado: máxima media de 19 °C, mínima de 5 °C [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche] [mem-01e3282facc3].\n- **Día 3:** día libre para caminar por la ciudad o descansar.\n- **Día 4:** día libre. Enero tiene unos 3 días de lluvia en promedio, así que conviene dejar margen [mem-50c2da0fbcec].\n- **Día 5 (vuelta):** regreso en micro a Mendoza.\n\n## Presupuesto\n\n**Pedido original (7 días, 6 noches), no entra:**\n- Pasajes micro semicama (mínimo): $ 540.400 (2 personas, 2 tramos, $ 135.100 por persona por tramo)\n- Alojamiento Selva India Hotel Suite: $ 434.520 (6 noches, 1 habitación, $ 72.420 por noche) [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] [mem-f408466d015c]\n- Comida: $ 420.000 (estimación de $ 30.000 por persona por día)\n- Teleférico Cerro Catedral: $ 80.000 (2 adultos, $ 40.000 c/u) [https://bariloche.org/tarifas-excursiones-bariloche] [mem-f2962de0fd34]\n- **Total: $ 1.474.920. Faltan $ 674.920.**\n- Costo por día: $ 210.703 (por persona: $ 105.351)\n\n**Alternativa de 5 días y 4 noches, sí entra:**\n- Pasajes micro semicama (ida y vuelta): $ 270.200 ($ 135.100 por persona)\n- Alojamiento Selva India Hotel Suite: $ 289.680 (4 noches, $ 72.420 por noche)\n- Comida: $ 150.000 (estimación de $ 15.000 por persona por día)\n- **Total: $ 709.880. Sobran $ 90.120.**\n- Costo por día: $ 141.976 (por persona: $ 70.988)\n\n**Dólar:** no lo usé porque todos los precios están en pesos. Como referencia, el dólar oficial venta estaba en ARS 1.570 (6/11/2026) [https://www.dolarito.ar] [mem-13d552ddd1f0].\n\n**Advertencias sobre el cálculo:**\n- El pasaje no aclara si el precio es por persona, por tramo o ida y vuelta. La alternativa supone ida y vuelta por persona. Si fuera por tramo, el 5 días tampoco entra. Hay que confirmarlo con la empresa.\n- Los precios son de noviembre. En enero suelen subir.\n- La comida es una estimación. Las fuentes se contradicen mucho.\n\n## Alternativas\n\n- Reducir a 5 días, que es la opción que entra.\n- Confirmar el precio real del pasaje antes de decidir.\n- Bajar costos de alojamiento buscando opciones más baratas (Villa Sofía Apart Hotel & Spa desde ARS 92.458 por noche, referencia 16/11/2026 [mem-f408466d015c]), aunque no es más barato que el Selva India.\n- Cocinar en el alojamiento para bajar el gasto de comida.\n- Priorizar actividades gratuitas, porque el teleférico ya representa $ 80.000.\n\n## Lo que no pudimos averiguar\n\n- Precios de pasajes y alojamiento para enero de 2027. Todo es de otras fechas.\n- Precio del avión (no encontrado).\n- Precio del telesilla, del pase de temporada de Cerro Catedral y de rafting o kayak.\n- Precios de los tours de Tangol (ilegibles en la fuente).\n- Costo diario de comida confiable.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-01e3282facc3 → https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche — clima, buscado el 2026-11-10\n- [memoria] mem-13d552ddd1f0 → https://www.dolarito.ar — cambio, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-ea5fcf2bf407 — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c — alojamiento, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 — actividades, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 — comida, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Itinerario\n\nEl viaje completo de 7 días (6 noches) no entra en el presupuesto, así que el itinerario que propongo es el de la **alternativa de 5 días y 4 noches**, que sí alcanza. Las actividades disponibles en los datos son pocas, así que varios días quedan libres.\n\n- **Día 1 (ida):** salida en micro desde Mendoza, unas 19 h de viaje según Plataforma10 [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] [mem-ea5fcf2bf407]. Llegada a San Carlos de Bariloche y check-in.\n- **Día 2:** Teleférico Cerro Catedral (excursión de 3 a 4 h con confitería giratoria). Clima esperado: máxima media de 19 °C, mínima de 5 °C [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche] [mem-01e3282facc3].\n- **Día 3:** día libre para caminar por la ciudad o descansar.\n- **Día 4:** día libre. Enero tiene unos 3 días de lluvia en promedio, así que conviene dejar margen [mem-50c2da0fbcec].\n- **Día 5 (vuelta):** regreso en micro a Mendoza.\n\n## Presupuesto\n\n**Pedido original (7 días, 6 noches), no entra:**\n- Pasajes micro semicama (mínimo): $ 540.400 (2 personas, 2 tramos, $ 135.100 por persona por tramo)\n- Alojamiento Selva India Hotel Suite: $ 434.520 (6 noches, 1 habitación, $ 72.420 por noche) [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] [mem-f408466d015c]\n- Comida: $ 420.000 (estimación de $ 30.000 por persona por día)\n- Teleférico Cerro Catedral: $ 80.000 (2 adultos, $ 40.000 c/u) [https://bariloche.org/tarifas-excursiones-bariloche] [mem-f2962de0fd34]\n- **Total: $ 1.474.920. Faltan $ 674.920.**\n- Costo por día: $ 210.703 (por persona: $ 105.351)\n\n**Alternativa de 5 días y 4 noches, sí entra:**\n- Pasajes micro semicama (ida y vuelta): $ 270.200 ($ 135.100 por persona)\n- Alojamiento Selva India Hotel Suite: $ 289.680 (4 noches, $ 72.420 por noche)\n- Comida: $ 150.000 (estimación de $ 15.000 por persona por día)\n- **Total: $ 709.880. Sobran $ 90.120.**\n- Costo por día: $ 141.976 (por persona: $ 70.988)\n\n**Dólar:** no lo usé porque todos los precios están en pesos. Como referencia, el dólar oficial venta estaba en ARS 1.570 (6/11/2026) [https://www.dolarito.ar] [mem-13d552ddd1f0].\n\n**Advertencias sobre el cálculo:**\n- El pasaje no aclara si el precio es por persona, por tramo o ida y vuelta. La alternativa supone ida y vuelta por persona. Si fuera por tramo, el 5 días tampoco entra. Hay que confirmarlo con la empresa.\n- Los precios son de noviembre. En enero suelen subir.\n- La comida es una estimación. Las fuentes se contradicen mucho.\n\n## Alternativas\n\n- Reducir a 5 días, que es la opción que entra.\n- Confirmar el precio real del pasaje antes de decidir.\n- Bajar costos de alojamiento buscando opciones más baratas (Villa Sofía Apart Hotel & Spa desde ARS 92.458 por noche, referencia 16/11/2026 [mem-f408466d015c]), aunque no es más barato que el Selva India.\n- Cocinar en el alojamiento para bajar el gasto de comida.\n- Priorizar actividades gratuitas, porque el teleférico ya representa $ 80.000.\n\n## Lo que no pudimos averiguar\n\n- Precios de pasajes y alojamiento para enero de 2027. Todo es de otras fechas.\n- Precio del avión (no encontrado).\n- Precio del telesilla, del pase de temporada de Cerro Catedral y de rafting o kayak.\n- Precios de los tours de Tangol (ilegibles en la fuente).\n- Costo diario de comida confiable.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-01e3282facc3 → https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche — clima, buscado el 2026-11-10\n- [memoria] mem-13d552ddd1f0 → https://www.dolarito.ar — cambio, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-ea5fcf2bf407 — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c — alojamiento, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 — actividades, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 — comida, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → analista → supervisor → sintesis",
+    "pasos_supervisor": 3,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 1,
+      "analista": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 6,
+      "buscar_en_web": 1,
+      "validar_viaje": 1,
+      "calcular_presupuesto": 2
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 17,
+    "fuentes_web": 0,
+    "observaciones": [],
+    "validacion": "aprobada",
+    "presupuesto_entra": false,
+    "alternativa_calculada": true
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "input_tokens": 83278,
+      "output_tokens": 12890,
+      "total_tokens": 96168,
+      "input_token_details": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 2458
+      }
+    }
+  },
+  "archivo": "traces\\5_memoria_real_20261110-151006.json"
+}

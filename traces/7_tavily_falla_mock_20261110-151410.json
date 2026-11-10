@@ -1,0 +1,399 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "7_tavily_falla",
+  "modo": "mock",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:14:10.387-03:00",
+  "fin": "2026-11-10T15:14:10.459-03:00",
+  "duracion_s": 0.07,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "analista",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "enero sin día exacto: se asume del 10/01/2027 al 16/01/2027"
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:10.391-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "enero sin día exacto: se asume del 10/01/2027 al 16/01/2027"
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar.",
+        "temas": [
+          "pasajes",
+          "alojamiento",
+          "clima",
+          "actividades",
+          "cambio"
+        ],
+        "evaluacion": "R1: todavía no hay datos. Empieza el investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:14:10.432-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá precios de pasajes y alojamiento, comida y actividades, el clima y la cotización del dólar.",
+        "contenido": "## Hallazgos\n## Datos que faltan\n- pasajes: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- alojamiento: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- clima: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- actividades: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- cambio: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente",
+        "fuentes": [],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta' [destino=Bariloche, tema=pasajes]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precio alojamiento hostel hotel habitacion doble por noche Bariloche",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'precio alojamiento hostel hotel habitacion doble por noche Bariloche' [destino=Bariloche, tema=alojamiento]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima en Bariloche en enero",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'clima en Bariloche en enero' [destino=Bariloche, tema=clima]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "que hacer actividades excursiones y comida en Bariloche",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'que hacer actividades excursiones y comida en Bariloche' [destino=Bariloche, tema=actividades]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotizacion dolar oficial tarjeta MEP hoy",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'cotizacion dolar oficial tarjeta MEP hoy' [destino=Bariloche, tema=cambio]: no hay nada guardado sobre este destino y tema. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio pasajes vuelo y micro Mendoza Bariloche ida y vuelta",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": false
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio alojamiento hostel hotel habitacion doble por noche Bariloche",
+              "destino": "Bariloche",
+              "tema": "alojamiento",
+              "forzar": false
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "clima en Bariloche en enero",
+              "destino": "Bariloche",
+              "tema": "clima",
+              "forzar": false
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "que hacer actividades excursiones y comida en Bariloche",
+              "destino": "Bariloche",
+              "tema": "actividades",
+              "forzar": false
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "cotizacion dolar oficial tarjeta MEP hoy",
+              "destino": "Bariloche",
+              "tema": "cambio",
+              "forzar": false
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.431-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "alojamiento",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "clima",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "actividades",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "cambio",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          }
+        ],
+        "observaciones": [
+          "Las búsquedas no devolvieron ninguna fuente utilizable.",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+          "Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio.",
+          "Se pidieron precios de alojamiento pero los resultados encontrados no traen ningún precio."
+        ]
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:10.434-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "investigador",
+        "instruccion": "Rehacer con forzar=true: la búsqueda anterior no trajo precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+        "temas": [
+          "pasajes"
+        ],
+        "evaluacion": "R3/R5 NO se cumplen: Las búsquedas no devolvieron ninguna fuente utilizable. | Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no  | Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no  | Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no  | Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no  | Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no  | Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio. | Se pidieron precios de alojamiento pero los resultados encontrados no traen ningún precio. Se devuelve el trabajo al investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:14:10.444-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Rehacer con forzar=true: la búsqueda anterior no trajo precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+        "contenido": "## Hallazgos\n## Datos que faltan\n- pasajes: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente",
+        "fuentes": [],
+        "herramientas": [
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no está disponible.",
+            "timestamp": "2026-11-10T15:14:10.444-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 0,
+            "memoria": 0,
+            "web": 0,
+            "con_precios": false
+          }
+        ],
+        "observaciones": [
+          "Las búsquedas no devolvieron ninguna fuente utilizable.",
+          "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no "
+        ]
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:10.446-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "analista",
+        "instruccion": "Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto (opción económica; si no alcanza, una alternativa) con los precios de los hallazgos.",
+        "temas": [],
+        "evaluacion": "R1-R3 OK (hay datos con fuentes y precios). R4 pendiente: falta validar y calcular.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "analista",
+      "timestamp": "2026-11-10T15:14:10.455-03:00",
+      "detalle": {
+        "ronda": 3,
+        "instruccion": "Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto (opción económica; si no alcanza, una alternativa) con los precios de los hallazgos.",
+        "contenido": "## Validación\nVÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.\n## Presupuesto\nNo se puede calcular.\n## Conclusión\nFaltan precios.\n## Datos que faltan\n- precios de: pasaje, alojamiento, comida",
+        "fuentes": [],
+        "herramientas": [
+          "validar_viaje"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "validar_viaje",
+            "argumentos": {
+              "origen": "Mendoza",
+              "destino": "Bariloche",
+              "fecha_ida": "2027-01-10",
+              "fecha_vuelta": "2027-01-16",
+              "personas": 2,
+              "presupuesto": 800000.0,
+              "moneda": "ARS",
+              "dias_pedidos": 7
+            },
+            "resultado": "VÁLIDO: Mendoza → Bariloche, del 2027-01-10 al 2027-01-16 (7 días, 6 noches), 2 personas, presupuesto $ 800.000.",
+            "timestamp": "2026-11-10T15:14:10.455-03:00"
+          }
+        ],
+        "cobertura": [],
+        "observaciones": [
+          "El viaje es válido y hay presupuesto, pero no se calculó el presupuesto con éxito."
+        ]
+      }
+    },
+    {
+      "n": 7,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:14:10.457-03:00",
+      "detalle": {
+        "paso": 4,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R5: la búsqueda web falló y no se puede resolver; se finaliza avisando qué faltó.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 8,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:14:10.458-03:00",
+      "detalle": {
+        "respuesta": "## Lo que encontramos\n- No encontramos datos.\n\n## Lo que no pudimos averiguar\n- pasajes: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- alojamiento: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- clima: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- actividades: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- cambio: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- precios de: pasaje, alojamiento, comida\n\n## Fuentes\n- No se usaron fuentes externas."
+      }
+    }
+  ],
+  "respuesta_final": "## Lo que encontramos\n- No encontramos datos.\n\n## Lo que no pudimos averiguar\n- pasajes: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- alojamiento: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- clima: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- actividades: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- cambio: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No invente\n- precios de: pasaje, alojamiento, comida\n\n## Fuentes\n- No se usaron fuentes externas.",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → investigador → supervisor → analista → supervisor → sintesis",
+    "pasos_supervisor": 4,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 2,
+      "analista": 1
+    },
+    "refinamientos": 1,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 5,
+      "buscar_en_web": 6,
+      "validar_viaje": 1
+    },
+    "busquedas_web": 6,
+    "fuentes_memoria": 0,
+    "fuentes_web": 0,
+    "observaciones": [
+      "Las búsquedas no devolvieron ninguna fuente utilizable.",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio.",
+      "Se pidieron precios de alojamiento pero los resultados encontrados no traen ningún precio.",
+      "Las búsquedas no devolvieron ninguna fuente utilizable.",
+      "Falló una búsqueda: ERROR al buscar en la web (Tavily): ConnectionError: Tavily no respondió (simulado): 503 Service Unavailable. No inventes datos: informá que la búsqueda web no ",
+      "El viaje es válido y hay presupuesto, pero no se calculó el presupuesto con éxito."
+    ],
+    "validacion": "aprobada",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {},
+  "archivo": "traces\\7_tavily_falla_mock_20261110-151410.json"
+}

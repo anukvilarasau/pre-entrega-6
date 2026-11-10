@@ -1,0 +1,224 @@
+{
+  "pregunta": "¿Cómo llegar de Mendoza a Bariloche y cuánto sale el pasaje?",
+  "escenario": "6_refinamiento",
+  "modo": "mock",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:06:22.032-03:00",
+  "fin": "2026-11-10T15:06:22.092-03:00",
+  "duracion_s": 0.06,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": null,
+    "fecha_vuelta": null,
+    "dias": null,
+    "personas": null,
+    "presupuesto": null,
+    "moneda": null,
+    "supuestos": []
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:06:22.037-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "supuestos": []
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Averiguá cómo llegar y cuánto sale el pasaje.\n- pasajes: como llegar de Mendoza a Bariloche",
+        "temas": [
+          "pasajes"
+        ],
+        "evaluacion": "R1: todavía no hay datos. Empieza el investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:06:22.074-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Averiguá cómo llegar y cuánto sale el pasaje.\n- pasajes: como llegar de Mendoza a Bariloche",
+        "contenido": "## Hallazgos\n### Pasajes\n- Cómo llegar a Bariloche desde Mendoza: Desde Mendoza se puede llegar a Bariloche en avión (con escala en Buenos Aires o vuelos directos de temporada) o por tierra, por la ruta 40, en micro o en auto. En temporada alta (enero) conviene reservar con anticipación porque la demanda es alta. — [https://guia.mock-viajes.example/como-llegar-a-bariloche] (web)\n## Datos que faltan\n- ninguno",
+        "fuentes": [
+          {
+            "ref": "https://guia.mock-viajes.example/como-llegar-a-bariloche",
+            "origen": "web",
+            "tema": "pasajes",
+            "url": "https://guia.mock-viajes.example/como-llegar-a-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria",
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "como llegar de Mendoza a Bariloche",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "SIN RESULTADOS EN MEMORIA para 'como llegar de Mendoza a Bariloche' [destino=Bariloche, tema=pasajes]: 2 datos recientes pero poco parecido a la consulta. Buscá en la web con buscar_en_web.",
+            "timestamp": "2026-11-10T15:06:22.073-03:00"
+          },
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "como llegar de Mendoza a Bariloche",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": false
+            },
+            "resultado": "WEB (Tavily) — 1 resultado para 'como llegar de Mendoza a Bariloche' (guardados en memoria):\n\n[https://guia.mock-viajes.example/como-llegar-a-bariloche] origen=web | tema=pasajes | guardado como mem-c18a9b95db78\nCómo llegar a Bariloche desde Mendoza\nDesde Mendoza se puede llegar a Bariloche en avión (con escala en Buenos Aires o vuelos directos de temporada) o por tierra, por la ruta 40, en micro o en auto. En temporada alta (enero) conviene reservar con anticipación porque la demanda es alta.",
+            "timestamp": "2026-11-10T15:06:22.073-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 1,
+            "memoria": 0,
+            "web": 1,
+            "con_precios": false
+          }
+        ],
+        "observaciones": [
+          "Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio."
+        ]
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:06:22.076-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "investigador",
+        "instruccion": "Rehacer con forzar=true: la búsqueda anterior no trajo precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+        "temas": [
+          "pasajes"
+        ],
+        "evaluacion": "R3/R5 NO se cumplen: Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio. Se devuelve el trabajo al investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:06:22.088-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Rehacer con forzar=true: la búsqueda anterior no trajo precios.\n- pasajes: precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+        "contenido": "## Hallazgos\n### Pasajes\n- Vuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 por persona comprando con 60 días de anticipación. Duración: 5 a 7 horas con la escala. — [mem-df9efd11b444] (memoria)\n- Micro directo Mendoza - Bariloche (aprox. 18 horas, por la ruta 40). Semicama: $70.000 por persona por tramo; cama ejecutivo: $95.000 por persona por tramo. Ida y vuelta en semicama: $140.000 por persona. Se paga en pesos con tarjeta de débito o crédito. — [mem-ae9aa9bf303f] (memoria)\n## Datos que faltan\n- ninguno",
+        "fuentes": [
+          {
+            "ref": "mem-df9efd11b444",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://vuelos.mock-viajes.example/mendoza-bariloche-enero",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-ae9aa9bf303f",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://micros.mock-viajes.example/mendoza-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_web"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_web",
+            "argumentos": {
+              "consulta": "precio pasaje vuelo micro Mendoza Bariloche ida y vuelta",
+              "destino": "Bariloche",
+              "tema": "pasajes",
+              "forzar": true
+            },
+            "resultado": "NO SE BUSCÓ EN LA WEB: la memoria ya tiene datos vigentes CON PRECIOS sobre esto: forzar=true no aplica, usá estos.\n\nMEMORIA — 2 datos vigentes para 'precio pasaje vuelo micro Mendoza Bariloche ida y vuelta':\n\n[mem-df9efd11b444] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://vuelos.mock-viajes.example/mendoza-bariloche-enero\nVuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 ...",
+            "timestamp": "2026-11-10T15:06:22.087-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 2,
+            "memoria": 2,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:06:22.090-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1-R6 OK: hay datos con fuentes.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:06:22.091-03:00",
+      "detalle": {
+        "respuesta": "## Lo que encontramos\n- Cómo llegar a Bariloche desde Mendoza: Desde Mendoza se puede llegar a Bariloche en avión (con escala en Buenos Aires o vuelos directos de temporada) o por tierra, por la ruta 40, en micro o en auto. En temporada alta (enero) conviene reservar con anticipación porque la demanda es alta. — [https://guia.mock-viajes.example/como-llegar-a-bariloche] (web)\n- Vuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 por persona comprando con 60 días de anticipación. Duración: 5 a 7 horas con la escala. — [mem-df9efd11b444] (memoria)\n- Micro directo Mendoza - Bariloche (aprox. 18 horas, por la ruta 40). Semicama: $70.000 por persona por tramo; cama ejecutivo: $95.000 por persona por tramo. Ida y vuelta en semicama: $140.000 por persona. Se paga en pesos con tarjeta de débito o crédito. — [mem-ae9aa9bf303f] (memoria)\n\n## Fuentes\n- [web] https://guia.mock-viajes.example/como-llegar-a-bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-df9efd11b444 → https://vuelos.mock-viajes.example/mendoza-bariloche-enero — pasajes, buscado el 2026-11-10\n- [memoria] mem-ae9aa9bf303f → https://micros.mock-viajes.example/mendoza-bariloche — pasajes, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Lo que encontramos\n- Cómo llegar a Bariloche desde Mendoza: Desde Mendoza se puede llegar a Bariloche en avión (con escala en Buenos Aires o vuelos directos de temporada) o por tierra, por la ruta 40, en micro o en auto. En temporada alta (enero) conviene reservar con anticipación porque la demanda es alta. — [https://guia.mock-viajes.example/como-llegar-a-bariloche] (web)\n- Vuelos Mendoza - San Carlos de Bariloche para enero 2027, con escala en Buenos Aires (Aeroparque). Tarifa promedio ida y vuelta: $480.000 por persona con equipaje de mano, pagando con tarjeta en pesos. Tarifas promocionales desde $390.000 por persona comprando con 60 días de anticipación. Duración: 5 a 7 horas con la escala. — [mem-df9efd11b444] (memoria)\n- Micro directo Mendoza - Bariloche (aprox. 18 horas, por la ruta 40). Semicama: $70.000 por persona por tramo; cama ejecutivo: $95.000 por persona por tramo. Ida y vuelta en semicama: $140.000 por persona. Se paga en pesos con tarjeta de débito o crédito. — [mem-ae9aa9bf303f] (memoria)\n\n## Fuentes\n- [web] https://guia.mock-viajes.example/como-llegar-a-bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-df9efd11b444 → https://vuelos.mock-viajes.example/mendoza-bariloche-enero — pasajes, buscado el 2026-11-10\n- [memoria] mem-ae9aa9bf303f → https://micros.mock-viajes.example/mendoza-bariloche — pasajes, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 3,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 2
+    },
+    "refinamientos": 1,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 1,
+      "buscar_en_web": 2
+    },
+    "busquedas_web": 1,
+    "fuentes_memoria": 2,
+    "fuentes_web": 1,
+    "observaciones": [
+      "Se pidieron precios de pasajes pero los resultados encontrados no traen ningún precio."
+    ],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {},
+  "archivo": "traces\\6_refinamiento_mock_20261110-150622.json"
+}

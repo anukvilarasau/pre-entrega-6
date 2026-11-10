@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Any
 
 import config
-from state import Aporte, DecisionRegistrada, PedidoViaje, ahora
+from state import Aporte, DecisionRegistrada, PedidoViaje, ahora, validacion_del_pedido
 
 LARGO_LOG: int = 300  # caracteres de cada resultado de herramienta en el .log
 
@@ -93,7 +93,6 @@ class Traza:
         web_real = [ll for ll in llamadas if ll.herramienta == "buscar_en_web"
                     and not ll.resultado.startswith("NO SE BUSCÓ EN LA WEB")]
         fuentes = {(f.ref, f.origen) for a in aportes if a.agente == "investigador" for f in a.fuentes}
-        validaciones = [ll.resultado for ll in llamadas if ll.herramienta == "validar_viaje"]
         calculos = [ll.resultado for ll in llamadas if ll.herramienta == "calcular_presupuesto"]
         delegaciones = [d.siguiente for d in decisiones if d.siguiente != "FINALIZAR"]
         veces = Counter(delegaciones)
@@ -108,8 +107,9 @@ class Traza:
             "fuentes_memoria": sum(1 for _, o in fuentes if o == "memoria"),
             "fuentes_web": sum(1 for _, o in fuentes if o == "web"),
             "observaciones": [o for a in aportes for o in a.observaciones],
-            "validacion": ("aprobada" if any(v.startswith("VÁLIDO") for v in validaciones)
-                           else "rechazada" if validaciones else "no se validó"),
+            # La validación del pedido REAL del usuario (no de fechas que el analista haya supuesto).
+            "validacion": {"valido": "aprobada", "invalido": "rechazada", None: "no se validó"}[
+                validacion_del_pedido(llamadas, ultimo.get("pedido"))],
             "presupuesto_entra": (None if not calculos else "NO ENTRA" not in calculos[0]),
             "alternativa_calculada": len(calculos) > 1,
         }

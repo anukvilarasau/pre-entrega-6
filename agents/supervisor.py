@@ -37,6 +37,7 @@ from state import (
     OrquestadorState,
     PedidoViaje,
     aportes_de,
+    validacion_del_pedido,
     validar_actualizacion,
 )
 
@@ -85,6 +86,8 @@ Reglas:
 - No repitas un pedido que ya salió bien. Como máximo UNA ronda de corrección por especialista: después, seguí con lo \
 que hay (el sistema no te va a dejar mandar al investigador una tercera vez).
 - Si hay presupuesto, NO se puede finalizar sin que el analista haya calculado (el sistema lo impide).
+- Si las fechas del pedido son imposibles (o validar_viaje dio INVÁLIDO), NO pidas suponer otras fechas: con la \
+validación alcanza; FINALIZÁ y la síntesis le pide al usuario que corrija.
 - Pedí la cotización del dólar oficial, tarjeta y MEP (no el blue).
 - Si un problema no se puede resolver (por ejemplo, la búsqueda web está caída y ya se reintentó), FINALIZÁ igual: \
 la síntesis le va a avisar al usuario qué faltó.
@@ -145,7 +148,7 @@ def mensaje_para_supervisor(state: OrquestadorState, pedido: PedidoViaje) -> str
         bloques.append("APORTES HASTA AHORA:\n\n" + "\n\n".join(resumen_aporte(i, a) for i, a in enumerate(aportes, 1)))
     else:
         bloques.append("APORTES HASTA AHORA: ninguno.")
-    bloques.append("¿Quién trabaja ahora, o FINALIZAR?")
+    bloques.append("Dada la conversación actual, ¿quién debe intervenir ahora o es momento de finalizar?")
     return "\n\n".join(bloques)
 
 
@@ -177,6 +180,7 @@ def aplicar_reglas_duras(
     2. FINALIZAR sin ningún aporte → investigador.
     3. FINALIZAR con presupuesto, datos con fuente y sin cálculo → analista (R4 por código).
     4. Investigador por tercera vez → analista (si hay presupuesto) o FINALIZAR (anti-bucle).
+    5. Analista otra vez con un pedido que validar_viaje ya rechazó → FINALIZAR (no se suponen fechas).
     """
     sin_investigacion = not aportes_de(state, "investigador")
     if decision.siguiente == "analista" and sin_investigacion:
@@ -198,6 +202,13 @@ def aplicar_reglas_duras(
     instruccion_analista = ("Validá el viaje con los DATOS DEL PEDIDO y calculá el presupuesto con los precios de "
                             "referencia de los hallazgos (opción económica; si no alcanza, una alternativa). Si un "
                             "precio es un rango o un valor 'desde', usá un valor representativo y aclaralo.")
+
+    # Pedido imposible (validar_viaje rechazó las fechas DEL USUARIO): no se manda de nuevo al analista ni se
+    # suponen otras fechas; se finaliza para que la síntesis le pida al usuario que corrija (escenario 4 real).
+    llamadas_analista = [ll for a in aportes_de(state, "analista") for ll in a.llamadas]
+    if decision.siguiente == "analista" and validacion_del_pedido(llamadas_analista, pedido) == "invalido":
+        return DecisionSupervisor(evaluacion=decision.evaluacion, siguiente="FINALIZAR"), \
+            "regla dura: validar_viaje rechazó el pedido del usuario; no se recalcula con fechas supuestas → FINALIZAR"
 
     # R4 por código: con presupuesto y datos con fuente, no se termina sin el cálculo del analista.
     if decision.siguiente == "FINALIZAR" and hay_presupuesto and sin_analisis and con_fuentes:

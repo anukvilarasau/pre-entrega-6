@@ -1,0 +1,246 @@
+{
+  "pregunta": "¿Cómo llegar de Mendoza a Bariloche y cuánto sale el pasaje?",
+  "escenario": "6_refinamiento",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 6,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:05:08.950-03:00",
+  "fin": "2026-11-10T15:05:42.951-03:00",
+  "duracion_s": 34.0,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": null,
+    "fecha_vuelta": null,
+    "dias": null,
+    "personas": null,
+    "presupuesto": null,
+    "moneda": null,
+    "supuestos": []
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:05:12.783-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "supuestos": []
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá opciones para viajar de Mendoza a Bariloche (Argentina) y precios de referencia de pasajes: colectivo de larga distancia (empresas, duración y rango de precio), avión (aerolíneas, vuelos directos o con escala, rango de precio desde) y, si corresponde, auto (distancia y tiempo estimado). Pedí precios de referencia (rangos, valores \"desde\" o promedios), no exactos, ya que no hay fechas definidas. Incluí la URL o la fuente de cada dato. Además, no hay fechas ni cantidad de personas informadas: indicá que el precio es por persona y por tramo.",
+        "temas": [
+          "pasajes"
+        ],
+        "evaluacion": "Todavía no hay aportes. R1: la pregunta pide cómo llegar y cuánto sale el pasaje, así que falta cubrir pasajes (opciones de transporte y precios de referencia). R2 y R3 aún no se pueden evaluar. R4 no aplica, porque no hay presupuesto ni pedido de cuentas. R5 y R6 no aplican todavía. Hay que llamar al investigador solo para pasajes.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:05:21.175-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá opciones para viajar de Mendoza a Bariloche (Argentina) y precios de referencia de pasajes: colectivo de larga distancia (empresas, duración y rango de precio), avión (aerolíneas, vuelos directos o con escala, rango de precio desde) y, si corresponde, auto (distancia y tiempo estimado). Pedí precios de referencia (rangos, valores \"desde\" o promedios), no exactos, ya que no hay fechas definidas. Incluí la URL o la fuente de cada dato. Además, no hay fechas ni cantidad de personas informadas: indicá que el precio es por persona y por tramo.",
+        "contenido": "## Hallazgos\n\n### Colectivo (micro) de larga distancia\n- Mendoza a San Carlos de Bariloche: precio desde ARS 135.100 y promedio ARS 193.018. La fuente no aclara la unidad (si es por persona o por tramo), así que figura como \"unidad no especificada\". Duración aproximada: 19h 21m. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (web, vía memoria [mem-ea5fcf2bf407])\n- Mismo recorrido, otra fuente: micro de 13 a 15 horas, desde USD 24 hasta USD 38. La fuente no indica si es por persona o por tramo, ni la empresa. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n- Empresas: no se encontraron nombres de empresas de micro en los datos disponibles.\n\n### Avión\n- Mendoza (MDZ) a Bariloche (BRC): vuelos ida y vuelta entre ARS 199.202 y ARS 385.415, con promedio de ARS 279.875 en los últimos 12 meses. Unidad: ida y vuelta, por persona según la fuente, aunque no lo aclara de forma explícita. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web, vía memoria [mem-a2293a0a5065])\n- Precio más bajo reciente: ARS 135.100 ... (ver nota) — Kayak informa ARS 135.585 con JetSMART en los últimos 5 días. Unidad no especificada en la fuente. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web, vía memoria [mem-a2293a0a5065])\n- Vuelos directos: en promedio ARS 245.624 ida y vuelta. Vuelos con escala (conexión en Córdoba): en promedio ARS 256.723 ida y vuelta. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web, vía memoria [mem-a2293a0a5065])\n- Desde USD 94 hasta USD 170 por vuelo, con duración de 2,3 a 2,8 horas. Unidad no especificada. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n- Aerolíneas mencionadas: JetSMART. Otras aerolíneas: no se encontraron datos.\n\n### Auto\n- Distancia: 942 km. Tiempo estimado: 10 a 13 horas. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n- Costo de referencia (combustible y peajes no incluidos en la fuente): desde USD 75 hasta USD 94. Unidad no especificada. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n## Datos que faltan\n- Unidad (por persona o por tramo) de los precios de micro y avión en las fuentes; según el pedido, se toman como referencia por persona y por tramo, pero no está confirmado.\n- Moneda y tipo de cambio: las fuentes mezclan ARS y USD sin indicar la cotización usada. Hace falta una búsqueda de cambio para convertirlos.\n- Nombres de empresas de micro y horarios.\n- Precios de referencia para una fecha concreta: no hay fechas definidas, así que los valores son rangos orientativos.",
+        "fuentes": [
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f103fb9db68b",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://maps.com.ar/como-ir/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-a2293a0a5065",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes Mendoza a Bariloche colectivo y avión precio por persona por tramo",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'pasajes Mendoza a Bariloche colectivo y avión precio por persona por tramo':\n\n[mem-ea5fcf2bf407] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche\n### ¿Cuánto sale un pasaje de micro a San Carlos de Bariloche desde Mendoza?\n:   El precio del pasaje de micro de Mendoza a San Carlos de Bariloche arranca en ARS 135.100, llegando a un precio promedio de ARS 193.018. Para conseguir las tarifas más económicas, te recomendamos reservar los pasajes con anticipación. Los precios su...",
+            "timestamp": "2026-11-10T15:05:21.174-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:05:24.110-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "investigador",
+        "instruccion": "Buscá la cotización del dólar en Argentina hoy: oficial, tarjeta y MEP (no el blue), con fuente (URL o mem-...). Si no hay datos actuales, indicá la fecha de cada dato. No busques de nuevo pasajes: ya están cubiertos.",
+        "temas": [
+          "otro"
+        ],
+        "evaluacion": "R1 Cobertura: la pregunta pide cómo llegar y cuánto sale el pasaje. Pasajes cubiertos (micro, avión, auto) con datos de referencia. Falta cotización del dólar (hay precios en USD: maps.com.ar), así que hace falta el tipo de cambio oficial, tarjeta y MEP. R2 Fuentes: todos los aportes tienen URL o mem-. R3 Precios: pasajes y alojamiento tienen montos; pasajes sí, alojamiento no aplica por ahora porque la pregunta es de pasajes. R4: no hay presupuesto, no corresponde analista. R5: sin observaciones por código. R6: hay inconsistencias de unidad (persona vs tramo, ida vuelta vs ida) y una mezcla ARS/USD, que conviene aclarar con el tipo de cambio. Falta cotización del dólar para cerrar la conversión.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:05:31.531-03:00",
+      "detalle": {
+        "ronda": 2,
+        "instruccion": "Buscá la cotización del dólar en Argentina hoy: oficial, tarjeta y MEP (no el blue), con fuente (URL o mem-...). Si no hay datos actuales, indicá la fecha de cada dato. No busques de nuevo pasajes: ya están cubiertos.",
+        "contenido": "## Hallazgos\n### Cambio (cotización del dólar)\n- Dólar oficial: compra $1.520 / venta $1.570 ARS por USD. Fuente con fecha \"viernes 6 de noviembre\" (sin año en el extracto) — [https://www.dolarito.ar] (memoria, [mem-13d552ddd1f0])\n- Dólar oficial: compra $1.520 / venta $1.570 ARS por USD. Sin fecha en el extracto — [https://pagliaccio.com.ar/dolarhoy] (memoria, [mem-6a10ac52826e])\n- Dólar MEP: compra $1.539,27 / venta $1.539,72 ARS por USD. Fecha indicada: viernes 9 de octubre de 2026, 18:01 (Argentina) — [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n- Dólar MEP (referencia adicional): compra $1.539,27 / venta $1.539,72 ARS por USD, fecha 9 de octubre de 2026 — mismo registro [mem-685deaa71b46]. El extracto de Pagliaccio se corta antes de su MEP, así que no se tomó de ahí.\n- Dólar tarjeta: $2.008,20 ARS por USD (el extracto no aclara si es compra o venta; el spread indicado es $54,05). Fecha indicada: viernes 9 de octubre de 2026, 18:00 (Argentina) — [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n\n## Datos que faltan\n- Las fechas de los datos no coinciden: infodolar tiene 9 de octubre de 2026, dolarito tiene 6 de noviembre. Ambas búsquedas figuran en memoria como hechas hoy (2026-11-10), por lo que no puedo confirmar cuál es la cotización actual. Conviene verificar en la web antes de usar estos valores.\n- No hay dato de tarjeta confirmado en las fuentes de dolarito o Pagliaccio, y no se pudo confirmar si el valor de tarjeta de infodolar es compra o venta.\n- No se buscó en la web en esta ocasión porque la memoria ya tenía datos de los tres tipos de cambio.",
+        "fuentes": [
+          {
+            "ref": "mem-685deaa71b46",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-6a10ac52826e",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://pagliaccio.com.ar/dolarhoy",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-13d552ddd1f0",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.dolarito.ar",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial, tarjeta y MEP hoy Argentina",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'cotización dólar oficial, tarjeta y MEP hoy Argentina':\n\n[mem-685deaa71b46] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://www.infodolar.com\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue | $ 1.520,00  = $ 0,00 | $ 1.540,00  = $ 0,00 | = 0,00 % | $ 20,00 | viernes, 9 de octubre de 2026 18:00 Argentina |\n| Dólar MEP | $ 1.539,27  -$ 1,06 | $ 1.539,72  -$ 1,61 | -0,10 % | $ 0,45 | viernes, 9 de octubre de 2026 18:01 Argentina |\n| Dólar FiwindFiwind | $ 1.520,46  -$ 5,26 | $ 1.545,54  -$ 7,34 | -0,47 % ...",
+            "timestamp": "2026-11-10T15:05:31.530-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "cambio",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": [
+          "Se pidió el tema 'otro' pero no se hizo ninguna búsqueda sobre él."
+        ]
+      }
+    },
+    {
+      "n": 5,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:05:34.424-03:00",
+      "detalle": {
+        "paso": 3,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "R1 Cobertura: la pregunta pide cómo llegar y cuánto sale el pasaje. Hay pasajes (micro, avión, auto) y cambio. Cubierto. R2 Fuentes: todos los aportes tienen URL o mem-. Cumplido. R3 Precios: pasajes y alojamiento; hay precios de referencia de pasajes en ARS y USD. Cumplido para pasajes. No hay presupuesto, así que alojamiento no es necesario. R4 Cálculo: no hay presupuesto ni se pide calcular, no aplica. R5 Observaciones: el aporte #2 tiene observación de tema 'otro' pedido sin búsqueda; ese tema no corresponde a la pregunta (era un pedido erróneo) y no afecta la respuesta. Aporte #1 sin observaciones. R6 Coherencia: hay contradicciones de moneda (ARS vs USD en micro y avión) y fechas del dólar inconsistentes (oct 2026 vs nov 2026). La síntesis debe aclararlo como dato de referencia. Ya hubo ronda de corrección en el investigador para cambio, así que no conviene repetirla. Se puede finalizar avisando las incertidumbres.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 6,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:05:42.951-03:00",
+      "detalle": {
+        "respuesta": "## Opciones para ir de Mendoza a Bariloche\n\n**Avión (la opción más rápida)**\n- Vuelo directo de unas 2,3 a 2,8 horas. Aerolínea mencionada: JetSMART. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n- Ida y vuelta entre ARS 199.202 y ARS 385.415, con promedio de ARS 279.875 en los últimos 12 meses. Un precio reciente de JetSMART aparece en ARS 135.585 en los últimos 5 días. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web, vía memoria [mem-a2293a0a5065])\n- Vuelos directos: promedio de ARS 245.624 ida y vuelta. Con escala en Córdoba: promedio de ARS 256.723 ida y vuelta. [mismo enlace de Kayak]\n- Otro rango de la fuente de maps.com.ar: entre USD 94 y USD 170 por vuelo. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n**Micro (la más barata, pero muy larga)**\n- Duración de 13 a 19 horas según la fuente.\n- Precio desde ARS 135.100, con promedio de ARS 193.018. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (web, vía memoria [mem-ea5fcf2bf407])\n- Otra fuente da entre USD 24 y USD 38. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n**Auto**\n- Distancia de 942 km, con 10 a 13 horas de manejo.\n- Costo de referencia desde USD 75 hasta USD 94, sin combustible ni peajes. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n## Cuánto sale el pasaje\n\nLas fuentes mezclan pesos y dólares y no aclaran si los precios son por persona o por tramo, así que no conviene comparar los números directamente. Como referencia, el avión ida y vuelta ronda los ARS 200.000 a 280.000 en los datos de Kayak, y el micro, los ARS 135.000 a 193.000 según Plataforma 10.\n\n## Cotización del dólar\n\nLos valores que encontramos son estos:\n- Dólar oficial: compra $1.520 / venta $1.570. [https://www.dolarito.ar] (memoria, [mem-13d552ddd1f0]) y [https://pagliaccio.com.ar/dolarhoy] (memoria, [mem-6a10ac52826e])\n- Dólar MEP: compra $1.539,27 / venta $1.539,72, del 9 de octubre de 2026. [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n- Dólar tarjeta: $2.008,20, sin aclarar si es compra o venta. [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n\nLas fechas no coinciden entre fuentes, así que conviene verificar la cotización del día antes de convertir precios.\n\n## Lo que no pudimos averiguar\n\n- Si los precios son por persona o por tramo, en cada fuente.\n- Precios para una fecha concreta. Los valores son rangos orientativos.\n- Nombres de empresas de micro y horarios.\n- Una cotización del dólar vigente y confirmada.\n\nSi me decís la fecha aproximada, la cantidad de personas y si preferís avión, micro o auto, puedo buscar precios más precisos.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f103fb9db68b → https://maps.com.ar/como-ir/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-a2293a0a5065 → https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-10\n- [memoria] mem-685deaa71b46 → https://www.infodolar.com — cambio, buscado el 2026-11-10\n- [memoria] mem-6a10ac52826e → https://pagliaccio.com.ar/dolarhoy — cambio, buscado el 2026-11-10\n- [memoria] mem-13d552ddd1f0 → https://www.dolarito.ar — cambio, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "## Opciones para ir de Mendoza a Bariloche\n\n**Avión (la opción más rápida)**\n- Vuelo directo de unas 2,3 a 2,8 horas. Aerolínea mencionada: JetSMART. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n- Ida y vuelta entre ARS 199.202 y ARS 385.415, con promedio de ARS 279.875 en los últimos 12 meses. Un precio reciente de JetSMART aparece en ARS 135.585 en los últimos 5 días. [https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC] (web, vía memoria [mem-a2293a0a5065])\n- Vuelos directos: promedio de ARS 245.624 ida y vuelta. Con escala en Córdoba: promedio de ARS 256.723 ida y vuelta. [mismo enlace de Kayak]\n- Otro rango de la fuente de maps.com.ar: entre USD 94 y USD 170 por vuelo. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n**Micro (la más barata, pero muy larga)**\n- Duración de 13 a 19 horas según la fuente.\n- Precio desde ARS 135.100, con promedio de ARS 193.018. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (web, vía memoria [mem-ea5fcf2bf407])\n- Otra fuente da entre USD 24 y USD 38. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n**Auto**\n- Distancia de 942 km, con 10 a 13 horas de manejo.\n- Costo de referencia desde USD 75 hasta USD 94, sin combustible ni peajes. [https://maps.com.ar/como-ir/mendoza/bariloche] (web, vía memoria [mem-f103fb9db68b])\n\n## Cuánto sale el pasaje\n\nLas fuentes mezclan pesos y dólares y no aclaran si los precios son por persona o por tramo, así que no conviene comparar los números directamente. Como referencia, el avión ida y vuelta ronda los ARS 200.000 a 280.000 en los datos de Kayak, y el micro, los ARS 135.000 a 193.000 según Plataforma 10.\n\n## Cotización del dólar\n\nLos valores que encontramos son estos:\n- Dólar oficial: compra $1.520 / venta $1.570. [https://www.dolarito.ar] (memoria, [mem-13d552ddd1f0]) y [https://pagliaccio.com.ar/dolarhoy] (memoria, [mem-6a10ac52826e])\n- Dólar MEP: compra $1.539,27 / venta $1.539,72, del 9 de octubre de 2026. [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n- Dólar tarjeta: $2.008,20, sin aclarar si es compra o venta. [https://www.infodolar.com] (memoria, [mem-685deaa71b46])\n\nLas fechas no coinciden entre fuentes, así que conviene verificar la cotización del día antes de convertir precios.\n\n## Lo que no pudimos averiguar\n\n- Si los precios son por persona o por tramo, en cada fuente.\n- Precios para una fecha concreta. Los valores son rangos orientativos.\n- Nombres de empresas de micro y horarios.\n- Una cotización del dólar vigente y confirmada.\n\nSi me decís la fecha aproximada, la cantidad de personas y si preferís avión, micro o auto, puedo buscar precios más precisos.\n\n## Fuentes\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f103fb9db68b → https://maps.com.ar/como-ir/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-a2293a0a5065 → https://www.kayak.com.ar/vuelos/Mendoza-El-Plumerillo-MDZ/Bariloche-Teniente-Luis-Candelaria-BRC — pasajes, buscado el 2026-11-10\n- [memoria] mem-685deaa71b46 → https://www.infodolar.com — cambio, buscado el 2026-11-10\n- [memoria] mem-6a10ac52826e → https://pagliaccio.com.ar/dolarhoy — cambio, buscado el 2026-11-10\n- [memoria] mem-13d552ddd1f0 → https://www.dolarito.ar — cambio, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 3,
+    "decision_forzada_por_freno": false,
+    "delegaciones": {
+      "investigador": 2
+    },
+    "refinamientos": 1,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 2
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 6,
+    "fuentes_web": 0,
+    "observaciones": [
+      "Se pidió el tema 'otro' pero no se hizo ninguna búsqueda sobre él."
+    ],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "output_token_details": {
+        "reasoning": 1357
+      },
+      "input_token_details": {
+        "ephemeral_5m_input_tokens": 0,
+        "cache_creation": 0,
+        "ephemeral_1h_input_tokens": 0,
+        "cache_read": 0
+      },
+      "total_tokens": 36092,
+      "output_tokens": 6694,
+      "input_tokens": 29398
+    }
+  },
+  "archivo": "traces\\6_refinamiento_real_20261110-150508.json"
+}

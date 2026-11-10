@@ -30,7 +30,15 @@ from langgraph.prebuilt import create_react_agent
 
 import config
 from agents.common import NodoAsync, correr_react, extraer_llamadas, respuesta_final, resultados
-from state import Aporte, OrquestadorState, PedidoViaje, aportes_de, contexto_especialista, validar_actualizacion
+from state import (
+    Aporte,
+    OrquestadorState,
+    PedidoViaje,
+    aportes_de,
+    contexto_especialista,
+    validacion_del_pedido,
+    validar_actualizacion,
+)
 
 log = logging.getLogger(__name__)
 
@@ -39,8 +47,9 @@ DATOS DEL PEDIDO y los HALLAZGOS DEL INVESTIGADOR que te pasan, y usás tus herr
 Nunca hagas cuentas de cabeza: los números salen de las herramientas.
 
 Pasos:
-1. validar_viaje con los DATOS DEL PEDIDO (dias_pedidos = Días, si está). Si responde INVÁLIDO, informá los errores \
-y NO calcules el presupuesto.
+1. validar_viaje con los DATOS DEL PEDIDO, tal cual (dias_pedidos = Días, si está). Si responde INVÁLIDO, informá los \
+errores y TERMINÁ: no calcules el presupuesto y NO inventes ni supongas otras fechas, aunque la instrucción lo pida \
+(eso lo corrige el usuario).
 2. calcular_presupuesto, opción "económica", con los precios más baratos razonables de los hallazgos. Usá las \
 noches que devolvió validar_viaje. Respetá las unidades:
    - pasaje: precio POR PERSONA; tramo="ida_y_vuelta" si el precio incluye los dos viajes, "por_tramo" si es solo ida;
@@ -90,11 +99,12 @@ def chequear_analisis(pedido: PedidoViaje | None, contenido: str, mensajes: list
     if not hechos:
         return ["El analista no usó ninguna herramienta: sus números no están calculados."]
 
-    validaciones = resultados(mensajes, "validar_viaje")
     calculos = resultados(mensajes, "calcular_presupuesto")
-    if not validaciones:
+    llamadas, _, _ = extraer_llamadas(mensajes)
+    estado_validacion = validacion_del_pedido(llamadas, pedido)  # el pedido REAL, no fechas inventadas
+    if estado_validacion is None:
         observaciones.append("El analista no validó el viaje con validar_viaje.")
-    viaje_valido = any(str(m.content).startswith("VÁLIDO") for m in validaciones)
+    viaje_valido = estado_validacion == "valido"
     calculo_ok = any(str(m.content).startswith("PRESUPUESTO") for m in calculos)
 
     if viaje_valido and pedido is not None and pedido.presupuesto is not None and not calculo_ok:
@@ -103,7 +113,7 @@ def chequear_analisis(pedido: PedidoViaje | None, contenido: str, mensajes: list
         texto = str(m.content)
         if texto.startswith(("ERROR", "Error")):
             observaciones.append(f"Una herramienta del analista dio error ({m.name}): {texto[:160]}")
-    if calculo_ok and not any(s in contenido for s in ("ENTRA", "entra", "alcanza")):
+    if viaje_valido and calculo_ok and not any(s in contenido for s in ("ENTRA", "entra", "alcanza")):
         observaciones.append("La respuesta del analista no dice si el viaje entra o no en el presupuesto.")
     return observaciones
 

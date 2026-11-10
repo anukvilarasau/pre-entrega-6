@@ -1,90 +1,64 @@
 # PROGRESO — Pre-entrega 6 (Asesor de viajes multi-agente)
 
-> Última actualización: 5/11/2026, 21:40. Estado: **código completo; 120 tests OK; los 8 escenarios corridos en
-> mock y los 7 posibles en real (el 7 es solo mock), con sus trazas.**
-> Faltan: el notebook, el README, la prueba de instalación limpia, la revisión final y la subida a GitHub.
+> **Estado: TERMINADA y subida a GitHub. NO se entregó en la plataforma de Coderhouse** (eso lo hace Anuk).
+> Última actualización: 10/11/2026.
 
-## 1. Qué está terminado
+## Resumen final
 
-| Pieza | Archivo | Estado |
-|---|---|---|
-| Configuración (claves, rutas, 3 frenos, modo mock) | `config.py`, `.env.example`, `.gitignore` | ✅ |
-| Estado `OrquestadorState(MessagesState)` + Pydantic (`Fuente`, `Aporte`, `LlamadaHerramienta`, `PedidoViaje`, `DecisionSupervisor`, `DecisionRegistrada`) + `validar_actualizacion` (cada nodo escribe solo su parte) | `state.py` | ✅ |
-| Fábrica de LLM: Claude real o `LLMMock` (políticas por rol) | `llm.py`, `agents/mock.py` | ✅ |
-| Memoria ChromaDB (filtros: destino/tema + 7 días + distancia ≤ 0,55, calibrada con el modelo real) | `agents/memory.py` | ✅ |
-| Investigador: `buscar_en_memoria` + `buscar_en_web` (Tavily) + chequeo por código | `agents/research_tools.py`, `agents/research_agent.py`, `agents/common.py` | ✅ |
-| Analista: `validar_viaje` + `calcular_presupuesto` + chequeo por código | `agents/analyst_tools.py`, `agents/analyst_agent.py` | ✅ |
-| Supervisor: extrae el pedido, salida estructurada con `Literal`, rúbrica R1–R6, 4 reglas duras, freno de pasos, `ruta_supervisor` | `agents/supervisor.py` | ✅ |
-| Síntesis: fuentes y avisos armados por código + **chequeo de actividades repetidas** (pide una corrección) | `agents/synthesizer.py` | ✅ |
-| Grafo (`StateGraph` + `add_conditional_edges`) y `consultar()` | `graph.py` | ✅ |
-| Trazas `.json` + `.log` con métricas | `tracing.py` | ✅ |
-| CLI: `--mock`, `--chat`, `--max-pasos`, `--fallar-web`, `--mermaid`, `-v` | `main.py` | ✅ |
-| Corrida de los 8 escenarios + tabla `traces/resultados.md` armada desde las trazas | `escenarios.py` | ✅ |
-| Tests: **120 pasan en ~8 s, sin claves** | `tests/` | ✅ |
+- **Repo público:** https://github.com/anukvilarasau/pre-entrega-6
+- **Tests:** 128, todos pasan en ~10 s, sin claves (`python -m pytest -q`).
+- **Instalación desde cero:** probada en un venv nuevo con Python 3.12.10. `pip install -r requirements.txt` sin errores, `pip check` sin conflictos y los 128 tests pasan.
+- **Escenarios:** los 8 en mock y los 7 posibles en vivo (el 7, Tavily caído, es solo mock), con sus trazas en `traces/` y la tabla en `traces/resultados.md` y en el README (§9).
+- **`demo.ipynb`:** ejecutado con salidas (8 celdas de código, 0 errores). Incluye la pregunta de demo en mock y en vivo, la memoria y el freno.
+- **README:** diagrama Mermaid, por qué la topología jerárquica, conflictos entre agentes, contaminación de contexto, Tavily, ChromaDB vs. Pinecone, `langchain-tavily` vs. `TavilySearchResults`, `create_react_agent`, escenarios (vivo y mock), lo aprendido de las corridas reales, tabla de criterios e instalación paso a paso.
 
-Para retomar:
-- `.venv\Scripts\python.exe -m pytest -q` → tiene que dar 120 passed.
-- `.venv\Scripts\python.exe escenarios.py --tabla` → rearma la tabla sin correr nada.
+## Resultados de los escenarios (código final, 10/11/2026)
 
-## 2. Los 3 detalles que pediste
-
-| Detalle | Estado | Verificación |
-|---|---|---|
-| Actividades repetidas entre días | ✅ | Mock: los días que sobran son "día libre". Real: chequeo por código en la síntesis; si detecta un lugar repetido, pide UNA corrección al LLM y, si sigue, avisa. **Se activó en vivo** en el escenario 5 (Cerro Catedral en los días 2 y 6) y la corrección quedó sin repeticiones. Tests en `test_synthesizer.py`. |
-| "Búsquedas web simuladas" en mock | ✅ | `Traza.etiqueta_busquedas()`. |
-| Plurales ("2 personas", "1 habitación") | ✅ | `cantidad()` en `state.py` + test. |
-
-## 3. Resultados de los escenarios (resumen; detalle en `traces/resultados.md`)
-
-| # | Escenario | Mock | Real |
+| # | Escenario | En vivo (Claude + Tavily) | Mock |
 |---|---|---|---|
-| 1 | Flujo completo | ✅ sup → inv → sup → ana → sup → síntesis; entra ($785.100) | ✅ con 1 refinamiento del investigador; "no alcanza" ($1,6 M–$1,9 M) y alternativa de 4 días que entra |
-| 2 | Solo clima | ✅ sin analista | ✅ sin analista, 23 s |
-| 3 | No alcanza ($400.000) | ✅ alternativa calculada | ✅ no entra; datos 100 % de memoria (0 búsquedas en Tavily) |
-| 4 | Fechas inválidas | ✅ rechazada | ✅ rechazada, sin itinerario |
-| 5 | Memoria (misma pregunta que el 1) | ✅ 6 de memoria · 0 de la web | ⚠️ **parcial:** 22 de memoria pero 3 búsquedas nuevas en Tavily, y el supervisor volvió al investigador después del analista |
-| 6 | Refinamiento | ✅ rechaza la búsqueda sin precios y la rehace | ⚠️ **no se dio en vivo:** la primera búsqueda ya trajo precios, así que no hubo nada que rechazar (la evidencia del refinamiento es la del mock y el refinamiento espontáneo de los escenarios 1, 3 y 4 reales) |
-| 7 | Tavily caído | ✅ termina y avisa qué faltó | — (solo mock) |
-| 8 | Freno (`max_pasos=2`) | ✅ forzado + aviso | ✅ forzado + aviso de información parcial |
+| 1 | Flujo completo (demo) | ✅ sup → inv → sup → ana → sup → síntesis (3 decisiones). **No alcanza: $826.720 (faltan $26.720).** 6 búsquedas en Tavily, 18 fuentes. | ✅ misma ruta; entra ($785.100) |
+| 2 | Solo clima | ✅ sin analista (2 decisiones) | ✅ |
+| 3 | No alcanza ($400.000) | ✅ no entra; todo de memoria | ✅ con alternativa |
+| 4 | Fechas inválidas | ✅ rechazada; pide corregir; sin itinerario | ✅ |
+| 5 | Memoria | ✅ **17 de memoria · 0 búsquedas en Tavily** | ✅ |
+| 6 | Refinamiento | ✅ el supervisor rechazó el aporte (faltaban precios de vuelos) y pidió rehacer; la 2.ª ronda no sumó datos (ver "Para revisar") | ✅ rechazo por búsqueda sin precios + nueva búsqueda |
+| 7 | Tavily caído | — (solo mock) | ✅ termina, no inventa presupuesto |
+| 8 | Freno (`max_pasos=2`) | ✅ FINALIZAR forzado + aviso de información parcial | ✅ |
 
-## 4. Qué falta, en orden
+## Qué se hizo en esta última etapa
 
-1. **Revisar el escenario 5 real:** por qué el investigador hizo 3 búsquedas en Tavily habiendo memoria (probablemente consultas con otras palabras o temas nuevos) y por qué el supervisor volvió al investigador después del analista. Decidir si se ajusta o si se documenta tal cual.
-2. **`demo.ipynb`** ejecutado con salidas visibles: el flujo de delegación de la pregunta de demo (mock y real).
-3. **README.md**:
-   - diagrama Mermaid (`python main.py --mermaid`);
-   - por qué la topología jerárquica y cómo se manejan los conflictos entre agentes;
-   - qué es Tavily y por qué la web; por qué ChromaDB y no Pinecone; `TavilySearch` en lugar de `TavilySearchResults`;
-   - `create_react_agent` deprecado (se usa igual porque lo nombra la consigna); async;
-   - instalación desde cero; tabla de escenarios (de `traces/resultados.md`); tabla de criterios;
-   - "lo que aprendimos de las corridas reales" (trazas `0_` y `0b_`).
-4. **`requirements.txt` final** (sumar `langchain` 1.4.7, que entra como dependencia de `langchain-tavily`) y **prueba en un venv limpio**.
-5. **Revisión punto por punto** contra `CONSIGNA.md`, los 4 criterios y `MEJORAS_TICHER.md`.
-6. **Repo público `pre-entrega-6`** en GitHub (anukvilarasau) y push. Antes, preguntar si se borra `EXTRA_MCP.md` del historial (entró en el primer commit). NO entregar en Coderhouse.
+1. **Historial de git reescrito:** `EXTRA_MCP.md` no aparece en ningún commit (verificado; respaldos y objetos viejos borrados). El archivo sigue en `../EXTRA_MCP.md`.
+2. **Arreglos del escenario 5** (con tests):
+   - `forzar` bloqueado por código si la memoria tiene precios vigentes;
+   - **cobertura por tema** calculada por código (`CoberturaTema`) que el supervisor ve como tabla;
+   - campo estructurado `DecisionSupervisor.temas` → `temas_pedidos`; el chequeo del investigador usa ese campo.
+3. **Arreglo del escenario 4** (salió en la corrida en vivo): el supervisor le pidió al analista "suponer" otra fecha y la métrica marcó la validación como aprobada.
+   - Ahora cuenta la **validación del pedido real** (`validacion_del_pedido`).
+   - Hay una regla dura nueva: "pedido inválido → FINALIZAR".
+   - El analista no puede inventar fechas.
+4. Todos los escenarios se volvieron a correr con el código final (en vivo y en mock). Las trazas de versiones anteriores quedaron en `traces/anteriores/`.
+5. `demo.ipynb`, README completo, `requirements.txt` final (se fijó `langchain==1.4.7`) y prueba en venv limpio.
+6. Revisión contra `CONSIGNA.md` (21 puntos verificados en el código) y contra `MEJORAS_TICHER.md` (tabla en el README, §11).
 
-## 5. Decisiones que tomamos
+## Decisiones tomadas sin consultar (según la consigna y MEJORAS_TICHER)
 
-- **Tema:** asesor de viajes (reemplazó a httpx/Pinecone). Pregunta de demo: Bariloche, 7 días, 2 personas, desde Mendoza, $800.000.
-- **Investigador:** memoria ChromaDB primero, Tavily solo si no hay datos vigentes (7 días). `langchain-tavily` (`TavilySearch`). Como máximo una búsqueda web por tema, 3 resultados por búsqueda.
-- **Embeddings:** en real, el ONNX por defecto de ChromaDB (sin torch); en mock y tests, `EmbeddingHash` (offline). La memoria compara contra "la consulta original + el título".
-- **Analista: A + B** (`validar_viaje` + `calcular_presupuesto`), sin LLM adentro. Con tarjeta se usa el dólar **tarjeta**; en efectivo, el **MEP** (o, si no está, el oficial). La unidad del alojamiento es obligatoria.
-- **Contexto acotado:** los especialistas reciben solo la instrucción + `DATOS DEL PEDIDO` (+ el texto final de los hallazgos, en el caso del analista). Nunca la pregunta ni el historial.
-- **`PedidoViaje`** lo extrae el supervisor una sola vez; no valida reglas de negocio.
-- **Fuentes y avisos los pone el código.** Solo se listan las fuentes citadas.
-- **Frenos:** `MAX_PASOS_SUPERVISOR` = 6 (la última decisión es FINALIZAR forzado), `RECURSION_LIMIT` = 20, `RECURSION_LIMIT_ESPECIALISTA` = 12.
-- **Reglas duras:** no se finaliza con presupuesto sin el analista; el investigador trabaja como máximo 2 veces; el analista no trabaja sin datos; no se finaliza sin aportes.
-- **`MAX_TOKENS_RESPUESTA` = 8000** (con 2500 se cortaban las respuestas).
-- **Se mantiene `create_react_agent`** porque lo nombra la consigna.
-- **Sin MCP:** `EXTRA_MCP.md` no es parte de esta entrega (se movió a `../EXTRA_MCP.md`).
+- **Frase literal de la consigna** en el mensaje del supervisor: "Dada la conversación actual, ¿quién debe intervenir ahora o es momento de finalizar?".
+- **Diagrama:** se usa `draw_mermaid()` (texto Mermaid que GitHub dibuja solo). `draw_mermaid_png()` quedó **bloqueado por permisos**, porque manda el diagrama a un servicio público externo (mermaid.ink). No hace falta para la consigna.
+- **Trazas anteriores:** se conservan en `traces/anteriores/` como evidencia de cada arreglo (el README las cita en §10).
+- **Repetí todas las corridas reales** después del último arreglo, para que las trazas del repo correspondan exactamente al código final.
 
-## 6. Lo que mostraron las primeras corridas reales (para el README)
+## Para revisar vos (Anuk)
 
-| Traza | Qué pasó | Qué se cambió |
-|---|---|---|
-| `0_primera_corrida_real_antes_del_ajuste` | El supervisor pidió 3 veces "precios exactos" y finalizó sin el analista; 75 fuentes. | Rúbrica de precios de referencia, reglas duras, solo fuentes citadas, menos búsquedas. |
-| `0b_segunda_corrida_real_tope_de_tokens` | Las llamadas a `calcular_presupuesto` se cortaron (`kwargs {}`) y la síntesis quedó trunca. El chequeo por código lo detectó. | Tope de 8000 tokens, cálculos de a uno, síntesis breve y aviso si se corta. |
-| `1_flujo_completo_real` | ✅ Funciona de punta a punta. | — |
+1. **Veredicto cerca del límite:** en el escenario 1 en vivo la demo dio "no alcanza por $26.720"; en la corrida en vivo del notebook, con la misma memoria, dio "entra". El LLM eligió precios de referencia distintos y el total está muy cerca de $800.000. Está explicado en el README (§14). Si querés un veredicto estable, se puede probar la demo con otro presupuesto.
+2. **Escenario 6 en vivo:** el refinamiento ocurrió (el supervisor rechazó por falta de precios de vuelos), pero el bloqueo de `forzar` trabaja **por tema**. Como ya había precios de micro en "pasajes", no dejó buscar vuelos en la web. Está documentado como limitación; la mejora sería separar subtemas (micro y avión).
+3. **Memoria real:** `data/memoria_chroma/` (no se sube) tiene los datos del 10/11/2026. Vencen el 17/11; después, la demo en vivo vuelve a buscar en Tavily.
+4. **Costo:** una pregunta completa en vivo usa del orden de 100.000 a 200.000 tokens de `claude-haiku-5-5`.
+5. **Entrega en Coderhouse:** pendiente, la hacés vos.
 
-## 7. Próximo paso exacto
+## Cómo retomarlo
 
-Abrir `traces/5_memoria_real_*.log` y revisar las 3 búsquedas en Tavily y la vuelta al investigador después del analista. Decidir con Anuk si se ajusta o se documenta tal cual. Después, armar `demo.ipynb`.
+```powershell
+.venv\Scripts\python.exe -m pytest -q                 # 128 passed
+.venv\Scripts\python.exe main.py --mock --chat        # probarlo sin claves
+.venv\Scripts\python.exe escenarios.py --tabla        # rearmar la tabla desde las trazas
+```

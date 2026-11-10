@@ -1,0 +1,365 @@
+{
+  "pregunta": "Quiero ir 7 días a Bariloche en enero, somos 2 personas, salimos desde Mendoza y tenemos 800.000 pesos. ¿Me armás el viaje y me decís si nos alcanza?",
+  "escenario": "8_freno_de_pasos",
+  "modo": "real",
+  "modelo": "claude-haiku-5-5",
+  "max_pasos": 2,
+  "recursion_limit": 20,
+  "inicio": "2026-11-10T15:13:30.311-03:00",
+  "fin": "2026-11-10T15:14:07.159-03:00",
+  "duracion_s": 36.85,
+  "estado": "completo",
+  "ruta": [
+    "supervisor",
+    "investigador",
+    "supervisor",
+    "sintesis"
+  ],
+  "pedido": {
+    "origen": "Mendoza",
+    "destino": "Bariloche",
+    "fecha_ida": "2027-01-10",
+    "fecha_vuelta": "2027-01-16",
+    "dias": 7,
+    "personas": 2,
+    "presupuesto": 800000.0,
+    "moneda": "ARS",
+    "supuestos": [
+      "Enero sin día exacto: se asume ida el 10/01/2027 (próximo enero, ya que enero de 2026 ya pasó) y vuelta el 16/01/2027 (7 días)."
+    ]
+  },
+  "eventos": [
+    {
+      "n": 1,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:13:34.927-03:00",
+      "detalle": {
+        "pedido_extraido": {
+          "origen": "Mendoza",
+          "destino": "Bariloche",
+          "fecha_ida": "2027-01-10",
+          "fecha_vuelta": "2027-01-16",
+          "dias": 7,
+          "personas": 2,
+          "presupuesto": 800000.0,
+          "moneda": "ARS",
+          "supuestos": [
+            "Enero sin día exacto: se asume ida el 10/01/2027 (próximo enero, ya que enero de 2026 ya pasó) y vuelta el 16/01/2027 (7 días)."
+          ]
+        },
+        "paso": 1,
+        "siguiente": "investigador",
+        "instruccion": "Buscá datos actuales con fuente (URL o memoria local) para un viaje de Mendoza a Bariloche, ida 2027-01-10 y vuelta 2027-01-16 (7 días, 2 personas). Necesitamos: pasajes aéreos o terrestres Mendoza-Bariloche (precios de referencia: rangos, valores \"desde\" o promedios, indicando la moneda y si es por persona o total), alojamiento en Bariloche para 7 noches y 2 personas (precio de referencia por noche), comida y actividades típicas con precio de referencia, clima esperado en enero en Bariloche, y la cotización del dólar oficial, tarjeta y MEP (no el blue). Cada hallazgo debe traer su fuente.",
+        "temas": [
+          "pasajes",
+          "alojamiento",
+          "comida",
+          "actividades",
+          "clima",
+          "cambio"
+        ],
+        "evaluacion": "Pregunta con presupuesto (800.000 ARS para 2 personas, 7 días) que pide armar el viaje y saber si alcanza. R1 no cumplida: no hay datos de pasajes, alojamiento, comida/actividades ni cotización del dólar. R2 y R3 no evaluables aún: no hay aportes. R4 no cumplida: el analista no calculó nada y no puede trabajar sin precios. R5 y R6 sin aportes que chequear. Corresponde primero al investigador.",
+        "forzada": false
+      }
+    },
+    {
+      "n": 2,
+      "nodo": "investigador",
+      "timestamp": "2026-11-10T15:13:57.292-03:00",
+      "detalle": {
+        "ronda": 1,
+        "instruccion": "Buscá datos actuales con fuente (URL o memoria local) para un viaje de Mendoza a Bariloche, ida 2027-01-10 y vuelta 2027-01-16 (7 días, 2 personas). Necesitamos: pasajes aéreos o terrestres Mendoza-Bariloche (precios de referencia: rangos, valores \"desde\" o promedios, indicando la moneda y si es por persona o total), alojamiento en Bariloche para 7 noches y 2 personas (precio de referencia por noche), comida y actividades típicas con precio de referencia, clima esperado en enero en Bariloche, y la cotización del dólar oficial, tarjeta y MEP (no el blue). Cada hallazgo debe traer su fuente.",
+        "contenido": "## Hallazgos\n\n### Pasajes (Mendoza → Bariloche)\n- Pasaje de micro Mendoza → San Carlos de Bariloche (Semicama): ARS 193.000 por persona, para fecha 07-08 nov 2026. Tramo de unos 19h 10m. Tarifa de referencia, no de enero 2027. [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche] (web... en memoria) [mem-ea5fcf2bf407] (memoria)\n- Precio promedio de pasaje de bus Mendoza → Bariloche: ARS 193.025 (unidad no especificada). Pasaje más barato: ARS 135.100 (unidad no especificada). [https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche] (memoria) [mem-b6468acfdb03]\n- Empresas que operan el tramo: Andesmar, CATA Internacional y Flecha Bus (categorías Semicama, Cama y Cama Premium). Sin precio en la fuente. [https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes] (memoria) [mem-e10c651c981c]\n\n### Alojamiento (San Carlos de Bariloche)\n- Selva India Hotel Suite: ARS 72.420 por noche, 1 noche para 2 personas, desde (ref. 10 nov 2026). Unidad: \"1 noche, 2 personas\"; no aclara si es por habitación. [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche] (memoria) [mem-f408466d015c]\n- Villa Sofía Apart Hotel & Spa: ARS 92.458 por noche, 1 noche para 2 personas, desde (ref. 16 nov 2026). [mismo URL] (memoria) [mem-f408466d015c]\n- Villa Huapi (alquiler temporario): ARS 95.008 por noche, 1 noche para 2 personas, desde (ref. 20 dic 2026). [mismo URL] (memoria) [mem-f408466d015c]\n- Gran Hotel Panamericano: ARS 96.947 por noche, 1 noche para 2 personas, desde (fecha no clara). [mismo URL] (memoria) [mem-f408466d015c]\n- Precio \"noches desde\" general en la ciudad: ARS 38.950 (unidad no especificada). [mismo URL] (memoria) [mem-f408466d015c]\n\n### Comida (precios de referencia)\n- Tenedor libre frente al lago: ARS 38.000 por persona. [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en] (memoria) [mem-850c9ab297f2]\n- Comida en restaurante promedio: ARS 900 a 2.000 por persona. Restaurante turístico, comida completa: ARS 1.500 a 3.000 por persona. Esta fuente parece desactualizada (ver faltantes). [https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo] (memoria) [mem-760d72e28e6f]\n- Lista de precios (bariloche.org):\n  - Café cortado con medialuna: ARS 9.000 (unidad no especificada)\n  - Chocolate caliente con torta: ARS 17.000 a 20.000 (unidad no especificada)\n  - Pizza grande: ARS 40.000 a 50.000 (unidad no especificada)\n  - Hamburguesa completa: ARS 22.000 a 30.000 (unidad no especificada)\n  - Picada para 2 personas: ARS 70.000\n  - Parrillada para 2 personas: ARS 80.000 a 90.000\n  - Trucha con papas: ARS 35.000 (unidad no especificada)\n  - Cerveza artesanal, pinta: ARS 5.500 (unidad no especificada)\n  - [https://bariloche.org/cuanto_me_cuesta] (memoria) [mem-0019ce230e02]\n\n### Actividades\n- Teleférico Cerro Otto (excursión de 3 a 4 hs, incluye confitería giratoria): ARS 40.000 adultos; ARS 20.000 niños de 6 a 12 años y jubilados. [https://bariloche.org/tarifas-excursiones-bariloche] (memoria) [mem-f2962de0fd34]\n- Noche nórdica en Cerro Otto (Tangol): ARS 629.713 con 10% de descuento (antes ARS 699.681). Unidad no especificada, probablemente por persona. [https://www.tangol.com/es/excursiones/bariloche/d-5] (memoria) [mem-42bc3c7dcff9]\n- Otras opciones citadas sin precio: kayak, rafting, paseos en barco en verano. [https://www.tangol.com/es/excursiones/bariloche/d-5] (memoria) [mem-42bc3c7dcff9]\n\n### Clima (enero)\n- Temperatura media mensual: entre 15 °C y 19 °C; mes más cálido del año. [https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118] (memoria) [mem-296dd4d2d2e7]\n- Máximas medias de 19 °C y mínimas de 5 °C. [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche] (memoria) [mem-01e3282facc3]\n- Lluvia: unos 3 días de lluvia y 28 días secos en enero; 93 mm de lluvia promedio. Sin nevadas. [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January] (memoria) [mem-50c2da0fbcec]\n\n### Cambio (cotización del dólar, ARS por USD)\n- Dólar oficial: compra ARS 1.520 / venta ARS 1.570 (cotización de referencia de la fuente). [https://pagliaccio.com.ar/dolarhoy] (memoria) [mem-6a10ac52826e]\n- Dólar oficial (dolarito): compra 1.520 / venta 1.570 (fecha 6 nov 2026). [https://www.dolarito.ar] (memoria) [mem-13d552ddd1f0]\n- Dólar tarjeta: venta ARS 2.008,20 (9 oct 2026). [https://www.infodolar.com] (memoria) [mem-685deaa71b46]\n- Dólar MEP: compra ARS 1.539,27 / venta ARS 1.539,72 (9 oct 2026). [https://www.infodolar.com] (memoria) [mem-685deaa71b46]\n\n## Datos que faltan\n- Pasajes para las fechas del viaje (enero 2027): los precios de la memoria son de noviembre 2026. No hay precio de avión Mendoza → Bariloche.\n- Precio de la ida y la vuelta por separado: las fuentes no indican si el precio de micro es por tramo o ida y vuelta.\n- Alojamiento: no hay precio para 7 noches ni confirmación de si el precio es por habitación. No se encontró precio de Booking.com.\n- Comida: las fuentes son inconsistentes. noticiasffha da ARS 900 a 3.000 por persona, mientras que bariloche.org y Instagram dan ARS 38.000 o más. Se necesita una fuente actualizada.\n- Clima: tiempo3 indica \"33° / 17°\", valor que parece erróneo frente al resto de las fuentes. No lo tomé como dato confiable.\n- Cotizaciones: son de 6 y 9 de oct/nov 2026. Falta el MEP actualizado y la compra del dólar tarjeta. Además, la fecha exacta de estas cotizaciones no coincide con la fecha de búsqueda.\n- Actividades: no hay precios de excursiones de verano para enero 2027.\n- No hice búsquedas web: toda la información vino de la memoria local (buscada el 10/11/2026).",
+        "fuentes": [
+          {
+            "ref": "mem-e10c651c981c",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-b6468acfdb03",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-ea5fcf2bf407",
+            "origen": "memoria",
+            "tema": "pasajes",
+            "url": "https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f408466d015c",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-9530619359f6",
+            "origen": "memoria",
+            "tema": "alojamiento",
+            "url": "https://www.booking.com/city/ar/san-carlos-de-bariloche.es-ar.html",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-850c9ab297f2",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-760d72e28e6f",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-0019ce230e02",
+            "origen": "memoria",
+            "tema": "comida",
+            "url": "https://bariloche.org/cuanto_me_cuesta",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-42bc3c7dcff9",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.tangol.com/es/excursiones/bariloche/d-5",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-d82455b9b89b",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://www.instagram.com/reel/DaGrnu3R9AC",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-f2962de0fd34",
+            "origen": "memoria",
+            "tema": "actividades",
+            "url": "https://bariloche.org/tarifas-excursiones-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-50c2da0fbcec",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-296dd4d2d2e7",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-01e3282facc3",
+            "origen": "memoria",
+            "tema": "clima",
+            "url": "https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-685deaa71b46",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.infodolar.com",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-13d552ddd1f0",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://www.dolarito.ar",
+            "fecha_busqueda": "2026-11-10"
+          },
+          {
+            "ref": "mem-6a10ac52826e",
+            "origen": "memoria",
+            "tema": "cambio",
+            "url": "https://pagliaccio.com.ar/dolarhoy",
+            "fecha_busqueda": "2026-11-10"
+          }
+        ],
+        "herramientas": [
+          "buscar_en_memoria"
+        ],
+        "llamadas": [
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "pasajes aéreos o micro Mendoza a Bariloche enero 2027",
+              "destino": "Bariloche",
+              "tema": "pasajes"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'pasajes aéreos o micro Mendoza a Bariloche enero 2027':\n\n[mem-e10c651c981c] origen=memoria | tema=pasajes | buscado hace 0.0 días (2026-11-10) | url=https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes\nUnibus te permite buscar pasajes en las principales empresas de micros de Argentina. En esta página podés encontrar los horarios, la duración del viaje y los datos clave del tramo Mendoza - Bariloche, y comprar tu pasaje online pagando con Mercado Pago.\n\nOperan este tramo: Andesmar, CATA Internacional y Flecha Bus.\n\nPodés viajar en categoría Semicama, Cam...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "alojamiento por noche para 2 personas enero",
+              "destino": "Bariloche",
+              "tema": "alojamiento"
+            },
+            "resultado": "MEMORIA — 2 datos vigentes para 'alojamiento por noche para 2 personas enero':\n\n[mem-f408466d015c] origen=memoria | tema=alojamiento | buscado hace 0.0 días (2026-11-10) | url=https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche\nLandingID: generic-hotels-city\n\n# Hoteles en San Carlos de Bariloche\n\nNoches desde $38.950\n\nHoteles en San Carlos de Bariloche\n\n## Hoteles con el mejor costo-beneficio\n\n##### Selva India Hotel Suite\n\n1 noche, 2 personas desde\n\n$72.420\n\n $ 144.841\n\n- 50 %\n\nFecha de referencia:\n\n10 noviembre 2026\n\n##### Villa Huapi\n\n8.7\n\nAlquiler Temporario\n\n1...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "precios de comida y restaurantes",
+              "destino": "Bariloche",
+              "tema": "comida"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'precios de comida y restaurantes':\n\n[mem-850c9ab297f2] origen=memoria | tema=comida | buscado hace 0.0 días (2026-11-10) | url=https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en\nTienen 2 locales \n📍Cuenca 1299\n📍Fragata Sarmiento 800\npinchu.travel.food's profile picture\nAbrió un tenedor libre en Bariloche. Se encuentra frente al lago y del puerto. El precio es de $38.000 por persona y abre todos los días. Pueden encontrar fiambres, rabas, parrilla, milanesas, y muchas cosas más. Los postres estan incluidos y son libres 🙌 ¿Qué les parece?\n...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "actividades y precios de excursiones",
+              "destino": "Bariloche",
+              "tema": "actividades"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'actividades y precios de excursiones':\n\n[mem-42bc3c7dcff9] origen=memoria | tema=actividades | buscado hace 0.0 días (2026-11-10) | url=https://www.tangol.com/es/excursiones/bariloche/d-5\nEntre las cosas para hacer en Bariloche, encontrarás actividades para todos los gustos. En invierno, el Cerro Catedral es el protagonista para practicar esquí y snowboard. Durante el verano, los lagos invitan a realizar kayak, rafting y paseos en barco.\n\nFiltros\n\n75 resultados\n\nFiltros aplicados Bariloche × Limpiar filtros\n\n  10% Off  ARS 699.681 ARS 629.713     Bariloche 5,0 ...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "clima esperado en enero temperaturas",
+              "destino": "Bariloche",
+              "tema": "clima"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'clima esperado en enero temperaturas':\n\n[mem-50c2da0fbcec] origen=memoria | tema=clima | buscado hace 0.0 días (2026-11-10) | url=https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January\nTemperaturas en Bariloche en enero - gráfico meteorológico\n\nLluvia en Bariloche en enero - tabla meteorológica\n\n## Viaja a Bariloche en enero - Preguntas frecuentes\n\n¿Cuál es la temperatura promedio en Bariloche en enero?\n\nLas temperaturas promedio en Bariloche para el mes de enero son de 33° / 17°C.\n\n¿Cuál es la probabilidad de lluvia en Bar...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          },
+          {
+            "herramienta": "buscar_en_memoria",
+            "argumentos": {
+              "consulta": "cotización dólar oficial tarjeta MEP",
+              "destino": "Bariloche",
+              "tema": "cambio"
+            },
+            "resultado": "MEMORIA — 3 datos vigentes para 'cotización dólar oficial tarjeta MEP':\n\n[mem-685deaa71b46] origen=memoria | tema=cambio | buscado hace 0.0 días (2026-11-10) | url=https://www.infodolar.com\n|  | Compra | Venta | Variación | Spread |  |\n ---  ---  --- |\n| Dólar Blue | $ 1.520,00  = $ 0,00 | $ 1.540,00  = $ 0,00 | = 0,00 % | $ 20,00 | viernes, 9 de octubre de 2026 18:00 Argentina |\n| Dólar MEP | $ 1.539,27  -$ 1,06 | $ 1.539,72  -$ 1,61 | -0,10 % | $ 0,45 | viernes, 9 de octubre de 2026 18:01 Argentina |\n| Dólar FiwindFiwind | $ 1.520,46  -$ 5,26 | $ 1.545,54  -$ 7,34 | -0,47 % | $ 25,09 | Opera...",
+            "timestamp": "2026-11-10T15:13:57.291-03:00"
+          }
+        ],
+        "cobertura": [
+          {
+            "tema": "pasajes",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "alojamiento",
+            "fuentes": 2,
+            "memoria": 2,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "comida",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "actividades",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          },
+          {
+            "tema": "clima",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": false
+          },
+          {
+            "tema": "cambio",
+            "fuentes": 3,
+            "memoria": 3,
+            "web": 0,
+            "con_precios": true
+          }
+        ],
+        "observaciones": []
+      }
+    },
+    {
+      "n": 3,
+      "nodo": "supervisor",
+      "timestamp": "2026-11-10T15:13:57.293-03:00",
+      "detalle": {
+        "paso": 2,
+        "siguiente": "FINALIZAR",
+        "instruccion": "",
+        "temas": [],
+        "evaluacion": "FRENO DE PASOS: se llegó a la decisión 2 de 2. Se finaliza con lo que hay.",
+        "forzada": true
+      }
+    },
+    {
+      "n": 4,
+      "nodo": "sintesis",
+      "timestamp": "2026-11-10T15:14:07.158-03:00",
+      "detalle": {
+        "respuesta": "> ⚠️ Esta respuesta se armó con información parcial: el sistema llegó a su límite de pasos antes de completar todas las verificaciones.\n\n## Qué pudimos averiguar\n\nLa búsqueda se cortó antes de que se completara el cálculo del presupuesto, así que **todavía no podemos decirte si los 800.000 pesos alcanzan para los 7 días**. Estos son los precios de referencia que encontramos, con sus fechas:\n\n- **Micro Mendoza → San Carlos de Bariloche (semicama):** ARS 193.000 por persona, con tramo de unas 19 hs. Es una tarifa de noviembre de 2026, no de enero de 2027 [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]. Otra fuente da un promedio de ARS 193.025 y un mínimo de ARS 135.100, sin aclarar la unidad [https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche]. Operan Andesmar, CATA y Flecha Bus [https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes].\n- **Alojamiento:** entre ARS 72.420 y 96.947 por noche para 2 personas, según el hotel y la fecha de referencia (noviembre y diciembre de 2026). No queda claro si el precio es por habitación [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche].\n- **Comida:** las fuentes no coinciden. Un tenedor libre frente al lago cuesta ARS 38.000 por persona [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en]. Una lista de precios de bariloche.org ubica la pizza grande entre ARS 40.000 y 50.000, y la parrillada para 2 entre ARS 80.000 y 90.000 [https://bariloche.org/cuanto_me_cuesta]. Otra fuente, probablemente desactualizada, da entre ARS 900 y 3.000 por persona [https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo].\n- **Actividades:** Teleférico Cerro Otto, ARS 40.000 por adulto (3 a 4 hs, con confitería giratoria) [https://bariloche.org/tarifas-excursiones-bariloche]. También hay kayak, rafting y paseos en barco en verano, pero sin precio [https://www.tangol.com/es/excursiones/bariloche/d-5].\n- **Clima en enero:** temperatura media de 15 a 19 °C, el mes más cálido del año [https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118]. Máximas de unos 19 °C y mínimas de 5 °C [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche]. Unos 3 días de lluvia y sin nevadas [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January].\n\n## Lo que no pudimos averiguar\n\n- **Presupuesto total:** no está calculado, así que no tenemos el desglose, el saldo ni el costo por día.\n- **Pasajes para enero de 2027:** solo tenemos precios de noviembre de 2026. No encontramos precio de avión, y no sabemos si el de micro es por tramo o ida y vuelta.\n- **Alojamiento para 7 noches:** no hay precio total ni confirmación de si es por habitación.\n- **Comida:** las fuentes son inconsistentes y falta una actualizada.\n- **Dólar:** las cotizaciones son de octubre y noviembre de 2026. Falta el MEP actual y el dólar tarjeta reciente.\n- **Fechas:** ida el 10/01/2027 y vuelta el 16/01/2027 son supuestos nuestros, porque no indicaste día exacto.\n\nSi querés, podemos repetir la búsqueda enfocada en pasajes y alojamiento para enero de 2027 y calcular el presupuesto con esos datos.\n\n## Fuentes\n- [memoria] mem-e10c651c981c → https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes — pasajes, buscado el 2026-11-10\n- [memoria] mem-b6468acfdb03 → https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 → https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — comida, buscado el 2026-11-10\n- [memoria] mem-760d72e28e6f → https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo — comida, buscado el 2026-11-10\n- [memoria] mem-0019ce230e02 → https://bariloche.org/cuanto_me_cuesta — comida, buscado el 2026-11-10\n- [memoria] mem-42bc3c7dcff9 → https://www.tangol.com/es/excursiones/bariloche/d-5 — actividades, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-296dd4d2d2e7 → https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118 — clima, buscado el 2026-11-10\n- [memoria] mem-01e3282facc3 → https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche — clima, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._"
+      }
+    }
+  ],
+  "respuesta_final": "> ⚠️ Esta respuesta se armó con información parcial: el sistema llegó a su límite de pasos antes de completar todas las verificaciones.\n\n## Qué pudimos averiguar\n\nLa búsqueda se cortó antes de que se completara el cálculo del presupuesto, así que **todavía no podemos decirte si los 800.000 pesos alcanzan para los 7 días**. Estos son los precios de referencia que encontramos, con sus fechas:\n\n- **Micro Mendoza → San Carlos de Bariloche (semicama):** ARS 193.000 por persona, con tramo de unas 19 hs. Es una tarifa de noviembre de 2026, no de enero de 2027 [https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche]. Otra fuente da un promedio de ARS 193.025 y un mínimo de ARS 135.100, sin aclarar la unidad [https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche]. Operan Andesmar, CATA y Flecha Bus [https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes].\n- **Alojamiento:** entre ARS 72.420 y 96.947 por noche para 2 personas, según el hotel y la fecha de referencia (noviembre y diciembre de 2026). No queda claro si el precio es por habitación [https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche].\n- **Comida:** las fuentes no coinciden. Un tenedor libre frente al lago cuesta ARS 38.000 por persona [https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en]. Una lista de precios de bariloche.org ubica la pizza grande entre ARS 40.000 y 50.000, y la parrillada para 2 entre ARS 80.000 y 90.000 [https://bariloche.org/cuanto_me_cuesta]. Otra fuente, probablemente desactualizada, da entre ARS 900 y 3.000 por persona [https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo].\n- **Actividades:** Teleférico Cerro Otto, ARS 40.000 por adulto (3 a 4 hs, con confitería giratoria) [https://bariloche.org/tarifas-excursiones-bariloche]. También hay kayak, rafting y paseos en barco en verano, pero sin precio [https://www.tangol.com/es/excursiones/bariloche/d-5].\n- **Clima en enero:** temperatura media de 15 a 19 °C, el mes más cálido del año [https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118]. Máximas de unos 19 °C y mínimas de 5 °C [https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche]. Unos 3 días de lluvia y sin nevadas [https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January].\n\n## Lo que no pudimos averiguar\n\n- **Presupuesto total:** no está calculado, así que no tenemos el desglose, el saldo ni el costo por día.\n- **Pasajes para enero de 2027:** solo tenemos precios de noviembre de 2026. No encontramos precio de avión, y no sabemos si el de micro es por tramo o ida y vuelta.\n- **Alojamiento para 7 noches:** no hay precio total ni confirmación de si es por habitación.\n- **Comida:** las fuentes son inconsistentes y falta una actualizada.\n- **Dólar:** las cotizaciones son de octubre y noviembre de 2026. Falta el MEP actual y el dólar tarjeta reciente.\n- **Fechas:** ida el 10/01/2027 y vuelta el 16/01/2027 son supuestos nuestros, porque no indicaste día exacto.\n\nSi querés, podemos repetir la búsqueda enfocada en pasajes y alojamiento para enero de 2027 y calcular el presupuesto con esos datos.\n\n## Fuentes\n- [memoria] mem-e10c651c981c → https://www.unibus.com.ar/es/rutas/mendoza-bariloche-pasajes — pasajes, buscado el 2026-11-10\n- [memoria] mem-b6468acfdb03 → https://www.centraldepasajes.com.ar/cdp/pasajes-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-ea5fcf2bf407 → https://www.plataforma10.com.ar/pasajes-en-micro/mendoza/bariloche — pasajes, buscado el 2026-11-10\n- [memoria] mem-f408466d015c → https://www.despegar.com.ar/hoteles/hl/901/i1/hoteles-en-san+carlos+de+bariloche — alojamiento, buscado el 2026-11-10\n- [memoria] mem-850c9ab297f2 → https://www.instagram.com/popular/precios-de-comida-en-bariloche-2026?hl=en — comida, buscado el 2026-11-10\n- [memoria] mem-760d72e28e6f → https://noticiasffha.com.ar/cuanto-cuesta-un-viaje-a-bariloche-y-como-planificarlo — comida, buscado el 2026-11-10\n- [memoria] mem-0019ce230e02 → https://bariloche.org/cuanto_me_cuesta — comida, buscado el 2026-11-10\n- [memoria] mem-42bc3c7dcff9 → https://www.tangol.com/es/excursiones/bariloche/d-5 — actividades, buscado el 2026-11-10\n- [memoria] mem-f2962de0fd34 → https://bariloche.org/tarifas-excursiones-bariloche — actividades, buscado el 2026-11-10\n- [memoria] mem-50c2da0fbcec → https://www.tiempo3.com/south-america/argentina/rio-negro/bariloche?page=month&month=January — clima, buscado el 2026-11-10\n- [memoria] mem-296dd4d2d2e7 → https://www.tangol.com/blog/es/como-es-el-clima-en-san-carlos-de-bariloche-a-lo-largo-del-ano/n-118 — clima, buscado el 2026-11-10\n- [memoria] mem-01e3282facc3 → https://www.eltiempo.es/viajar/tiempo-habitual/san-carlos-de-bariloche — clima, buscado el 2026-11-10\n\n_Los precios son aproximados: salen de búsquedas web (o de la memoria local de búsquedas de los últimos días) y pueden cambiar. Confirmalos antes de reservar._",
+  "metricas": {
+    "ruta": "supervisor → investigador → supervisor → sintesis",
+    "pasos_supervisor": 2,
+    "decision_forzada_por_freno": true,
+    "delegaciones": {
+      "investigador": 1
+    },
+    "refinamientos": 0,
+    "llamadas_por_herramienta": {
+      "buscar_en_memoria": 6
+    },
+    "busquedas_web": 0,
+    "fuentes_memoria": 17,
+    "fuentes_web": 0,
+    "observaciones": [],
+    "validacion": "no se validó",
+    "presupuesto_entra": null,
+    "alternativa_calculada": false
+  },
+  "tokens": {
+    "claude-haiku-5-5": {
+      "input_tokens": 21704,
+      "output_tokens": 8409,
+      "total_tokens": 30113,
+      "input_token_details": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0,
+        "cache_creation": 0,
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 2513
+      }
+    }
+  },
+  "archivo": "traces\\8_freno_de_pasos_real_20261110-151330.json"
+}

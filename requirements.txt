@@ -1,3 +1,4 @@
+# Python 3.12 · instalar con: python -m pip install -r requirements.txt
 # Grafo multi-agente
 langgraph==1.2.18
 # LLM: Claude vía LangChain
@@ -6,6 +7,7 @@ langchain-anthropic==1.7.7
 anthropic==2.3.0
 # Búsqueda web (reemplaza a TavilySearchResults, deprecado)
 langchain-tavily==0.2.18
+langchain==1.4.7          # dependencia de langchain-tavily (fijada para que la instalación sea reproducible)
 # Memoria local de búsquedas (embeddings ONNX por defecto, sin torch)
 chromadb==1.5.9
 # Validación y configuración

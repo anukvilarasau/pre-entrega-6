@@ -391,6 +391,23 @@ def estado_inicial(pregunta: str) -> dict[str, Any]:
     }
 
 
+def validacion_del_pedido(llamadas: list[LlamadaHerramienta], pedido: PedidoViaje | None) -> str | None:
+    """Resultado de validar_viaje para LAS FECHAS QUE DIO EL USUARIO: 'valido', 'invalido' o None (no se validó).
+
+    Si el analista además probó fechas inventadas (pasó en la corrida real del escenario 4),
+    esas validaciones NO cuentan: lo que importa es si el pedido real es posible.
+    """
+    validaciones = [ll for ll in llamadas if ll.herramienta == "validar_viaje"]
+    if not validaciones:
+        return None
+    if pedido is not None and pedido.fecha_ida and pedido.fecha_vuelta:
+        del_pedido = [ll for ll in validaciones
+                      if str(ll.argumentos.get("fecha_ida")) == pedido.fecha_ida.isoformat()
+                      and str(ll.argumentos.get("fecha_vuelta")) == pedido.fecha_vuelta.isoformat()]
+        validaciones = del_pedido or validaciones
+    return "valido" if validaciones[0].resultado.startswith("VÁLIDO") else "invalido"
+
+
 def aportes_de(state: OrquestadorState, agente: Especialista) -> list[Aporte]:
     """Los aportes de un especialista, en orden."""
     return [a for a in state.get("aportes", []) if a.agente == agente]
