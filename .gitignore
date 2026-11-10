@@ -8,3 +8,5 @@ __pycache__/
 .DS_Store
 # Cache de embeddings / memoria de búsquedas (se genera sola)
 data/memoria_chroma/
+# Notas de progreso personales (no se suben)
+PROGRESO.md
